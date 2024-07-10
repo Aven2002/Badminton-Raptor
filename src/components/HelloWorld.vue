@@ -8,7 +8,7 @@
 export default {
   data() {
     return {
-      message: 'Hello, Vue.js!'
+      message: 'Hello, Vue.js! Aven Ding '
     };
   }
 };
