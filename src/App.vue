@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <AppHeader />
-    <HelloWorld />
+    <Header_com />
+    <Footer_com />
   </div>
 </template>
 
 <script>
-import AppHeader from './components/Header_com.vue';
+import Header_com from './components/Header_com.vue';
+import Footer_com from './components/Footer_com.vue';
 
 export default {
   name: 'App',
   components: {
-    AppHeader,
+    Header_com,
+    Footer_com
   }
 };
 </script>
