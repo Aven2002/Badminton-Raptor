@@ -1,27 +1,27 @@
 <template>
   <div class="login-container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card">
-            <div class="card-header text-white">
-              <h4 class="card-title">Login</h4>
-            </div>
-            <div class="card-body">
-              <form @submit.prevent="login">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="email" v-model="email" required>
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" v-model="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
-              </form>
-            </div>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-white">
+            <h4 class="card-title">Login</h4>
+          </div>
+          <div class="card-body">
+            <form @submit.prevent="login">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" v-model="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" v-model="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -47,7 +47,6 @@ export default {
 
 <style scoped>
 body {
- 
   color: #ffffff;
   font-family: 'Arial', sans-serif;
 }
@@ -55,9 +54,7 @@ body {
 .login-container {
   background-image: url('../assets/background/Bg_01.png');
   background-size: cover;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
+  padding:50px;
 }
 
 .card {
@@ -74,6 +71,10 @@ body {
 
 .card-title {
   margin-bottom: 0;
+}
+
+.card-body {
+  padding: 1.5rem;
 }
 
 .form-label {
