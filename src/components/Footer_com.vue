@@ -57,7 +57,7 @@
                 Products
               </h6>
               <p>
-                <a href="#!" class="text-reset">Angular</a>
+                <router-link to="/landing" class="text-reset">Landing</router-link>
               </p>
               <p>
                 <a href="#!" class="text-reset">React</a>
