@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header_com />
-    <router-link to="/Landing_view" class="text-reset">Landing</router-link>
+    <router-link to="/" class="text-reset">Landing</router-link>
     <router-link to="/Home_view" class="text-reset">Home</router-link>
     <router-view></router-view>
     <Footer_com />
@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import Header_com from './components/Header_com.vue';
-import Footer_com from './components/Footer_com.vue';
+import Header_com from "./components/Header_com.vue";
+import Footer_com from "./components/Footer_com.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Header_com,
-    Footer_com
-  }
+    Footer_com,
+  },
 };
 </script>
 
