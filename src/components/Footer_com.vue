@@ -57,7 +57,7 @@
                 Products
               </h6>
               <p>
-                <router-link to="/landing" class="text-reset">Landing</router-link>
+                <router-link to="/Landing_view" class="text-reset">Landing</router-link>
               </p>
               <p>
                 <a href="#!" class="text-reset">React</a>
