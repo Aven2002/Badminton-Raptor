@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <Header_com />
-    <router-link to="/" class="text-reset">Landing</router-link>
-    <router-link to="/Home_view" class="text-reset">Home</router-link>
+
     <router-view></router-view>
     <Footer_com />
   </div>

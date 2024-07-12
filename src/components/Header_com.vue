@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header-com">
     <img :src="logo" alt="Logo" class="logo" />
     <h1>{{ title }}</h1>
   </header>
@@ -18,14 +18,21 @@ export default {
 </script>
 
 <style scoped>
-header {
-  background-color: #42b983;
-  color: white;
+.header-com {
+  background-color: #000; 
+  color: #fff; 
   display: flex;
+  align-items: center; 
+  padding: 10px 20px; 
 }
 
 .logo {
-  width: 100px;
-  margin-bottom: 10px;
+  width: 120px; 
+  margin-right: 10px; 
+}
+
+h1 {
+  font-size: 32px; 
+  margin: 0; 
 }
 </style>
