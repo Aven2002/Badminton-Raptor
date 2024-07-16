@@ -9,6 +9,7 @@ import Personalized_Recommendation_view from '@/views/Personalized_Recommendatio
 import Settings_view from '@/views/Settings_view.vue';
 import Favorite_List_view from '@/views/Favorite_List_view.vue';
 import Feedback_view from '@/views/Feedback_view.vue';
+import Reset_Password_view from '@/views/Reset_Password_view.vue';
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: "/Feedback_List_view",
     name: "Feedback_List_view",
     component: Feedback_view,
+  },
+  {
+    path: "/Reset_Password_view",
+    name: "Reset_Password_view",
+    component: Reset_Password_view,
   },
 ];
 

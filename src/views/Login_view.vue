@@ -1,25 +1,29 @@
 <template>
-  <div class="login-container">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header text-white">
-            <h4 class="card-title">Login</h4>
+  <div class="login-container d-flex justify-content-center align-items-center">
+    <div class="card">
+      <div class="card-header text-white text-center">
+        <h4 class="card-title">Login</h4>
+      </div>
+      <div class="card-body">
+        <form @submit.prevent="login">
+          <div class="mb-3">
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" class="form-control" id="email" v-model="email" placeholder="Username or email address" required>
+            </div>
           </div>
-          <div class="card-body">
-            <form @submit.prevent="login">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" v-model="email" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" v-model="password" required>
-              </div>
-              <button type="submit" class="btn btn-primary w-100">Login</button>
-            </form>
+          <div class="mb-3">
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" class="form-control" id="password" v-model="password" placeholder="Password" required>
+            </div>
           </div>
-        </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+        <router-link to="/Reset_Password_view" class="d-block mt-3 text-center" style="color: #bbbbbb">
+  Forgot Password?
+</router-link>
+
       </div>
     </div>
   </div>
@@ -52,15 +56,17 @@ body {
 }
 
 .login-container {
-  background-image: url('../assets/background/Bg_01.png');
+  background-image: url('@/assets/background/Bg_01.png');
   background-size: cover;
-  padding:50px;
+  padding:70px;
 }
 
 .card {
   background-color: #1e1e1e;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%;
 }
 
 .card-header {
@@ -87,14 +93,13 @@ body {
   color: #ffffff;
 }
 
-.form-control:focus {
-  background-color: #2c2c2c;
-  border-color: #555555;
-  box-shadow: none;
+.form-control::placeholder {
+  color: #bbbbbb; 
+  font-size: 13px;
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
+.form-control:focus {
+  border-color: #555555;
+  box-shadow: none;
 }
 </style>
