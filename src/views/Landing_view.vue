@@ -1,6 +1,6 @@
 <template>
   <div class="landing">
-    <div class="body">
+    <div class="body d-flex justify-content-center align-items-center">
       <!-- Main content section -->
       <div class="content">
         <h2>Experience the Power of Badminton Raptor</h2>
@@ -20,11 +20,6 @@
           <router-link to="/SignUp_view" class="btn btn-success">Sign Up</router-link>
         </div>
       </div>
-
-      <!-- Image on the right side -->
-      <div class="image-container">
-        <img src="../assets/background/Bg_logo.png" alt="background_logo">
-      </div>
     </div>
   </div>
 </template>
@@ -36,27 +31,30 @@ export default {
 </script>
 
 <style>
-.body {
-  display: flex;
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-}
-
-.landing {
-  margin: auto; 
-  background-color: black; 
-}
-.feature-list {
-  list-style-type: none; 
-  padding-left:0;
-}
 .content {
-  max-width: 1000px; 
+  padding:80px 20px;
+  max-width: 1000px;
   text-align: left;
-  color: white; 
 }
 
-.image-container img {
-  max-width: 100%; 
+.feature-list {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 16px;
 }
+
+.feature-list li {
+  margin: 10px 0;
+}
+
+h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
 </style>

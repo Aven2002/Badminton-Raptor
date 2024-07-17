@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <Header_com />
-
-    <router-view></router-view>
+    <div class="view-container">
+      <router-view></router-view>
+    </div>
     <Footer_com />
   </div>
 </template>
@@ -25,5 +26,13 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
+}
+
+.view-container {
+  background-image: url('./assets/background/Bg_01.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh; 
 }
 </style>

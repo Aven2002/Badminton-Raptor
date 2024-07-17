@@ -8,7 +8,7 @@ import Compare_Equipment_view from '@/views/Compare_Equipment_view.vue';
 import Personalized_Recommendation_view from '@/views/Personalized_Recommendation_view.vue';
 import Settings_view from '@/views/Settings_view.vue';
 import Favorite_List_view from '@/views/Favorite_List_view.vue';
-import Feedback_view from '@/views/Feedback_view.vue';
+import Contact_Us_view from '@/views/Contact_Us_view.vue';
 import Reset_Password_view from '@/views/Reset_Password_view.vue';
 
 const routes = [
@@ -58,9 +58,9 @@ const routes = [
     component: Favorite_List_view,
   },
   {
-    path: "/Feedback_List_view",
-    name: "Feedback_List_view",
-    component: Feedback_view,
+    path: "/Contact_Us_view",
+    name: "Contact_Us_view",
+    component: Contact_Us_view,
   },
   {
     path: "/Reset_Password_view",

@@ -56,8 +56,6 @@ body {
 }
 
 .login-container {
-  background-image: url('@/assets/background/Bg_01.png');
-  background-size: cover;
   padding:70px;
 }
 

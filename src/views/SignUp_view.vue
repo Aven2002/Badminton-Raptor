@@ -130,8 +130,6 @@ export default {
 
 <style scoped>
 .signup-container {
-  background-image: url('../assets/background/Bg_01.png');
-  background-size: cover;
   padding: 20px;
 }
 

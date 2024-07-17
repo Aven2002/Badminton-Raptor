@@ -30,7 +30,7 @@ export default {
         { id: 3, title: 'Personalized Recommendation', link: '/Personalized_Recommendation_view', icon: 'fa-solid fa-person' },
         { id: 4, title: 'Settings', link: '/Settings_view', icon: 'fa-solid fa-gears' },
         { id: 5, title: 'Favorite List', link: '/Favorite_List_view', icon: 'fa-solid fa-star' },
-        { id: 6, title: 'Feedback', link: '/Feedback_List_view', icon: 'fa-solid fa-comment-dots' }
+        { id: 6, title: 'Contact Us', link: '/Contact_Us_view', icon: 'fa-solid fa-comment-dots' }
       ]
     };
   }
@@ -42,8 +42,8 @@ export default {
 h3{
   text-align: left;
   margin-left:50px;
-  margin-top:20px;
   font-weight: bold;
+  padding:20px;
 }
 
 .card {
@@ -62,4 +62,3 @@ h3{
   margin-bottom: 0;
 }
 </style>
-
