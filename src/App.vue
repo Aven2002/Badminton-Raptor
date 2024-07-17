@@ -22,17 +22,30 @@ export default {
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%; /* Ensure body and html occupy full height */
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column; /* Align items in a column */
+  min-height: 100vh; /* Ensure #app occupies full viewport height */
 }
 
 .view-container {
+  flex: 1; /* Allow this container to grow and fill available space */
   background-image: url('./assets/background/Bg_01.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 100vh; 
 }
 </style>

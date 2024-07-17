@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header bg-primary text-white">
+          <div class="card-header text-white">
             <h4 class="card-title">Sign Up</h4>
           </div>
           <div class="card-body">
@@ -130,7 +130,7 @@ export default {
 
 <style scoped>
 .signup-container {
-  padding: 20px;
+  padding: 45px;
 }
 
 body {
@@ -176,6 +176,7 @@ body {
   background-color: #2c2c2c;
   border-color: #555555;
   box-shadow: none;
+  color:white;
 }
 
 input[type="range"] {
@@ -185,30 +186,5 @@ input[type="range"] {
   outline: none;
   opacity: 0.7;
   transition: opacity 0.2s;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 1rem;
-  height: 1rem;
-  background: #007bff;
-  cursor: pointer;
-}
-
-input[type="range"]:hover {
-  opacity: 1;
-}
-
-input[type="range"]:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 2px 2px #0056b3;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-.w-100 {
-  width: 100%;
 }
 </style>

@@ -56,7 +56,7 @@ body {
 }
 
 .login-container {
-  padding:70px;
+  padding:100px;
 }
 
 .card {
@@ -96,8 +96,10 @@ body {
   font-size: 13px;
 }
 
-.form-control:focus {
+.form-control:focus, .form-select:focus {
+  background-color: #2c2c2c;
   border-color: #555555;
   box-shadow: none;
+  color:white;
 }
 </style>
