@@ -11,9 +11,9 @@
               <img src='@/assets/contactLogo.png' alt="Contact Image" class="img-fluid mb-3">
               <p class="text-white">Contact Information:</p>
               <ul class="list-unstyled text-white">
-                <li>Email: sportStoreSystem@service.com</li>
+                <li>Email: badmintonRaptorSystem@service.com</li>
                 <li>Phone: +03-9011-2945</li>
-                <li>Address: Sport Store, Jalan Professor Khoo Kay Kim, Seksyen 13, 46200 Petaling Jaya, Selangor</li>
+                <li>Address: Badminton Raptor, Jalan Professor Khoo Kay Kim, Seksyen 13, 46200 Petaling Jaya, Selangor</li>
               </ul>
             </div>
             <div class="col-md-6">
@@ -140,12 +140,14 @@ h4 {
 }
 
 .form-control::placeholder {
-  color: #bbbbbb; /* Light grey color for the placeholder */
+  color: #bbbbbb; 
 }
 
 .form-control:focus {
+  background-color: #2c2c2c;
   border-color: #555555;
   box-shadow: none;
+  color:white;
 }
 
 .btn-primary:hover {

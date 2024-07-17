@@ -92,7 +92,7 @@ body {
   font-size: 13px;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus {
   background-color: #2c2c2c;
   border-color: #555555;
   box-shadow: none;
