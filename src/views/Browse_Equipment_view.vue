@@ -1,6 +1,16 @@
 <template>
   <div>
     <h1>Browse Equipment</h1>
+    <!-- Search Bar -->
+    <div class="mb-4">
+  <input 
+    type="text" 
+    v-model="searchQuery" 
+    class="form-control search-bar" 
+    placeholder="Search by equipment name" 
+  />
+</div>
+
     <div v-if="loading" class="text-center">Loading...</div>
     <div v-else>
       <div v-if="filteredItems.length === 0" class="text-center">No items found.</div>
@@ -36,36 +46,44 @@
   </div>
 </template>
 
+
 <script>
 import axios from 'axios';
 
 export default {
   name: 'Browse_Equipment_view',
   data() {
-    return {
-      items: [],
-      filter: '',
-      loading: false,
-      currentPage: 1,
-      itemsPerPage: 6
-    };
-  },
-  computed: {
-    filteredItems() {
-      if (this.filter) {
-        return this.items.filter(item => item.equipCategory === this.filter);
-      }
-      return this.items;
-    },
-    totalPages() {
-      return Math.ceil(this.filteredItems.length / this.itemsPerPage);
-    },
-    paginatedItems() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      return this.filteredItems.slice(start, end);
+  return {
+    items: [],
+    filter: '',
+    searchQuery: '',
+    loading: false,
+    currentPage: 1,
+    itemsPerPage: 6
+  };
+},
+
+computed: {
+  filteredItems() {
+    let items = this.items;
+    if (this.filter) {
+      items = items.filter(item => item.equipCategory === this.filter);
     }
+    if (this.searchQuery) {
+      items = items.filter(item => item.equipName.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    }
+    return items;
   },
+  totalPages() {
+    return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+  },
+  paginatedItems() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredItems.slice(start, end);
+  }
+},
+
   watch: {
     $route(to) {
       this.filter = to.query.filter || '';
@@ -168,6 +186,23 @@ export default {
   pointer-events: none;
   background-color: #fff;
   border-color: #dee2e6;
+}
+
+.search-bar {
+  background-color: #1e1e1e; /* Black background */
+  border: 1px solid #444; /* Dark border */
+  color: #fff; /* White text */
+}
+
+.search-bar::placeholder {
+  color: #bbb; /* Light gray placeholder text */
+}
+
+.search-bar:focus {
+   background-color: #2c2c2c;
+  border-color: #555555;
+  box-shadow: none;
+  color:white;
 }
 
 </style>
