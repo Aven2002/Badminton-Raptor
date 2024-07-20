@@ -110,8 +110,8 @@ export default {
 
 .card {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 200px; 
+  height: 200px; /* Set a fixed height */
   cursor: pointer;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -140,12 +140,34 @@ export default {
 .card-front img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the card without distortion */
+  object-fit: contain; /* Ensure the image fits within the card without being cropped */
+  object-position: center; /* Center the image within the card */
 }
 
 .card:hover {
   transform: rotateY(180deg);
 }
 
-</style>
+/* Pagination Styles */
+.pagination {
+  margin-top: 20px;
+}
 
+.page-item .page-link {
+  color: #343a40;
+}
+
+.page-item.active .page-link {
+  background-color: #343a40;
+  border-color: #343a40;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+</style>
