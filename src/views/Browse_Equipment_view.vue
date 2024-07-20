@@ -6,11 +6,15 @@
       <div v-if="filteredItems.length === 0" class="text-center">No items found.</div>
       <div class="row">
         <div class="col-md-4 mb-4" v-for="item in paginatedItems" :key="item.equipID">
-          <div class="card h-100" @click="goToDetails(item.equipID)" style="cursor: pointer;">
-            <img class="card-img-top" :src="getImagePath(item.equipImgPath)" alt="Equipment Image">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.equipName }}</h5>
-              <p class="card-text">Price: ${{ item.equipPrice }}</p>
+          <div class="card-container">
+            <div class="card" @click="goToDetails(item.equipID)">
+              <div class="card-front">
+                <img class="card-img-top" :src="getImagePath(item.equipImgPath)" alt="Equipment Image">
+              </div>
+              <div class="card-back">
+                <h5 class="card-title">{{ item.equipName }}</h5>
+                <p class="card-text">Price: ${{ item.equipPrice }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -100,5 +104,48 @@ export default {
 </script>
 
 <style scoped>
-/* Add any additional styling here */
+.card-container {
+  perspective: 800px; /* Adding perspective to the container */
+}
+
+.card {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  background-color: #333;
+  color: #fff;
+  transform: rotateY(180deg);
+  text-align: center;
+  padding: 20px;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the card without distortion */
+}
+
+.card:hover {
+  transform: rotateY(180deg);
+}
+
 </style>
+

@@ -1,112 +1,141 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <router-link to="/" class="navbar-brand d-flex align-items-center">
-          <img :src="logo" alt="Logo" class="logo">
-          <span class="ms-2">{{ title }}</span>
-        </router-link>
-        <button class="navbar-toggler" type="button" @click="toggleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" :class="{ show: isNavbarCollapsed }">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <router-link to="/Home_view" class="nav-link" @click="toggleNavbar">Home</router-link>
-            </li>
-            <li class="nav-item dropdown" @mouseover="showDropdown" @mouseleave="hideDropdown">
-              <router-link to="/Browse_Equipment_view" class="nav-link dropdown-toggle" @click="toggleNavbar">Equipment</router-link>
-              <ul class="dropdown-menu" :class="{ show: isDropdownVisible }">
-                <li>
-                  <router-link to="/Browse_Equipment_view?filter=racket" class="dropdown-item" @click="toggleNavbar">Rackets</router-link>
-                </li>
-                <li>
-                  <router-link to="/Browse_Equipment_view?filter=shuttlecock" class="dropdown-item" @click="toggleNavbar">Shuttlecocks</router-link>
-                </li>
-                <!-- Add more items here -->
-              </ul>
-            </li>
-            <li class="nav-item">
-              <router-link to="/Contact_Us_view" class="nav-link" @click="toggleNavbar">Contact Us</router-link>
-            </li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <router-link to="/" class="navbar-brand d-flex align-items-center">
+        <img :src="logo" alt="Logo" class="logo">
+        <span class="ms-2">{{ title }}</span>
+      </router-link>
+      <button class="navbar-toggler" type="button" @click="toggleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" :class="{ show: isNavbarCollapsed }">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <router-link to="/Home_view" class="nav-link" @click="toggleNavbar">Home</router-link>
+          </li>
+          <li class="nav-item dropdown" @mouseover="showDropdown" @mouseleave="hideDropdown">
+            <router-link to="/Browse_Equipment_view" class="nav-link dropdown-toggle" @click="toggleNavbar">Equipment</router-link>
+            <ul class="dropdown-menu" :class="{ show: isDropdownVisible }">
+              <li v-for="category in categories" :key="category">
+                <router-link :to="`/Browse_Equipment_view?filter=${category}`" class="dropdown-item" @click="toggleNavbar">{{ category }}</router-link>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <router-link to="/Contact_Us_view" class="nav-link" @click="toggleNavbar">Contact Us</router-link>
+          </li>
+        </ul>
       </div>
-    </nav>
-  </template>
-  
-  <script>
-  export default {
-    name: "Navbar_com",
-    data() {
-      return {
-        title: "Badminton Raptor",
-        logo: require("../assets/logo.png"),
-        isNavbarCollapsed: false,
-        isDropdownVisible: false,
-      };
+    </div>
+  </nav>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: "Navbar_com",
+  data() {
+    return {
+      title: "Badminton Raptor",
+      logo: require("../assets/logo.png"),
+      isNavbarCollapsed: false,
+      isDropdownVisible: false,
+      categories: [],
+    };
+  },
+  methods: {
+    toggleNavbar() {
+      this.isNavbarCollapsed = !this.isNavbarCollapsed;
     },
-    methods: {
-      toggleNavbar() {
-        this.isNavbarCollapsed = !this.isNavbarCollapsed;
-      },
-      showDropdown() {
-        this.isDropdownVisible = true;
-      },
-      hideDropdown() {
-        this.isDropdownVisible = false;
-      },
+    showDropdown() {
+      this.isDropdownVisible = true;
     },
-  };
-  </script>
-  
-  <style scoped>
-  .navbar-brand {
-    display: flex;
+    hideDropdown() {
+      this.isDropdownVisible = false;
+    },
+    fetchEquipment() {
+      axios.get('http://localhost:3000/api/equipment') 
+        .then(response => {
+          const equipment = response.data;
+          const categoriesSet = new Set(equipment.map(item => item.equipCategory));
+          this.categories = Array.from(categoriesSet);
+        })
+        .catch(error => {
+          console.error('Error fetching equipment:', error);
+        });
+    },
+  },
+  created() {
+    this.fetchEquipment();
+  },
+};
+</script>
+
+<style scoped>
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  color: #f8f9fa;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (min-width: 992px) {
+  .navbar-nav {
+    flex-direction: row;
     align-items: center;
   }
-  
-  .logo {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .navbar-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  @media (min-width: 992px) {
-    .navbar-nav {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-  
-  .dropdown-menu {
-    display: none;
-  }
-  
-  .dropdown-menu.show {
-    display: block;
-  }
-  
-  .navbar-nav .nav-link {
-    color: #ffffff;
-    transition: color 0.3s;
-  }
-  
-  .navbar-nav .nav-link:hover {
-    color: #f8f9fa;
-  }
-  
-  .navbar-nav .dropdown-menu .dropdown-item {
-    color: #000000;
-  }
-  
-  .navbar-nav .dropdown-menu .dropdown-item:hover {
-    background-color: #f8f9fa;
-    color: #000000;
-  }
-  </style>
-  
+}
+
+.navbar-nav .nav-item {
+  margin-left: 1rem;
+}
+
+.navbar-nav .nav-link {
+  color: #f8f9fa;
+  transition: color 0.3s, background-color 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-nav .dropdown-menu {
+  background-color: #343a40;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.navbar-nav .dropdown-item {
+  color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .dropdown-item:hover {
+  background-color: #495057;
+  color: #ffffff;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0.8);
+}
+</style>
