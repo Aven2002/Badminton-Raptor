@@ -26,7 +26,6 @@
         </div>
         <!-- Equipment Cards Section -->
         <div class="col-md-9">
-          <h1>Browse Equipment</h1>
           <!-- Search Bar -->
           <div class="mb-4">
             <input 
