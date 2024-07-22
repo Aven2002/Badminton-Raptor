@@ -1,0 +1,116 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  header, footer {
+    flex-shrink: 0;
+  }
+  
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  
+  .card-container {
+    perspective: 800px; /* Adding perspective to the container */
+  }
+  
+  .card {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Set a fixed height */
+    cursor: pointer;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .card-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+  
+  .card-back {
+    background-color: #333;
+    color: #fff;
+    transform: rotateY(180deg);
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensure the image fits within the card without being cropped */
+    object-position: center; /* Center the image within the card */
+  }
+  
+  .card:hover {
+    transform: rotateY(180deg);
+  }
+  
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .page-item {
+    margin: 0 4px; /* Space between items */
+  }
+  
+  .page-link {
+    color: #495057; /* Dark gray text */
+    background-color: #e9ecef; /* Light gray background */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 16px; /* Padding for buttons */
+    font-size: 0.875rem; /* Slightly smaller font size */
+    text-align: center; /* Centered text */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  }
+  
+  .page-link:hover {
+    color: #fff; /* White text on hover */
+    background-color: #007bff; /* Blue background on hover */
+  }
+  
+  .page-item.disabled .page-link {
+    color: #6c757d; /* Gray text for disabled state */
+    background-color: #e9ecef; /* Light gray background */
+  }
+  
+  .page-item.active .page-link {
+    color: #fff; /* White text for active page */
+    background-color: #007bff; /* Blue background for active page */
+  }
+  
+  
+  
+  
+  
+  .search-bar {
+    background-color: #1e1e1e; /* Black background */
+    border: 1px solid #444; /* Dark border */
+    color: #fff; /* White text */
+  }
+  
+  .search-bar::placeholder {
+    color: #bbb; /* Light gray placeholder text */
+  }
+  
+  .search-bar:focus {
+     background-color: #2c2c2c;
+    border-color: #555555;
+    box-shadow: none;
+    color:white;
+  }

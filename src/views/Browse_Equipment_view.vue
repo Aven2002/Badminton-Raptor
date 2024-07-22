@@ -1,208 +1,85 @@
 <template>
-  <div>
-    <h1>Browse Equipment</h1>
-    <!-- Search Bar -->
-    <div class="mb-4">
-  <input 
-    type="text" 
-    v-model="searchQuery" 
-    class="form-control search-bar" 
-    placeholder="Search by equipment name" 
-  />
-</div>
-
-    <div v-if="loading" class="text-center">Loading...</div>
-    <div v-else>
-      <div v-if="filteredItems.length === 0" class="text-center">No items found.</div>
+    <main class="content container">
       <div class="row">
-        <div class="col-md-4 mb-4" v-for="item in paginatedItems" :key="item.equipID">
-          <div class="card-container">
-            <div class="card" @click="goToDetails(item.equipID)">
-              <div class="card-front">
-                <img class="card-img-top" :src="getImagePath(item.equipImgPath)" alt="Equipment Image">
-              </div>
-              <div class="card-back">
-                <h5 class="card-title">{{ item.equipName }}</h5>
-                <p class="card-text">Price: ${{ item.equipPrice }}</p>
+        <!-- Filter Section -->
+        <div class="col-md-3">
+          <h2>Filters</h2>
+          <div class="mb-4">
+            <label for="category">Category</label>
+            <select id="category" class="form-control" v-model="filter">
+              <option value="">All Categories</option>
+              <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="brand">Brand</label>
+            <select id="brand" class="form-control" v-model="selectedBrand">
+              <option value="">All Brands</option>
+              <option v-for="brand in brands" :key="brand" :value="brand">{{ brand }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="priceRange">Price Range</label>
+            <input type="range" class="form-range" id="priceRange" v-model="priceRange" :min="minPrice" :max="maxPrice">
+            <div>Price: RM{{ priceRange }}</div>
+          </div>
+        </div>
+        <!-- Equipment Cards Section -->
+        <div class="col-md-9">
+          <h1>Browse Equipment</h1>
+          <!-- Search Bar -->
+          <div class="mb-4">
+            <input 
+              type="text" 
+              v-model="searchQuery" 
+              class="form-control search-bar" 
+              placeholder="Search by equipment name" 
+            />
+          </div>
+          <div v-if="loading" class="text-center">Loading...</div>
+          <div v-else>
+            <div v-if="filteredItems.length === 0" class="text-center">No items found.</div>
+            <div class="row">
+              <div class="col-md-4 mb-4" v-for="item in paginatedItems" :key="item.equipID">
+                <div class="card-container">
+                  <div class="card" @click="goToDetails(item.equipID)">
+                    <div class="card-front">
+                      <img class="card-img-top" :src="getImagePath(item.equipImgPath)" alt="Equipment Image">
+                    </div>
+                    <div class="card-back">
+                      <h5 class="card-title">{{ item.equipName }}</h5>
+                      <p class="card-text">Price: RM{{ item.equipPrice }}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" :class="{ disabled: currentPage === 1 }">
+      <a class="page-link" href="#" @click.prevent="changePage(currentPage - 1)" aria-label="Previous">
+        <i class="fas fa-chevron-left"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
+      <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
+    </li>
+    <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+      <a class="page-link" href="#" @click.prevent="changePage(currentPage + 1)" aria-label="Next">
+        <i class="fas fa-chevron-right"></i>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
           </div>
         </div>
       </div>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item" :class="{ disabled: currentPage === 1 }">
-            <button class="page-link" @click="changePage(currentPage - 1)">Previous</button>
-          </li>
-          <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
-            <button class="page-link" @click="changePage(page)">{{ page }}</button>
-          </li>
-          <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-            <button class="page-link" @click="changePage(currentPage + 1)">Next</button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+    </main>
 </template>
 
+<script src='@/javascript/Browse_Equipment.js'></script>
 
-<script>
-import axios from 'axios';
-
-export default {
-  name: 'Browse_Equipment_view',
-  data() {
-  return {
-    items: [],
-    filter: '',
-    searchQuery: '',
-    loading: false,
-    currentPage: 1,
-    itemsPerPage: 6
-  };
-},
-
-computed: {
-  filteredItems() {
-    let items = this.items;
-    if (this.filter) {
-      items = items.filter(item => item.equipCategory === this.filter);
-    }
-    if (this.searchQuery) {
-      items = items.filter(item => item.equipName.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    }
-    return items;
-  },
-  totalPages() {
-    return Math.ceil(this.filteredItems.length / this.itemsPerPage);
-  },
-  paginatedItems() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    return this.filteredItems.slice(start, end);
-  }
-},
-
-  watch: {
-    $route(to) {
-      this.filter = to.query.filter || '';
-      this.fetchItems();
-    }
-  },
-  created() {
-    this.filter = this.$route.query.filter || '';
-    this.fetchItems();
-  },
-  methods: {
-    async fetchItems() {
-      this.loading = true;
-      try {
-        const response = await axios.get('http://localhost:3000/api/equipment');
-        this.items = response.data;
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      } finally {
-        this.loading = false;
-      }
-    },
-    changePage(page) {
-      if (page > 0 && page <= this.totalPages) {
-        this.currentPage = page;
-      }
-    },
-    goToDetails(productID) {
-      this.$router.push({ name: 'ProductDetails', params: { id: productID } });
-    },
-    getImagePath(equipImgPath) {
-      return `http://localhost:3000/assets/${equipImgPath}`;
-    }
-  }
-};
-</script>
-
-<style scoped>
-.card-container {
-  perspective: 800px; /* Adding perspective to the container */
-}
-
-.card {
-  position: relative;
-  width: 200px; 
-  height: 200px; /* Set a fixed height */
-  cursor: pointer;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.card-front {
-  z-index: 2;
-  transform: rotateY(0deg);
-}
-
-.card-back {
-  background-color: #333;
-  color: #fff;
-  transform: rotateY(180deg);
-  text-align: center;
-  padding: 20px;
-}
-
-.card-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensure the image fits within the card without being cropped */
-  object-position: center; /* Center the image within the card */
-}
-
-.card:hover {
-  transform: rotateY(180deg);
-}
-
-/* Pagination Styles */
-.pagination {
-  margin-top: 20px;
-}
-
-.page-item .page-link {
-  color: #343a40;
-}
-
-.page-item.active .page-link {
-  background-color: #343a40;
-  border-color: #343a40;
-  color: white;
-}
-
-.page-item.disabled .page-link {
-  color: #6c757d;
-  pointer-events: none;
-  background-color: #fff;
-  border-color: #dee2e6;
-}
-
-.search-bar {
-  background-color: #1e1e1e; /* Black background */
-  border: 1px solid #444; /* Dark border */
-  color: #fff; /* White text */
-}
-
-.search-bar::placeholder {
-  color: #bbb; /* Light gray placeholder text */
-}
-
-.search-bar:focus {
-   background-color: #2c2c2c;
-  border-color: #555555;
-  box-shadow: none;
-  color:white;
-}
-
-</style>
+<style src='@/style/Browse_Equipment.css' scoped></style>
