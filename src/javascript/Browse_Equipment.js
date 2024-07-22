@@ -28,7 +28,8 @@ export default {
         items = items.filter(item => item.equipBrand === this.selectedBrand);
       }
       if (this.searchQuery) {
-        items = items.filter(item => item.equipName.toLowerCase().includes(this.searchQuery.toLowerCase()));
+        const searchQueryLower = this.searchQuery.toLowerCase();
+        items = items.filter(item => item.equipName.toLowerCase().includes(searchQueryLower));
       }
       items = items.filter(item => item.equipPrice <= Math.ceil(this.priceRange));
       return items;
@@ -55,6 +56,9 @@ export default {
     },
     priceRange(newVal) {
       this.priceRange = Math.max(newVal, this.adjustedMinPrice);
+    },
+    searchQuery() {
+      this.currentPage = 1; // Reset to the first page when the search query changes
     }
   },
   created() {

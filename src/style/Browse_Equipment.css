@@ -58,46 +58,52 @@
     transform: rotateY(180deg);
   }
   
-  .pagination {
+/* Pagination Styles */
+.pagination {
     margin-top: 20px;
     display: flex;
     justify-content: center;
-  }
-  
-  .page-item {
-    margin: 0 4px; /* Space between items */
-  }
-  
-  .page-link {
+    flex-wrap: wrap; /* Allow wrapping to prevent overflow */
+}
+
+.page-item {
+    margin: 0 2px; /* Reduced margin to fit more items */
+}
+
+.page-link {
     color: #495057; /* Dark gray text */
     background-color: #e9ecef; /* Light gray background */
     border: none; /* No border */
     border-radius: 4px; /* Rounded corners */
-    padding: 10px 16px; /* Padding for buttons */
-    font-size: 0.875rem; /* Slightly smaller font size */
+    padding: 6px 12px; /* Smaller padding for buttons */
+    font-size: 0.75rem; /* Smaller font size */
     text-align: center; /* Centered text */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-  }
-  
-  .page-link:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.page-link i {
+    font-size: 0.75rem; /* Size of the icons */
+}
+
+.page-link:hover {
     color: #fff; /* White text on hover */
     background-color: #007bff; /* Blue background on hover */
-  }
-  
-  .page-item.disabled .page-link {
+}
+
+.page-item.disabled .page-link {
     color: #6c757d; /* Gray text for disabled state */
     background-color: #e9ecef; /* Light gray background */
-  }
-  
-  .page-item.active .page-link {
+}
+
+.page-item.active .page-link {
     color: #fff; /* White text for active page */
     background-color: #007bff; /* Blue background for active page */
-  }
-  
-  
-  
-  
-  
+}
+
   .search-bar {
     background-color: #1e1e1e; /* Black background */
     border: 1px solid #444; /* Dark border */
