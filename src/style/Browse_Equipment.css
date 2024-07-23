@@ -121,6 +121,7 @@ header, footer {
 }
 
 .search-bar {
+    width: 50%;
     background-color: #1e1e1e; /* Black background */
     border: 1px solid #444; /* Dark border */
     color: #fff; /* White text */
