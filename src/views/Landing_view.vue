@@ -30,31 +30,6 @@ export default {
 };
 </script>
 
-<style>
-.content {
-  padding:80px 20px;
-  max-width: 1000px;
-  text-align: left;
-}
+<style src='@/style/Landing.css' scoped></style>
 
-.feature-list {
-  list-style-type: none;
-  padding-left: 0;
-  font-size: 16px;
-}
 
-.feature-list li {
-  margin: 10px 0;
-}
-
-h2 {
-  font-size: 2.5em;
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-}
-
-</style>
