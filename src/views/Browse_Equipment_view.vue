@@ -39,7 +39,6 @@
             <select id="sort" class="form-control w-auto" v-model="sortOrder">
               <option value="highest">Highest Price</option>
               <option value="lowest">Lowest Price</option>
-              <option value="latest">Latest</option>
             </select>
           </div>
         </div>

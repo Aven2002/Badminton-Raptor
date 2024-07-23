@@ -15,7 +15,8 @@ export default {
       categories: [],
       loading: false,
       currentPage: 1,
-      itemsPerPage: 6
+      itemsPerPage: 6,
+      sortOrder: 'highest'
     };
   },
   computed: {
@@ -32,6 +33,13 @@ export default {
         items = items.filter(item => item.equipName.toLowerCase().includes(searchQueryLower));
       }
       items = items.filter(item => item.equipPrice <= Math.ceil(this.priceRange));
+
+      // Sort items by price
+      if (this.sortOrder === 'highest') {
+        items.sort((a, b) => b.equipPrice - a.equipPrice);
+      } else if (this.sortOrder === 'lowest') {
+        items.sort((a, b) => a.equipPrice - b.equipPrice);
+      }
       return items;
     },
     totalPages() {
