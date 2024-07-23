@@ -54,17 +54,17 @@
   </div>
 </template>
 
-  <script>
-  import axios from 'axios';
-  
-  export default {
+<script>
+import axios from 'axios';
+
+export default {
   data() {
     return {
       form: {
         feedbackCategory: 'General',
         email: '',
         contactNum: '',
-        feedbackContent: '' // Initialize this property
+        feedbackContent: '' 
       },
       charCount: 0,
       phoneError: '',
@@ -74,7 +74,7 @@
   },
   methods: {
     updateCharCount() {
-      if (this.form.feedbackContent) { // Check if feedbackContent is defined
+      if (this.form.feedbackContent) {
         this.charCount = this.form.feedbackContent.trim().length;
         if (this.charCount > 1500) {
           this.errorMessage = 'Maximum 1500 characters allowed.';
@@ -84,7 +84,7 @@
           this.isSubmitDisabled = false;
         }
       } else {
-        this.charCount = 0; // If feedbackContent is undefined, set charCount to 0
+        this.charCount = 0;
       }
     },
     validatePhoneNumber(phoneNumber) {
@@ -92,87 +92,45 @@
       return phoneRegex.test(phoneNumber);
     },
     async submitFeedback() {
-      if (!this.validatePhoneNumber(this.form.contactNum)) {
-        this.phoneError = 'Invalid phone number format. Please try again...';
-        return;
-      }
+  if (!this.validatePhoneNumber(this.form.contactNum)) {
+    this.phoneError = 'Invalid phone number format. Please try again...';
+    return;
+  }
 
-      try {
-        const response = await axios.post('http://localhost:3000/api/feedback', this.form);
-        if (response.data.success) {
-          alert('Feedback submitted successfully!');
-        } else {
-          alert('Error submitting feedback. Please try again later.');
-        }
-      } catch (error) {
-        alert('Error submitting feedback. Please try again later.');
-      }
+  this.isSubmitDisabled = true; // Disable submit button during submission
+
+  try {
+    const response = await axios.post('http://localhost:3000/api/feedback', this.form);
+    console.log('Response Data:', response.data); // Log response data
+    
+    // Assuming that the presence of feedback data in the response indicates success
+    if (response.data && response.data.id) {
+      alert('Feedback submitted successfully!');
+      this.resetForm();
+    } else {
+      this.errorMessage = 'Error submitting feedback. Please try again later.';
+    }
+  } catch (error) {
+    this.errorMessage = 'Error submitting feedback. Please try again later.';
+    console.error('Submit Feedback Error:', error);
+  } finally {
+    this.isSubmitDisabled = false; // Re-enable button after submission
+  }
+},
+    resetForm() {
+      this.form = {
+        feedbackCategory: 'General',
+        email: '',
+        contactNum: '',
+        feedbackContent: ''
+      };
+      this.charCount = 0;
+      this.phoneError = '';
+      this.errorMessage = '';
+      this.isSubmitDisabled = false;
     }
   }
 };
-  </script>
+</script>
 
-  <style scoped>
-  
-  .container {
-  padding:30px;
-}
-
-.card {
-  background-color: #1e1e1e;
-  border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.card-header {
-  background-color: #333333;
-  border-bottom: 1px solid #444444;
-}
-
-h4 {
-  color: #ffffff;
-}
-
-.form-label {
-  color: #bbbbbb;
-}
-
-.form-control {
-  background-color: #2c2c2c;
-  border: 1px solid #444444;
-  color: #ffffff;
-}
-
-.form-control::placeholder {
-  color: #bbbbbb; 
-}
-
-.form-control:focus {
-  background-color: #2c2c2c;
-  border-color: #555555;
-  box-shadow: none;
-  color:white;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-.text-white {
-  color: #ffffff;
-}
-
-li {
-  text-align: left;
-  font-size: 13px;
-  margin-top: 15px;
-}
-
-p {
-  text-align: left;
-  font-size: 15px;
-}
-
-  </style>
-  
+<style src='@/style/Contact_Us.css' scoped></style>
