@@ -44,7 +44,9 @@
         </div>
         <div v-if="loading" class="text-center">Loading...</div>
         <div v-else>
-          <div v-if="filteredItems.length === 0" class="text-center">No items found.</div>
+          <div v-if="filteredItems.length === 0" class="text-center">
+            <img src='@/assets/Empty.png' alt="No favorites" class="img-fluid" />
+          </div>
           <div class="row">
             <div class="col-md-4 mb-4" v-for="item in paginatedItems" :key="item.equipID">
               <div class="card-container">
