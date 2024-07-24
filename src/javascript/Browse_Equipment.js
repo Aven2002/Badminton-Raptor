@@ -116,7 +116,7 @@ export default {
       }
     },
     goToDetails(productID) {
-      this.$router.push({ name: 'ProductDetails', params: { id: productID } });
+      this.$router.push({ name: 'Equipment_Details_view', params: { id: productID } });
     },
     getImagePath(equipImgPath) {
       return `http://localhost:3000/assets/${equipImgPath}`;

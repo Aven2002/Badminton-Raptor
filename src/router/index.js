@@ -10,6 +10,7 @@ import Settings_view from '@/views/Settings_view.vue';
 import Favorite_List_view from '@/views/Favorite_List_view.vue';
 import Contact_Us_view from '@/views/Contact_Us_view.vue';
 import Reset_Password_view from '@/views/Reset_Password_view.vue';
+import Equipment_Details_view from '@/views/Equipment_Details_view.vue';
 
 const routes = [
   {
@@ -67,6 +68,12 @@ const routes = [
     name: "Reset_Password_view",
     component: Reset_Password_view,
   },
+  {
+    path: '/equipment/:id',
+    name: 'Equipment_Details_view',
+    component: Equipment_Details_view,
+    props: true
+  }
 ];
 
 const router = createRouter({
