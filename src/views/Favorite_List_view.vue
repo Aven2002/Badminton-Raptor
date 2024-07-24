@@ -21,7 +21,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in favoriteItems" :key="item.id" @click="goToDetails(item.equipID)">
+                  <tr v-for="item in favoriteItems" :key="item.favoriteID" @click="goToDetails(item.equipID)">
                     <td>
                       <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" />
                     </td>
@@ -30,7 +30,7 @@
                     <td>{{ item.equipCategory }}</td>
                     <td>{{ item.equipBrand }}</td>
                     <td>
-                      <button class="btn btn-danger" @click.stop="removeFromFavorites(item.equipID)">Remove</button>
+                      <button class="btn btn-danger" @click.stop="removeFromFavorites(item.favoriteID)">Remove</button>
                     </td>
                   </tr>
                 </tbody>
