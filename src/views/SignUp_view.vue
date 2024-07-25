@@ -5,8 +5,23 @@
         <div class="card shadow-lg">
           <div class="card-body">
             <form @submit.prevent="signUp">
+              <!-- Pagination -->
+              <nav>
+                <ul class="pagination justify-content-center">
+                  <li :class="['page-item', { active: step === 1 }]">
+                    <a class="page-link" href="#" @click.prevent="goToStep(1)">1</a>
+                  </li>
+                  <li :class="['page-item', { active: step === 2 }]">
+                    <a class="page-link" href="#" @click.prevent="goToStep(2)" :class="{ disabled: !isStep2Valid }">2</a>
+                  </li>
+                  <li :class="['page-item', { active: step === 3 }]">
+                    <a class="page-link" href="#" @click.prevent="goToStep(3)" :class="{ disabled: !isStep2Valid }">3</a>
+                  </li>
+                </ul>
+              </nav>
+
+              <!-- Section 1: Profile Image Selection -->
               <div v-if="step === 1">
-                <!-- Profile Image Selection -->
                 <div class="row">
                   <div class="col-12 mb-4 text-center">
                     <div class="card profile-card mx-auto">
@@ -32,9 +47,9 @@
                 </div>
               </div>
 
+              <!-- Section 2: Account Info -->
               <div v-else-if="step === 2">
                 <div class="row">
-                  <!-- Left column -->
                   <div class="col-md-6">
                     <div class="mb-3">
                       <label for="fname" class="form-label">First Name</label>
@@ -57,7 +72,6 @@
                       <input type="password" class="form-control" id="password" v-model="form.password" required>
                     </div>
                   </div>
-                  <!-- Right column -->
                   <div class="col-md-6">
                     <div class="mb-3">
                       <label for="gender" class="form-label">Gender</label>
@@ -90,7 +104,46 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <button type="button" class="btn btn-primary" @click="nextStep" :disabled="!isStep2Valid">Next</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 3: Confirm and Submit -->
+              <div v-else-if="step === 3">
+                <div class="row">
+                  <div class="col-12">
+                    <h5>Profile Image</h5>
+                    <div class="card profile-card mx-auto mb-3">
+                      <div class="card-body text-center">
+                        <img :src="form.profileImg" class="img-fluid rounded-circle" alt="Profile Image" id="big-profile-img">
+                      </div>
+                    </div>
+                    <h5>Account Information</h5>
+                    <ul class="list-group mb-3">
+                      <li class="list-group-item"><strong>First Name:</strong> {{ form.fname }}</li>
+                      <li class="list-group-item"><strong>Last Name:</strong> {{ form.lname }}</li>
+                      <li class="list-group-item"><strong>Username:</strong> {{ form.username }}</li>
+                      <li class="list-group-item"><strong>Email:</strong> {{ form.email }}</li>
+                      <li class="list-group-item"><strong>Password:</strong> {{ form.password }}</li>
+                      <li class="list-group-item"><strong>Gender:</strong> {{ form.gender }}</li>
+                      <li class="list-group-item"><strong>Age:</strong> {{ form.age }}</li>
+                      <li class="list-group-item"><strong>Race:</strong> {{ form.race }}</li>
+                      <li class="list-group-item"><strong>Contact Number:</strong> {{ form.contactNum }}</li>
+                      <li class="list-group-item"><strong>Date of Birth:</strong> {{ form.dob }}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 text-center">
+                    <button type="button" class="btn btn-secondary" @click="prevStep">Back</button>
+                  </div>
+                  <div class="col-6 text-center">
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
@@ -98,6 +151,24 @@
       </div>
     </div>
   </div>
+<!-- Error Modal HTML -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ errorMessage }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </template>
 
 <script src='@/javascript/SignUp.js'></script>
