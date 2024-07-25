@@ -1,25 +1,37 @@
 import axios from 'axios';
 
 export default {
-  name: 'SignupView',
   data() {
     return {
+      step: 1,
       form: {
-        firstName: '',
-        lastName: '',
-        email: '',
+        profileImg: require('@/assets/Profile_Img/Profile_Img_Default.png'),
+        fname: '',
+        lname: '',
         username: '',
+        email: '',
         password: '',
         gender: '',
-        age: 0,
+        age: '',
         race: '',
-        contactNumber: '',
+        contactNum: '',
         dob: ''
       },
-      errorMessage: ''
+      profileImgs: [
+        require('@/assets/Profile_Img/Profile_Img_01.png'),
+        require('@/assets/Profile_Img/Profile_Img_02.png'),
+        require('@/assets/Profile_Img/Profile_Img_03.png'),
+        require('@/assets/Profile_Img/Profile_Img_04.png')
+      ]
     };
   },
   methods: {
+    selectProfileImg(img) {
+      this.form.profileImg = img;
+    },
+    nextStep() {
+      this.step = 2;
+    },
     async signUp() {
       try {
         const response = await axios.post('http://localhost:3000/api/account', this.form);
@@ -46,6 +58,6 @@ export default {
       }
       console.log('Signup button clicked');
       console.log('Form Data:', this.form);
-    }
+    },
   }
 };

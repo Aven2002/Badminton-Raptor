@@ -56,3 +56,18 @@
     opacity: 0.7;
     transition: opacity 0.2s;
   }
+
+  #big-profile-img {
+    width:200px;
+    height: 200px;
+  }
+  
+  .selectable-profile-img {
+    width:130px;
+    height: 130px;
+    cursor: pointer;
+  }
+  
+  .selectable-profile-img:hover {
+    border: 2px solid #007bff;
+  }
