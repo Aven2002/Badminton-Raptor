@@ -1,76 +1,94 @@
 <template>
-    <main class="content container">
-      <div v-if="loading" class="text-center">Loading...</div>
+  <div>
+    <main class="content container py-5">
+      <div v-if="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
       <div v-else>
         <div v-if="equipment">
           <div class="row">
-            <div class="col-md-4">
-              <img :src="getImagePath(equipment.equipImgPath)" alt="Equipment Image" class="img-fluid" />
+            <!-- Top Section: Breadcrumb and Button -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <BreadCrumb_com :equipName="equipment.equipName || 'Default Equipment Name'" />
+              <Favorite_btn_com :equipID="equipment.equipID" />
             </div>
-            <div class="col-md-8">
-              <h2>{{ equipment.equipName }}</h2>
-              <p><strong>Price:</strong> RM{{ equipment.equipPrice }}</p>
-              <p><strong>Category:</strong> {{ equipment.equipCategory }}</p>
-              <p><strong>Brand:</strong> {{ equipment.equipBrand }}</p>
-              
-              <!-- Display additional details based on category -->
-              <div v-if="details">
-                <div v-if="equipment.equipCategory === 'Racquet'">
-                  <h4>Racquet Details</h4>
-                  <ul>
-                    <li><strong>Flex:</strong> {{ details.flex }}</li>
-                    <li><strong>Frame:</strong> {{ details.frame }}</li>
-                    <li><strong>Shaft:</strong> {{ details.shaft }}</li>
-                    <li><strong>Joint:</strong> {{ details.joint }}</li>
-                    <li><strong>Length:</strong> {{ details.length }}</li>
-                    <li><strong>Weight:</strong> {{ details.weight }}</li>
-                    <li><strong>String Advice:</strong> {{ details.stringAdvice }}</li>
-                    <li><strong>Color:</strong> {{ details.color }}</li>
-                    <li><strong>Made In:</strong> {{ details.madeIn }}</li>
-                  </ul>
+            
+            <!-- Left Section: Image -->
+            <div class="col-md-4 d-flex flex-column align-items-center left-section">
+              <img :src="getImagePath(equipment.equipImgPath)" alt="Equipment Image" class="img-fluid rounded shadow-lg" />
+            </div>
+            
+            <!-- Right Section: Equipment Details -->
+            <div class="col-md-8">           
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="display-4">{{ equipment.equipName }}</h2>
+                <img :src="getBrandLogoPath(equipment.equipBrand)" alt="Brand Logo" class="img-fluid brand-logo" />
+              </div>
+              <p class="lead mb-3"><strong>Price:</strong> RM{{ equipment.equipPrice.toFixed(2) }}</p>
+              <p class="lead mb-3"><strong>Category:</strong> {{ equipment.equipCategory }}</p>
+              <p class="lead mb-4"><strong>Brand:</strong> {{ equipment.equipBrand }}</p>
+
+              <!-- Additional Details Based on Category -->
+              <div v-if="details" class="mt-4">
+                <div v-if="equipment.equipCategory === 'Racquet'" class="card card-dark mb-3">
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li class="list-group-item"><strong>Flex:</strong> {{ details.flex }}</li>
+                      <li class="list-group-item"><strong>Frame:</strong> {{ details.frame }}</li>
+                      <li class="list-group-item"><strong>Shaft:</strong> {{ details.shaft }}</li>
+                      <li class="list-group-item"><strong>Joint:</strong> {{ details.joint }}</li>
+                      <li class="list-group-item"><strong>Length:</strong> {{ details.length }}</li>
+                      <li class="list-group-item"><strong>Weight:</strong> {{ details.weight }}</li>
+                      <li class="list-group-item"><strong>String Advice:</strong> {{ details.stringAdvice }}</li>
+                      <li class="list-group-item"><strong>Color:</strong> {{ details.color }}</li>
+                      <li class="list-group-item"><strong>Made In:</strong> {{ details.madeIn }}</li>
+                    </ul>
+                  </div>
                 </div>
-  
-                <div v-if="equipment.equipCategory === 'Shuttlecock'">
-                  <h4>Shuttlecock Details</h4>
-                  <ul>
-                    <li><strong>Quantity per Tube:</strong> {{ details.quantityPerTube }}</li>
-                    <li><strong>Description:</strong> {{ details.description }}</li>
-                  </ul>
+                <div v-if="equipment.equipCategory === 'Shuttlecock'" class="card card-dark mb-3">
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li class="list-group-item"><strong>Quantity per Tube:</strong> {{ details.quantityPerTube }}</li>
+                      <li class="list-group-item"><strong>Description:</strong> {{ details.description }}</li>
+                    </ul>
+                  </div>
                 </div>
-  
-                <div v-if="equipment.equipCategory === 'Bags'">
-                  <h4>Bag Details</h4>
-                  <ul>
-                    <li><strong>Color:</strong> {{ details.color }}</li>
-                    <li><strong>Size:</strong> {{ details.size }}</li>
-                    <li><strong>Description:</strong> {{ details.description }}</li>
-                  </ul>
+                <div v-if="equipment.equipCategory === 'Bags'" class="card card-dark mb-3">
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li class="list-group-item"><strong>Color:</strong> {{ details.color }}</li>
+                      <li class="list-group-item"><strong>Size:</strong> {{ details.size }}</li>
+                      <li class="list-group-item"><strong>Description:</strong> {{ details.description }}</li>
+                    </ul>
+                  </div>
                 </div>
-  
-                <div v-if="equipment.equipCategory === 'Footwear'">
-                  <h4>Footwear Details</h4>
-                  <ul>
-                    <li><strong>Color:</strong> {{ details.color }}</li>
-                    <li><strong>Upper:</strong> {{ details.upper }}</li>
-                    <li><strong>Midsole:</strong> {{ details.midsole }}</li>
-                    <li><strong>Outsole:</strong> {{ details.outsole }}</li>
-                    <li><strong>Description:</strong> {{ details.description }}</li>
-                  </ul>
+                <div v-if="equipment.equipCategory === 'Footwear'" class="card card-dark mb-3">
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li class="list-group-item"><strong>Color:</strong> {{ details.color }}</li>
+                      <li class="list-group-item"><strong>Upper:</strong> {{ details.upper }}</li>
+                      <li class="list-group-item"><strong>Midsole:</strong> {{ details.midsole }}</li>
+                      <li class="list-group-item"><strong>Outsole:</strong> {{ details.outsole }}</li>
+                      <li class="list-group-item"><strong>Description:</strong> {{ details.description }}</li>
+                    </ul>
+                  </div>
                 </div>
-  
-                <div v-if="equipment.equipCategory === 'Apparel'">
-                  <h4>Apparel Details</h4>
-                  <ul>
-                    <li><strong>Color:</strong> {{ details.color }}</li>
-                    <li><strong>Material:</strong> {{ details.material }}</li>
-                  </ul>
+                <div v-if="equipment.equipCategory === 'Apparel'" class="card card-dark mb-3">
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li class="list-group-item"><strong>Color:</strong> {{ details.color }}</li>
+                      <li class="list-group-item"><strong>Material:</strong> {{ details.material }}</li>
+                    </ul>
+                  </div>
                 </div>
-  
-                <div v-if="equipment.equipCategory === 'Accessories'">
-                  <h4>Accessory Details</h4>
-                  <ul>
-                    <li><strong>Description:</strong> {{ details.description }}</li>
-                  </ul>
+                <div v-if="equipment.equipCategory === 'Accessories'" class="card card-dark mb-3">
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li class="list-group-item"><strong>Description:</strong> {{ details.description }}</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -78,50 +96,9 @@
         </div>
       </div>
     </main>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    name: 'Equipment_Details_View',
-    data() {
-      return {
-        equipment: null,
-        details: null,
-        loading: false
-      };
-    },
-    created() {
-      this.fetchEquipmentDetails();
-    },
-    methods: {
-      async fetchEquipmentDetails() {
-        this.loading = true;
-        const equipID = this.$route.params.id;
-  
-        try {
-          const response = await axios.get(`http://localhost:3000/api/equipment/${equipID}/details`);
-          this.equipment = response.data.equipment;
-          this.details = response.data.details;
-        } catch (error) {
-          console.error('Error fetching equipment details:', error);
-        } finally {
-          this.loading = false;
-        }
-      },
-      getImagePath(equipImgPath) {
-        return `http://localhost:3000/assets/${equipImgPath}`;
-      }
-    }
-  };
-  </script>
-  
-  
-  <style scoped>
-  .img-fluid {
-    max-width: 100%;
-    height: auto;
-  }
-  </style>
-  
+  </div>
+</template>
+
+<script src='@/javascript/Equipment_Details.js'></script>
+
+<style src='@/style/Equipment_Details.css' scoped></style>
