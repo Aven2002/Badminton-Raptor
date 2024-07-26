@@ -82,7 +82,8 @@ export default {
     },
     selectProfileImage(img) {
       this.user.profileImg = img;
-      this.editingProfileImage = false; // Exit profile image edit mode
+      this.editingProfileImage = false; 
+      this.editMode = true; 
     },
     toggleEditMode() {
       this.editMode = !this.editMode;
