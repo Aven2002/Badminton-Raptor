@@ -1,0 +1,103 @@
+.selected {
+  border: 2px solid #007bff;
+}
+
+.profile-img-container img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 50%;
+}
+
+/* Top Section Styles */
+.card-header {
+    background-color: #343a40; /* Darker background color for dark theme */
+    color: #ffffff; /* White text color */
+    border-bottom: 1px solid #495057; /* Subtle border for separation */
+    padding: 1.25rem 1.5rem; /* Adjust padding for spacing */
+  }
+  
+  .card-header .header {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space out the subtitle and ID */
+    align-items: center; /* Center align items vertically */
+    margin-top: 0.5rem; /* Margin for spacing */
+  }
+
+.form-label {
+  font-size: 0.9rem;
+}
+
+.form-control {
+  font-size: 0.8rem;
+}
+
+.btn {
+  font-size: 0.8rem;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+}
+
+.card-body .d-flex {
+  margin-top: 5px;
+}
+
+.input-row {
+  transition: all 0.3s ease-in-out;
+}
+
+.expanded {
+  margin-bottom: 100px; /* Adjust based on how much space you want */
+}
+
+.dark-theme {
+  background-color: #343a40;
+  color: #fff;
+  border: 1px solid #ced4da;
+}
+
+.profile-img-container {
+  max-width: 150px;
+  margin: auto;
+}
+
+.form-control-plaintext {
+  background-color: #343a40;
+  border: none;
+  color: #f8f9fa;
+}
+
+.profile-img-option img {
+  width: 60px; /* Smaller size for profile images */
+  height: 60px; /* Ensure height matches width */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.profile-img-option img:hover {
+  transform: scale(1.1); /* Enlarge image on hover */
+}
+
+.profile-img-option {
+  display: inline-block;
+  margin: 5px;
+}
+
+.btn-edit,
+.btn-update {
+  background-color: transparent;
+  border: 1px solid transparent; /* Make border invisible */
+  color: #007bff; /* Primary color */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* On hover */
+.btn-edit:hover,
+.btn-update:hover {
+  background-color: #007bff; /* Primary color */
+  color: #fff; /* Text color when hovered */
+  border-color: #007bff; /* Border color on hover */
+}
+
