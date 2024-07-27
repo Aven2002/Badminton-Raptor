@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { Modal } from 'bootstrap';
 import Cookies from 'js-cookie';
+import ErrorModal from '@/components/Error_modal_com.vue';
 
 export default {
   name: 'Login_view',
+  components: {
+    ErrorModal
+  },
   data() {
     return {
       step: 1,
