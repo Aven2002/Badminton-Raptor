@@ -48,16 +48,44 @@ export default {
     },
     dynamicDetails(details) {
       const dynamicKeys = {
-        Racquet: ['flex', 'frame', 'shaft', 'joint', 'length', 'weight', 'stringAdvice', 'color', 'madeIn'],
-        Shuttlecock: ['quantityPerTube', 'description'],
-        Bags: ['color', 'size', 'description'],
-        Footwear: ['color', 'upper', 'midsole', 'outsole', 'description'],
-        Apparel: ['color', 'material'],
-        Accessories: ['description'],
+        Racquet: {
+          flex: 'Flex',
+          frame: 'Frame',
+          shaft: 'Shaft',
+          joint: 'Joint',
+          length: 'Length',
+          weight: 'Weight',
+          stringAdvice: 'String Advice',
+          color: 'Color',
+          madeIn: 'Made In'
+        },
+        Shuttlecock: {
+          quantityPerTube: 'Quantity Per Tube',
+          description: 'Description'
+        },
+        Bags: {
+          color: 'Color',
+          size: 'Size',
+          description: 'Description'
+        },
+        Footwear: {
+          color: 'Color',
+          upper: 'Upper',
+          midsole: 'Midsole',
+          outsole: 'Outsole',
+          description: 'Description'
+        },
+        Apparel: {
+          color: 'Color',
+          material: 'Material'
+        },
+        Accessories: {
+          description: 'Description'
+        },
       };
-      return dynamicKeys[this.selectedCategory].reduce((acc, key) => {
+      return Object.keys(dynamicKeys[this.selectedCategory]).reduce((acc, key) => {
         if (details[key] !== undefined) {
-          acc[key] = details[key];
+          acc[dynamicKeys[this.selectedCategory][key]] = details[key];
         }
         return acc;
       }, {});
@@ -73,6 +101,9 @@ export default {
     },
     getCategoryImage(category) {
       return require(`@/assets/Icon/${category}_Icon.png`);
+    },
+    formatPrice(price) {
+      return `RM ${price.toFixed(2)}`;
     }
   },
   watch: {
@@ -86,3 +117,4 @@ export default {
     this.fetchCategories();
   },
 };
+
