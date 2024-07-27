@@ -1,72 +1,71 @@
 /* Container for the entire view */
 .container {
-    margin-top: 20px;
-  }
-  
-  /* Category cards */
-  .category-card {
-    width:80px;
-    height: 80px;
-    cursor: pointer; 
-    border-radius: 4px;
-    transition: border-color 0.3s, transform 0.3s;
-    cursor: pointer;
-    background-color: #212529; 
-    margin-bottom: 20px;
-  }
-  
-  /* Card hover effects */
-  .category-card:hover {
-    border: 2px solid #007bff;
-    transform: scale(1.02);
-  }
-  
-  /* Image styling for the cards */
-  .card-img-top {
-    max-height: 50px;
-    max-width: 50px; 
-    object-fit: contain; 
-    margin: 20px auto; 
-    display: block;
-  }
-  
-  /* Card title */
-  .card-title {
-    font-size: 0.9rem; 
-    margin-bottom: 0;
-    color: #f8f9fa; 
-  }
-  
-  /* Equipment dropdown styling */
-  .form-select {
-    border-radius: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    background-color: #343a40; /* Dark theme background */
-    color: #f8f9fa; /* Light text color */
-    border: 1px solid #495057; /* Darker border */
-  }
-  
-  .form-select-sm {
-    font-size: 0.75rem;
-  }
-  
-  /* Details section styling */
-  .details {
-    border-top: 1px solid #495057; /* Darker border for details */
-    padding-top: 10px;
-    color: #212529; /* Light text color for dark theme */
-    text-align: left;
-  }
+  margin-top: 20px;
+}
 
-  .details h5{
-    color:#212529;
-  }
+/* Category cards */
+.category-card {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: border-color 0.3s, transform 0.3s;
+  background-color: #212529;
+  margin-bottom: 20px;
+}
 
-  .details p {
-    margin-bottom: 5px;
-  }
-  
-  .details strong {
-    color: #007bff; /* Blue color for emphasis */
-  }
-  
+/* Card hover effects */
+.category-card:hover {
+  border: 2px solid #007bff;
+  transform: scale(1.02);
+}
+
+/* Image styling for the cards */
+.card-img-top {
+  max-height: 50px;
+  max-width: 50px;
+  object-fit: contain;
+  margin: 20px auto;
+  display: block;
+}
+
+/* Equipment image styling */
+.equipment-img {
+  max-height: 150px;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 10px 0;
+}
+
+/* Equipment dropdown styling */
+.form-select {
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #343a40; /* Dark theme background */
+  color: #f8f9fa; /* Light text color */
+  border: 1px solid #495057; /* Darker border */
+}
+
+.form-select-sm {
+  font-size: 0.75rem;
+}
+
+/* Details section styling */
+.details {
+  border-top: 1px solid #495057; /* Darker border for details */
+  padding-top: 10px;
+  color: #212529; /* Light text color for dark theme */
+  text-align: left;
+}
+
+.details h5 {
+  color: #212529;
+}
+
+.details p {
+  margin-bottom: 5px;
+}
+
+.details strong {
+  color: #007bff; /* Blue color for emphasis */
+}

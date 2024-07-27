@@ -8,10 +8,12 @@ export default {
       selectedCategory: '',
       selectedEquipment: {
         Left: null,
+        Center: null,
         Right: null,
       },
       equipmentDetails: {
         Left: null,
+        Center: null,
         Right: null,
       },
     };
@@ -48,44 +50,16 @@ export default {
     },
     dynamicDetails(details) {
       const dynamicKeys = {
-        Racquet: {
-          flex: 'Flex',
-          frame: 'Frame',
-          shaft: 'Shaft',
-          joint: 'Joint',
-          length: 'Length',
-          weight: 'Weight',
-          stringAdvice: 'String Advice',
-          color: 'Color',
-          madeIn: 'Made In'
-        },
-        Shuttlecock: {
-          quantityPerTube: 'Quantity Per Tube',
-          description: 'Description'
-        },
-        Bags: {
-          color: 'Color',
-          size: 'Size',
-          description: 'Description'
-        },
-        Footwear: {
-          color: 'Color',
-          upper: 'Upper',
-          midsole: 'Midsole',
-          outsole: 'Outsole',
-          description: 'Description'
-        },
-        Apparel: {
-          color: 'Color',
-          material: 'Material'
-        },
-        Accessories: {
-          description: 'Description'
-        },
+        Racquet: ['flex', 'frame', 'shaft', 'joint', 'length', 'weight', 'stringAdvice', 'color', 'madeIn'],
+        Shuttlecock: ['quantityPerTube', 'description'],
+        Bags: ['color', 'size', 'description'],
+        Footwear: ['color', 'upper', 'midsole', 'outsole', 'description'],
+        Apparel: ['color', 'material'],
+        Accessories: ['description'],
       };
-      return Object.keys(dynamicKeys[this.selectedCategory]).reduce((acc, key) => {
+      return dynamicKeys[this.selectedCategory].reduce((acc, key) => {
         if (details[key] !== undefined) {
-          acc[dynamicKeys[this.selectedCategory][key]] = details[key];
+          acc[key] = details[key];
         }
         return acc;
       }, {});
@@ -93,14 +67,19 @@ export default {
     selectCategory(category) {
       this.selectedCategory = category;
       this.selectedEquipment.Left = null;
+      this.selectedEquipment.Center = null;
       this.selectedEquipment.Right = null;
       this.equipmentNames = [];
       this.equipmentDetails.Left = null;
+      this.equipmentDetails.Center = null;
       this.equipmentDetails.Right = null;
       this.fetchEquipmentNames();
     },
     getCategoryImage(category) {
       return require(`@/assets/Icon/${category}_Icon.png`);
+    },
+    getImageURL(equipImgPath) {
+      return `http://localhost:3000/assets/${equipImgPath}`;
     },
     formatPrice(price) {
       return `RM ${price.toFixed(2)}`;
@@ -117,4 +96,3 @@ export default {
     this.fetchCategories();
   },
 };
-
