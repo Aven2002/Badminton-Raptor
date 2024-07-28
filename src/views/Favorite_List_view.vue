@@ -1,46 +1,51 @@
 <template>
-    <main class="content container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Favorites</h2>
-          <div v-if="loading" class="text-center">Loading...</div>
+  <main class="content container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Favorites</h2>
+        <div v-if="loading" class="text-center">Loading...</div>
+        <div v-else>
+          <div v-if="favoriteItems.length === 0" class="text-center">
+            <img src="@/assets/Empty.png" alt="No favorites" class="img-fluid" />
+          </div>
           <div v-else>
-            <div v-if="favoriteItems.length === 0" class="text-center">
-              <img src="@/assets/Empty.png" alt="No favorites" class="img-fluid" />
-            </div>
-            <div v-else>
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Brand</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in favoriteItems" :key="item.favoriteID" @click="goToDetails(item.equipID)">
-                    <td>
-                      <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" />
-                    </td>
-                    <td>{{ item.equipName }}</td>
-                    <td>RM{{ item.equipPrice }}</td>
-                    <td>{{ item.equipCategory }}</td>
-                    <td>{{ item.equipBrand }}</td>
-                    <td>
-                      <button class="btn btn-danger" @click.stop="removeFromFavorites(item.favoriteID)">Remove</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Brand</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in favoriteItems" :key="item.favoriteID" @click="goToDetails(item.equipID)">
+                  <td>
+                    <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" />
+                  </td>
+                  <td>{{ item.equipName }}</td>
+                  <td>RM{{ item.equipPrice }}</td>
+                  <td>{{ item.equipCategory }}</td>
+                  <td>{{ item.equipBrand }}</td>
+                  <td>
+                    <button class="btn btn-danger" @click.stop="confirmRemoveFromFavorites(item.favoriteID)">Remove</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    </main>
-  </template>
+    </div>
+    <!-- Use ErrorModal component -->
+    <ErrorModal :errorMessage="errorMessage" />
+
+    <!-- Use ConfirmationModal component -->
+    <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" />
+  </main>
+</template>
   
   <script src='@/javascript/Favorite_List.js'></script>
   
