@@ -58,10 +58,10 @@ export default {
         if (response.data && response.data.id) {
           this.showSuccessModal('Your feedback has been submitted successfully!');
         } else {
-          this.showErrorModal('An error occurred while logging in. Please try again later.');
+          this.showErrorModal('An error occurred while submitting. Please try again later.');
         }
       } catch (error) {
-        this.showErrorModal('An error occurred while logging in. Please try again later.');
+        this.showErrorModal('An error occurred while submitting. Please try again later.');
       } finally {
         this.isSubmitDisabled = false; // Re-enable button after submission
       }

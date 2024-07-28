@@ -43,7 +43,6 @@
                 <label for="feedbackContent" class="form-label">Feedback</label>
                 <textarea id="feedbackContent" v-model="form.feedbackContent" class="form-control" rows="4" required autocomplete="off" @input="updateCharCount"></textarea>
                 <div id="charCount" class="text-white">{{ charCount }}/1500 characters</div>
-                <div id="errorMessage" class="text-danger">{{ errorMessage }}</div>
               </div>
               <button type="submit" class="btn btn-primary w-100" :disabled="isSubmitDisabled">Submit Feedback</button>
             </form>
