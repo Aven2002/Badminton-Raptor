@@ -39,10 +39,9 @@
         </div>
       </div>
     </div>
-    <!-- Use ErrorModal component -->
+    
+    <!-- Modal -->
     <ErrorModal :errorMessage="errorMessage" />
-
-    <!-- Use ConfirmationModal component -->
     <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" />
   </main>
 </template>

@@ -1,7 +1,13 @@
 import axios from 'axios';
+import SuccessModal from '@/components/Success_modal_com.vue';
+import ErrorModal from '@/components/Error_modal_com.vue';
 import { Toast, Modal } from 'bootstrap';
 
 export default {
+  components: {
+    SuccessModal,
+    ErrorModal
+  },
   data() {
     return {
       step: 1,
@@ -24,8 +30,8 @@ export default {
         require('@/assets/Profile_Img/Profile_Img_03.png'),
         require('@/assets/Profile_Img/Profile_Img_04.png')
       ],
-      errorMessage: '',
-      showUsernameInput: false
+      successMessage: '',
+      errorMessage: ''
     };
   },
   computed: {
@@ -59,27 +65,18 @@ export default {
         const response = await axios.post('http://localhost:3000/api/account', this.form);
         
         if (response.data && response.data.id) {
-          // Show success toast and redirect to login
           this.showToast('Account created successfully!', 'success');
-          setTimeout(() => {
-            this.$router.push('/Login_view');
-          }, 2000);
+          this.showSuccessModal('Your account created successfully! Kindly use your credential to login');
         } else {
-          this.errorMessage = 'Error creating account';
+          this.showErrorModal('An error occurred while submitting. Please try again later.');
         }
       } catch (error) {
         console.log('Error response:', error.response); // Log error response for debugging
         if (error.response && error.response.status == 400) {
-            this.errorMessage = 'Username has been taken. Please choose a new username.';
-            this.showUsernameInput = true;
-            // Show the modal with error message
-            const errorModal = new Modal(document.getElementById('errorModal'));
-            errorModal.show();
+            this.showErrorModal('Username has been taken. Please choose a new username.');
         } else {
           console.error('Error:', error);
-          this.errorMessage = 'An error occurred. Please try again later.';
-          const errorModal = new Modal(document.getElementById('errorModal'));
-          errorModal.show();
+          this.showErrorModal('An error occurred while submitting. Please try again later.');
         }
       }
     },     
@@ -99,6 +96,25 @@ export default {
       document.body.appendChild(toastContainer);
       const toast = new Toast(toastContainer.querySelector('.toast'));
       toast.show();
-    }
+    },
+    showSuccessModal(message) {
+      this.successMessage = message;
+      const successModal = new Modal(document.getElementById('successModal'));
+      successModal.show();
+      
+      // Add event listener for the modal hidden event
+      successModal._element.addEventListener('hidden.bs.modal', () => {
+        this.$router.push('/Login_view');
+      });
+    },
+    showErrorModal(message) {
+      this.errorMessage = message;
+      const errorModal = new Modal(document.getElementById('errorModal'));
+      errorModal.show();
+
+      errorModal._element.addEventListener('hidden.bs.modal', () => {
+        this.$router.push('/');
+      });
+    },
   }
 };

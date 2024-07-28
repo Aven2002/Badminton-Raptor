@@ -51,10 +51,8 @@
       </div>
     </div>
 
-    <!-- Use ErrorModal component -->
+    <!-- Modal -->
     <ErrorModal :errorMessage="errorMessage" />
-    
-    <!-- Use SuccessModal component -->
     <SuccessModal :successMessage="successMessage" />
   </div>
 </template>

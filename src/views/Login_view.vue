@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <!-- Use ErrorModal component -->
+    <!-- Modal -->
     <ErrorModal :errorMessage="errorMessage" />
   </div>
 </template>
