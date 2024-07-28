@@ -67,6 +67,10 @@
         </div>
       </div>
     </div>
+
+    <!-- Modals -->
+    <ErrorModal :errorMessage="errorMessage" />
+    <SuccessModal :successMessage="successMessage" />
   </div>
 </template>
 

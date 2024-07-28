@@ -1,8 +1,14 @@
-
 import axios from 'axios';
+import SuccessModal from '@/components/Success_modal_com.vue';
+import ErrorModal from '@/components/Error_modal_com.vue';
+import { Modal } from 'bootstrap';
 import Cookies from 'js-cookie';
 
 export default {
+  components: {
+    SuccessModal,
+    ErrorModal
+  },
   data() {
     return {
       user: {
@@ -37,6 +43,8 @@ export default {
       ],
       editingProfileImage: false,
       editMode: false,
+      errorMessage: '',
+      successMessage: ''
     };
   },
   computed: {
@@ -73,11 +81,10 @@ export default {
     async updateProfile() {
       try {
         await axios.put(`http://localhost:3000/api/account/${this.userID}`, this.user);
-        alert('Profile updated successfully!');
+        this.showSuccessModal('Your profile updated successfully!');
         this.resetEditing();
       } catch (error) {
-        console.error('Error updating profile:', error);
-        alert('Failed to update profile.');
+        this.showErrorModal('An error occurred while updating. Please try again later.');
       }
     },
     selectProfileImage(img) {
@@ -91,5 +98,15 @@ export default {
     resetEditing() {
       this.editMode = false;
     },
+    showSuccessModal(message) {
+      this.successMessage = message;
+      const successModal = new Modal(document.getElementById('successModal'));
+      successModal.show();
+    },
+    showErrorModal(message) {
+      this.errorMessage = message;
+      const errorModal = new Modal(document.getElementById('errorModal'));
+      errorModal.show();
+    }
   }
 };
