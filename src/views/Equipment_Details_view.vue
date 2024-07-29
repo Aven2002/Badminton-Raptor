@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="content container py-5">
+    <main class="content container py-4">
       <div v-if="loading" class="text-center">
         <div class="spinner-border text-primary" role="status">
           <span class="sr-only">Loading...</span>
@@ -10,8 +10,15 @@
         <div v-if="equipment">
           <div class="row">
             <!-- Top Section: Breadcrumb and Button -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <BreadCrumb_com :equipName="equipment.equipName || 'Default Equipment Name'" />
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <Breadcrumb_com
+      :homeLink="'/Home_view'"
+      :breadcrumbItems="[
+        { text: 'Equipment', link: '/Browse_Equipment_view' }
+      ]"
+      :currentItem="equipment.equipName "
+    />
+             
               <Favorite_btn_com :equipID="equipment.equipID" />
             </div>
             

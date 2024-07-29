@@ -1,12 +1,12 @@
 import axios from 'axios';
 import Button_btn_com from '@/components/Back_btn_com.vue';
-import BreadCrumb_com from '@/components/BreadCrumb.vue';
+import Breadcrumb_com from '@/components/BreadCrumb.vue';
 import Favorite_btn_com from '@/components/Favorite_btn_com.vue';
 
 export default {
   components: {
     Button_btn_com,
-    BreadCrumb_com,
+    Breadcrumb_com,
     Favorite_btn_com
   },
   data() {

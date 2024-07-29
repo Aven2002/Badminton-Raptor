@@ -1,5 +1,13 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-3">
+    <!-- Breadcrumb -->
+    <div class="d-flex justify-content-between align-items-center">
+        <Breadcrumb_Com
+      :homeLink="'/Home_view'"
+      :breadcrumbItems="[]"
+      :currentItem="'Settings'"
+    />
+      </div>
     <div class="card bg-dark text-light">
       <!-- Top Section -->
       <div class="card-header">
