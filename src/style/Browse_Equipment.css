@@ -120,20 +120,3 @@ header, footer {
     background-color: #007bff; /* Blue background for active page */
 }
 
-.search-bar {
-    width: 50%;
-    background-color: #1e1e1e; /* Black background */
-    border: 1px solid #444; /* Dark border */
-    color: #fff; /* White text */
-}
-
-.search-bar::placeholder {
-    color: #bbb; /* Light gray placeholder text */
-}
-
-.search-bar:focus {
-    background-color: #2c2c2c;
-    border-color: #555555;
-    box-shadow: none;
-    color: white;
-}

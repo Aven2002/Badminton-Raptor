@@ -3,21 +3,25 @@ import { Modal } from 'bootstrap';
 import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 import ConfirmationModal from '@/components/Confirmation_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
+import SearchBar_Com from '@/components/Search_bar_com.vue';
 
 export default {
   name: 'FavoriteList',
   components: {
     Breadcrumb_Com,
     ConfirmationModal,
-    ErrorModal
+    ErrorModal,
+    SearchBar_Com
   },
   data() {
     return {
       favoriteItems: [],
+      filteredFavoriteItems: [],
       loading: false,
       confirmationMessage: '',
       errorMessage: '',
-      itemToRemove: null
+      itemToRemove: null,
+      searchQuery: ''
     };
   },
   created() {
@@ -29,6 +33,7 @@ export default {
       try {
         const response = await axios.get('http://localhost:3000/api/favorite');
         this.favoriteItems = response.data;
+        this.filteredFavoriteItems = response.data;
       } catch (error) {
         console.error('Error fetching favorite items:', error);
       } finally {
@@ -54,6 +59,7 @@ export default {
       try {
         await axios.delete(`http://localhost:3000/api/favorite/${favoriteID}`);
         this.favoriteItems = this.favoriteItems.filter(item => item.favoriteID !== favoriteID);
+        this.filteredFavoriteItems = this.filteredFavoriteItems.filter(item => item.favoriteID !== favoriteID);
       } catch (error) {
         this.showErrorModal('An error occurred while removing the equipment. Please try again later.');
       }
@@ -73,6 +79,12 @@ export default {
       this.errorMessage = message;
       const errorModal = new Modal(document.getElementById('errorModal'));
       errorModal.show();
+    },
+    handleSearch(query) {
+      this.searchQuery = query.toLowerCase();
+      this.filteredFavoriteItems = this.favoriteItems.filter(item =>
+        item.equipName.toLowerCase().includes(this.searchQuery)
+      );
     }
   }
 };

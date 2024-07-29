@@ -36,12 +36,7 @@
       <div class="col-md-9">
         <!-- Search and Sort Bar -->
         <div class="mb-4 d-flex justify-content-between align-items-center">
-          <input 
-            type="text" 
-            v-model="searchQuery" 
-            class="form-control search-bar me-3" 
-            placeholder="Search by equipment name" 
-          />
+          <SearchBar_Com @search="updateSearchQuery" />
           <div class="d-flex align-items-center">
             <label for="sort" class="me-2">Sort by:</label>
             <select id="sort" class="form-control w-auto" v-model="sortOrder">
@@ -64,7 +59,7 @@
                   </div>
                   <div class="card-back">
                     <h5 class="card-title">{{ item.equipName }}</h5>
-                    <p class="card-text">Price: RM{{ item.equipPrice }}</p>
+                    <p class="card-text">Price: RM{{ item.equipPrice.toFixed(2) }}</p>
                   </div>
                 </div>
               </div>

@@ -1,10 +1,12 @@
 import axios from 'axios';
 import Breadcrumb_Com from '@/components/BreadCrumb.vue';
+import SearchBar_Com from '@/components/Search_bar_com.vue';
 
 export default {
   name: 'Browse_Equipment_view',
   components: {
-    Breadcrumb_Com
+    Breadcrumb_Com,
+    SearchBar_Com
   },
   data() {
     return {
@@ -80,6 +82,9 @@ export default {
     this.fetchCategories();
   },
   methods: {
+    formattedPrice(price) {
+      return price.toFixed(2);
+    },
     async fetchItems() {
       this.loading = true;
       try {
@@ -124,6 +129,9 @@ export default {
     },
     getImagePath(equipImgPath) {
       return `http://localhost:3000/assets/${equipImgPath}`;
+    },
+    updateSearchQuery(query) {
+      this.searchQuery = query;
     }
   }
 };
