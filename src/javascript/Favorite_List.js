@@ -4,6 +4,7 @@ import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 import ConfirmationModal from '@/components/Confirmation_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import SearchBar_Com from '@/components/Search_bar_com.vue';
+import Cookies from 'js-cookie';
 
 export default {
   name: 'FavoriteList',
@@ -21,9 +22,10 @@ export default {
       confirmationMessage: '',
       errorMessage: '',
       itemToRemove: null,
-      searchQuery: ''
+      searchQuery: '',
+      userID: Cookies.get('userID') || '000'
     };
-  },
+  },  
   created() {
     this.fetchFavoriteItems();
   },
@@ -31,7 +33,7 @@ export default {
     async fetchFavoriteItems() {
       this.loading = true;
       try {
-        const response = await axios.get('http://localhost:3000/api/favorite');
+        const response = await axios.get(`http://localhost:3000/api/favorite/${this.userID}`);
         this.favoriteItems = response.data;
         this.filteredFavoriteItems = response.data;
       } catch (error) {
@@ -39,7 +41,7 @@ export default {
       } finally {
         this.loading = false;
       }
-    },
+    },    
     confirmRemoveFromFavorites(favoriteID) {
       this.itemToRemove = favoriteID;
       this.showConfirmationModal('Are you sure you want to remove it from your favorite list?');
