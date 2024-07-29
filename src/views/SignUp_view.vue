@@ -1,19 +1,24 @@
 <template>
   <div class="signup-container">
-    <!-- Pagination -->
-    <nav class="pagination-container">
-      <ul class="pagination justify-content-start">
-        <li :class="['page-item', { active: step === 1 }]">
-          <a class="page-link" href="#" @click.prevent="goToStep(1)">Profile Img</a>
-        </li>
-        <li :class="['page-item', { active: step === 2 }]">
-          <a class="page-link" href="#" @click.prevent="goToStep(2)" :class="{ disabled: !isStep2Valid }">Account Details</a>
-        </li>
-        <li :class="['page-item', { active: step === 3 }]">
-          <a class="page-link" href="#" @click.prevent="goToStep(3)" :class="{ disabled: !isStep2Valid }">Verify</a>
-        </li>
-      </ul>
-    </nav>
+    <!-- Container for pagination and back button -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <!-- Pagination -->
+      <nav class="pagination-container">
+        <ul class="pagination mb-0">
+          <li :class="['page-item', { active: step === 1 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(1)">Profile Img</a>
+          </li>
+          <li :class="['page-item', { active: step === 2 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(2)" :class="{ disabled: !isStep2Valid }">Account Details</a>
+          </li>
+          <li :class="['page-item', { active: step === 3 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(3)" :class="{ disabled: !isStep2Valid }">Verify</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Back Button -->
+      <BackBtn />
+    </div>
 
     <div class="row justify-content-center">
       <div class="col-md-8">

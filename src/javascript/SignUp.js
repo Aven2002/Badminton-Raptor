@@ -1,12 +1,14 @@
 import axios from 'axios';
 import SuccessModal from '@/components/Success_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
+import BackBtn from '@/components/Back_btn_com.vue';
 import { Toast, Modal } from 'bootstrap';
 
 export default {
   components: {
     SuccessModal,
-    ErrorModal
+    ErrorModal,
+    BackBtn
   },
   data() {
     return {
