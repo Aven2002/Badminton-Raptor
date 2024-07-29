@@ -65,7 +65,7 @@ export default {
     async signUp() {
       try {
         const response = await axios.post('http://localhost:3000/api/account', this.form);
-        
+  
         if (response.data && response.data.id) {
           this.showToast('Account created successfully!', 'success');
           this.showSuccessModal('Your account created successfully! Kindly use your credential to login');
@@ -74,14 +74,16 @@ export default {
         }
       } catch (error) {
         console.log('Error response:', error.response); // Log error response for debugging
+        
         if (error.response && error.response.status == 400) {
-            this.showErrorModal('Username has been taken. Please choose a new username.');
+          this.showErrorModal('Username has been taken. Please choose a new username.', false);
+          this.step--; // Revert to the previous step if the username is taken
         } else {
           console.error('Error:', error);
           this.showErrorModal('An error occurred while submitting. Please try again later.');
         }
       }
-    },     
+    },    
     showToast(message, type) {
       const toastHTML = `
         <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -109,14 +111,17 @@ export default {
         this.$router.push('/Login_view');
       });
     },
-    showErrorModal(message) {
+    showErrorModal(message, redirect = true) {
       this.errorMessage = message;
       const errorModal = new Modal(document.getElementById('errorModal'));
       errorModal.show();
-
-      errorModal._element.addEventListener('hidden.bs.modal', () => {
-        this.$router.push('/');
-      });
+  
+      // Only add the event listener for redirection if `redirect` is true
+      if (redirect) {
+        errorModal._element.addEventListener('hidden.bs.modal', () => {
+          this.$router.push('/');
+        });
+      }
     },
   }
 };
