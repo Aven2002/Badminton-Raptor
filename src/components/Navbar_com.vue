@@ -25,6 +25,7 @@
             <router-link to="/Contact_Us_view" class="nav-link" @click="toggleNavbar">Contact Us</router-link>
           </li>
         </ul>
+        <LogoutButton />
       </div>
     </div>
   </nav>
@@ -32,9 +33,13 @@
 
 <script>
 import axios from 'axios';
+import LogoutButton from '@/components/Logout_btn_com.vue';
 
 export default {
   name: "Navbar_com",
+  components: {
+    LogoutButton
+  },
   data() {
     return {
       title: "Badminton Raptor",
@@ -90,6 +95,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-right:20px;
 }
 
 @media (min-width: 992px) {
