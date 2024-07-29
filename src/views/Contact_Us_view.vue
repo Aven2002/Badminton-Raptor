@@ -1,4 +1,12 @@
 <template>
+  <!-- Breadcrumb -->
+  <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
+        <Breadcrumb_Com
+      :homeLink="'/Home_view'"
+      :breadcrumbItems="[]"
+      :currentItem="'Contact Us'"
+    />
+      </div>
   <div class="container d-flex justify-content-center align-items-center">
     <div class="card">
       <div class="card-header">

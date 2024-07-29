@@ -1,4 +1,12 @@
 <template>
+  <!-- Breadcrumb -->
+  <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
+        <Breadcrumb_Com
+      :homeLink="'/Home_view'"
+      :breadcrumbItems="[]"
+      :currentItem="'Compare Equipment'"
+    />
+    </div>
   <div class="container mt-5">
     <div class="row">
       <!-- Category Selection Cards -->

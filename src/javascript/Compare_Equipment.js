@@ -1,6 +1,10 @@
 import axios from 'axios';
+import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 
 export default {
+  components: {
+    Breadcrumb_Com
+  },
   data() {
     return {
       categories: [],

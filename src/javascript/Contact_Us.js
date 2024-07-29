@@ -1,10 +1,12 @@
 import axios from 'axios';
+import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 import SuccessModal from '@/components/Success_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import { Modal } from 'bootstrap';
 
 export default {
   components: {
+    Breadcrumb_Com,
     SuccessModal,
     ErrorModal
   },

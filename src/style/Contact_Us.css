@@ -1,5 +1,5 @@
 .container {
-  padding:30px;
+  padding:10px;
 }
 
 .card {
@@ -56,4 +56,8 @@ li {
 p {
   text-align: left;
   font-size: 15px;
+}
+.custom-breadcrumb{
+  margin-top: 30px;
+  margin-left: 250px;
 }

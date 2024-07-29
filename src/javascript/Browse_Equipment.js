@@ -1,7 +1,11 @@
 import axios from 'axios';
+import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 
 export default {
   name: 'Browse_Equipment_view',
+  components: {
+    Breadcrumb_Com
+  },
   data() {
     return {
       items: [],

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Modal } from 'bootstrap';
+import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 import ConfirmationModal from '@/components/Confirmation_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 
 export default {
   name: 'FavoriteList',
   components: {
+    Breadcrumb_Com,
     ConfirmationModal,
     ErrorModal
   },

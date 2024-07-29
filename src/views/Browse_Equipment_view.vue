@@ -1,4 +1,12 @@
 <template>
+  <!-- Breadcrumb -->
+  <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
+        <Breadcrumb_Com
+      :homeLink="'/Home_view'"
+      :breadcrumbItems="[]"
+      :currentItem="'Browse Equipment'"
+    />
+    </div>
   <main class="content container">
     <div class="row">
       <!-- Filter Section -->
