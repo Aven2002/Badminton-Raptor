@@ -1,5 +1,5 @@
 <template>
-  <button @click="downloadPDF" class="btn download-btn">
+  <button @click="downloadPDF" class="btn download-btn mt-2">
     <i class="fa-solid fa-cloud-arrow-down"></i>
     Download 
   </button>
@@ -42,7 +42,6 @@
   background: transparent;
   border: none;
   color: #007bff;
-  padding: 5px 10px; /* Smaller padding */
   font-size: 12px;
   font-weight: bold;
   display: inline-flex;

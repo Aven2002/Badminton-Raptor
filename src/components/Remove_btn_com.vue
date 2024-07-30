@@ -1,7 +1,6 @@
 <template>
     <div>
-      <button @click="confirmRemove" class="btn btn-danger">
-        <i class="fa-solid fa-cloud-arrow-down"></i>
+      <button @click="confirmRemove" class="btn btn-danger mt-2" >
         Remove
       </button>
       <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="favoriteListConfirmationModal" />
@@ -68,10 +67,12 @@
     font-size: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 90px; 
   }
   
   .btn-danger:hover {
-    background-color: #c82333;
+    background-color: #db4957;
+    border : solid black 1px;
   }
   
   .btn-danger:focus,

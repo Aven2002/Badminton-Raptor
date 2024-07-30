@@ -44,8 +44,11 @@
                   <td>{{ item.equipCategory }}</td>
                   <td>{{ item.equipBrand }}</td>
                   <td @click.stop="">
-                    <DownloadButton :equipID="item.equipID" @error="handleError" />
-                    <RemoveButton :favoriteID="item.favoriteID" @item-removed="handleItemRemoved" @error="showErrorModal" />
+                    <div class="d-flex justify-content-end" style="gap: 20px;">
+  <DownloadButton :equipID="item.equipID" @error="handleError" />
+  <RemoveButton :favoriteID="item.favoriteID" @item-removed="handleItemRemoved" @error="showErrorModal" />
+</div>
+
                   </td>
                 </tr>
               </tbody>
