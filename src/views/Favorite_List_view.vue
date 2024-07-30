@@ -8,12 +8,12 @@
         :currentItem="'Favourite List'"
       />
     </div>
-    
+
     <!-- Search Bar -->
     <div class="mb-3">
       <SearchBar_Com @search="handleSearch" />
     </div>
-    
+
     <div class="row">
       <div class="col-md-12">
         <h2>Favorites</h2>
@@ -43,7 +43,7 @@
                   <td>RM{{ item.equipPrice }}</td>
                   <td>{{ item.equipCategory }}</td>
                   <td>{{ item.equipBrand }}</td>
-                  <td>
+                  <td @click.stop="">
                     <DownloadButton :equipID="item.equipID" @error="handleError" />
                     <button class="btn btn-danger" @click.stop="confirmRemoveFromFavorites(item.favoriteID)">Remove</button>
                   </td>
@@ -54,12 +54,13 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Modal -->
     <ErrorModal :errorMessage="errorMessage" />
     <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="favoriteListConfirmationModal" />
   </main>
 </template>
+
   
   <script src='@/javascript/Favorite_List.js'></script>
   
