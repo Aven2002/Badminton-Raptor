@@ -56,10 +56,9 @@
     
     <!-- Modal -->
     <ErrorModal :errorMessage="errorMessage" />
-    <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" />
+    <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="favoriteListConfirmationModal" />
   </main>
 </template>
-
   
   <script src='@/javascript/Favorite_List.js'></script>
   

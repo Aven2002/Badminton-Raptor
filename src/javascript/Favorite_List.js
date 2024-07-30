@@ -25,7 +25,7 @@ export default {
       searchQuery: '',
       userID: Cookies.get('userID') || '000'
     };
-  },  
+  },
   created() {
     this.fetchFavoriteItems();
   },
@@ -41,7 +41,7 @@ export default {
       } finally {
         this.loading = false;
       }
-    },    
+    },
     confirmRemoveFromFavorites(favoriteID) {
       this.itemToRemove = favoriteID;
       this.showConfirmationModal('Are you sure you want to remove it from your favorite list?');
@@ -52,7 +52,7 @@ export default {
         this.itemToRemove = null;
         
         // Close the confirmation modal
-        const confirmationModalElement = document.getElementById('confirmationModal');
+        const confirmationModalElement = document.getElementById('favoriteListConfirmationModal');
         const confirmationModal = Modal.getInstance(confirmationModalElement) || new Modal(confirmationModalElement);
         confirmationModal.hide();
       }
@@ -74,7 +74,7 @@ export default {
     },
     showConfirmationModal(message) {
       this.confirmationMessage = message;
-      const confirmationModal = new Modal(document.getElementById('confirmationModal'));
+      const confirmationModal = new Modal(document.getElementById('favoriteListConfirmationModal'));
       confirmationModal.show();
     },
     showErrorModal(message) {
