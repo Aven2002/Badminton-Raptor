@@ -45,7 +45,7 @@
                   <td>{{ item.equipBrand }}</td>
                   <td @click.stop="">
                     <DownloadButton :equipID="item.equipID" @error="handleError" />
-                    <button class="btn btn-danger" @click.stop="confirmRemoveFromFavorites(item.favoriteID)">Remove</button>
+                    <RemoveButton :favoriteID="item.favoriteID" @item-removed="handleItemRemoved" @error="showErrorModal" />
                   </td>
                 </tr>
               </tbody>
@@ -57,7 +57,6 @@
 
     <!-- Modal -->
     <ErrorModal :errorMessage="errorMessage" />
-    <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="favoriteListConfirmationModal" />
   </main>
 </template>
 

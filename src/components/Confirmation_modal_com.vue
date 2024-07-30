@@ -12,7 +12,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="abortProcess">Cancel</button>
-          <button type="button" class="btn btn-primary" @click="continueProcess">Confirm</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="$emit('confirm')">Confirm</button>
         </div>
       </div>
     </div>
