@@ -44,6 +44,7 @@
                   <td>{{ item.equipCategory }}</td>
                   <td>{{ item.equipBrand }}</td>
                   <td>
+                    <DownloadButton :equipID="item.equipID" @error="handleError" />
                     <button class="btn btn-danger" @click.stop="confirmRemoveFromFavorites(item.favoriteID)">Remove</button>
                   </td>
                 </tr>

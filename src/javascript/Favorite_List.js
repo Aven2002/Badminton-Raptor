@@ -4,6 +4,7 @@ import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 import ConfirmationModal from '@/components/Confirmation_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import SearchBar_Com from '@/components/Search_bar_com.vue';
+import DownloadButton from '@/components/Download_btn_com.vue';
 import Cookies from 'js-cookie';
 
 export default {
@@ -12,7 +13,8 @@ export default {
     Breadcrumb_Com,
     ConfirmationModal,
     ErrorModal,
-    SearchBar_Com
+    SearchBar_Com,
+    DownloadButton
   },
   data() {
     return {
@@ -87,6 +89,9 @@ export default {
       this.filteredFavoriteItems = this.favoriteItems.filter(item =>
         item.equipName.toLowerCase().includes(this.searchQuery)
       );
+    },
+    handleError() {
+      this.showErrorModal('An error occurred while downloading the equipment details . Please try again later.');
     }
   }
 };
