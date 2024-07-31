@@ -4,7 +4,7 @@ import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import SearchBar_Com from '@/components/Search_bar_com.vue';
 import DownloadButton from '@/components/Download_btn_com.vue';
-import RemoveButton from '@/components/Remove_btn_com.vue';
+import RemoveButton from '@/components/Remove_favorite_btn_com.vue';
 import Cookies from 'js-cookie';
 
 export default {
