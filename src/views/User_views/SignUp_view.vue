@@ -165,6 +165,6 @@
   </div>
 </template>
 
-<script src='@/javascript/SignUp.js'></script>
+<script src='@/javascript/User_views/SignUp.js'></script>
 
-<style src='@/style/SignUp.css' scoped></style>
+<style src='@/style/User_views/SignUp.css' scoped></style>

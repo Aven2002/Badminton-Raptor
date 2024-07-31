@@ -64,7 +64,7 @@
 </template>
 
   
-  <script src='@/javascript/Favorite_List.js'></script>
+  <script src='@/javascript/User_views/Favorite_List.js'></script>
   
   <style scoped>
   .img-thumbnail {

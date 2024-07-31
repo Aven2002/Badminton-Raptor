@@ -90,6 +90,6 @@
   </main>
 </template>
 
-<script src='@/javascript/Browse_Equipment.js'></script>
+<script src='@/javascript/User_views/Browse_Equipment.js'></script>
 
-<style src='@/style/Browse_Equipment.css' scoped></style>
+<style src='@/style/User_views/Browse_Equipment.css' scoped></style>

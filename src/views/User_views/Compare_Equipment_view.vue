@@ -59,6 +59,6 @@
   </div>
 </template>
 
-<script src='@/javascript/Compare_Equipment.js'></script>
+<script src='@/javascript/User_views/Compare_Equipment'></script>
 
-<style src='@/style/Compare_Equipment.css' scoped></style>
+<style src='@/style/User_views/Compare_Equipment.css' scoped></style>

@@ -106,6 +106,6 @@
   </div>
 </template>
 
-<script src='@/javascript/Equipment_Details.js'></script>
+<script src='@/javascript/User_views/Equipment_Details.js'></script>
 
-<style src='@/style/Equipment_Details.css' scoped></style>
+<style src='@/style/User_views/Equipment_Details.css' scoped></style>

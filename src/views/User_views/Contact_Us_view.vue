@@ -65,6 +65,6 @@
   </div>
 </template>
 
-<script src='@/javascript/Contact_Us.js'></script>
+<script src='@/javascript/User_views/Contact_Us.js'></script>
 
-<style src='@/style/Contact_Us.css' scoped></style>
+<style src='@/style/User_views/Contact_Us.css' scoped></style>

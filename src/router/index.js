@@ -2,14 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router';
 import stateManagement from '@/State_management';
 
 // Import views
-import Landing_view from '@/views/User_views/Landing_view.vue';
+import Landing_view from '@/views/Landing_view.vue';
+import Login_view from '@/views/Login_view.vue';
+import Settings_view from '@/views/Settings_view.vue';
+
 import Home_view_user from '@/views/User_views/Home_view_user.vue';
-import Login_view from '@/views/User_views/Login_view.vue';
 import SignUp_view from '@/views/User_views/SignUp_view.vue';
 import Browse_Equipment_view from '@/views/User_views/Browse_Equipment_view.vue';
 import Compare_Equipment_view from '@/views/User_views/Compare_Equipment_view.vue';
 import Personalized_Recommendation_view from '@/views/User_views/Personalized_Recommendation_view.vue';
-import Settings_view from '@/views/User_views/Settings_view.vue';
 import Favorite_List_view from '@/views/User_views/Favorite_List_view.vue';
 import Contact_Us_view from '@/views/User_views/Contact_Us_view.vue';
 import Reset_Password_view from '@/views/User_views/Reset_Password_view.vue';
