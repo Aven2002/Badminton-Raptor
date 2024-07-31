@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import { Modal } from 'bootstrap';
 import Cookies from 'js-cookie';
@@ -15,6 +16,7 @@ export default {
       password: '',
       errorMessage: '',
       showPassword: false,
+      isAdmin: false, // Track if the user is an admin
     };
   },
   computed: {
@@ -23,6 +25,9 @@ export default {
     },
     passwordToggleIcon() {
       return this.showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+    },
+    homeLink() {
+      return this.isAdmin ? '/Home_view_admin' : '/Home_view_user';
     }
   },
   methods: {
@@ -53,7 +58,8 @@ export default {
 
         if (user) {
           Cookies.set('userID', user.userID);
-          this.$router.push('/Home_view');
+          await this.checkUserRole(); // Ensure role is checked before redirecting
+          this.$router.push(this.homeLink); // Redirect based on user role
         } else {
           this.showError('Incorrect username or password.');
         }
@@ -74,6 +80,22 @@ export default {
     },
     togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
+    },
+    async checkUserRole() {
+      try {
+        const userID = Cookies.get('userID');
+        if (!userID) {
+          console.warn('No userID found in cookies');
+          this.isAdmin = false; // Default to non-admin if no userID
+          return;
+        }
+
+        const response = await axios.get(`http://localhost:3000/api/account/${userID}/role`);
+        this.isAdmin = response.data.userRole === 'Admin'; // Ensure this matches the role in your API
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+        this.isAdmin = false; // Default to non-admin in case of error
+      }
     }
   }
 };

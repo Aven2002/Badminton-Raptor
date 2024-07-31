@@ -10,8 +10,9 @@
       </button>
       <div class="collapse navbar-collapse" :class="{ show: isNavbarCollapsed }">
         <ul class="navbar-nav ms-auto">
+          <!-- Home link based on user role -->
           <li class="nav-item">
-            <router-link to="/Home_view" class="nav-link" @click="toggleNavbar">Home</router-link>
+            <router-link :to="homeLink" class="nav-link" @click="toggleNavbar">Home</router-link>
           </li>
           <li class="nav-item dropdown" @mouseover="showDropdown" @mouseleave="hideDropdown">
             <router-link to="/Browse_Equipment_view" class="nav-link dropdown-toggle" @click="toggleNavbar">Equipment</router-link>
@@ -21,7 +22,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!isAdmin">
             <router-link to="/Contact_Us_view" class="nav-link" @click="toggleNavbar">Contact Us</router-link>
           </li>
         </ul>
@@ -32,13 +33,20 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapGetters } from 'vuex';
 import LogoutButton from '@/components/Logout_btn_com.vue';
+import axios from 'axios';
 
 export default {
   name: "Navbar_com",
   components: {
     LogoutButton
+  },
+  computed: {
+    ...mapGetters(['isAdmin']),
+    homeLink() {
+      return this.isAdmin ? '/Home_view_admin' : '/Home_view_user';
+    }
   },
   data() {
     return {
@@ -60,7 +68,7 @@ export default {
       this.isDropdownVisible = false;
     },
     fetchEquipment() {
-      axios.get('http://localhost:3000/api/equipment') 
+      axios.get('http://localhost:3000/api/equipment')
         .then(response => {
           const equipment = response.data;
           const categoriesSet = new Set(equipment.map(item => item.equipCategory));
@@ -69,13 +77,14 @@ export default {
         .catch(error => {
           console.error('Error fetching equipment:', error);
         });
-    },
+    }
   },
   created() {
     this.fetchEquipment();
-  },
+  }
 };
 </script>
+
 
 <style scoped>
 .navbar-brand {
@@ -95,7 +104,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right:20px;
+  margin-right: 20px;
 }
 
 @media (min-width: 992px) {
