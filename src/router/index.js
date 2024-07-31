@@ -16,6 +16,10 @@ import Reset_Password_view from '@/views/User_views/Reset_Password_view.vue';
 import Equipment_Details_view from '@/views/User_views/Equipment_Details_view.vue';
 
 import Home_view_admin from '@/views/Admin_views/Home_view_admin.vue';
+import Manage_Equipment_view from '@/views/Admin_views/Manage_Equipment_view.vue';
+import Manage_Account_view from '@/views/Admin_views/Manage_Account_view.vue';
+import Manage_Feedback_view from '@/views/Admin_views/Manage_Feedback_view.vue';
+import Manage_Recommendation_view from '@/views/Admin_views/Manage_Recommendation_view.vue';
 
 const routes = [
   // Define routes
@@ -32,7 +36,11 @@ const routes = [
   { path: "/Reset_Password_view", name: "Reset_Password_view", component: Reset_Password_view },
   { path: '/equipment/:id', name: 'Equipment_Details_view', component: Equipment_Details_view, props: true },
 
-  { path: "/Home_view_admin", name: "Home_view_admin", component: Home_view_admin, meta: { requiresAdmin: true } }
+  { path: "/Home_view_admin", name: "Home_view_admin", component: Home_view_admin, meta: { requiresAdmin: true } },
+  { path: "/Manage_Equipment_view", name: "Manage_Equipment_view", component: Manage_Equipment_view },
+  { path: "/Manage_Account_view", name: "Manage_Account_view", component: Manage_Account_view },
+  { path: "/Manage_Feedback_view", name: "Manage_Feedback_view", component: Manage_Feedback_view },
+  { path: "/Manage_Recommendation_view", name: "Manage_Recommendation_view", component: Manage_Recommendation_view }
 ];
 
 const router = createRouter({
