@@ -1,0 +1,198 @@
+<template>
+    <main class="container mt-5">
+      <h2>Create New Equipment</h2>
+      <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="equipName" class="form-label">Equipment Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="equipName"
+            v-model="equipment.equipName"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="equipCategory" class="form-label">Category</label>
+          <select
+            class="form-select"
+            id="equipCategory"
+            v-model="equipment.equipCategory"
+            required
+          >
+            <option disabled value="">Select a category</option>
+            <option value="Racquet">Racquet</option>
+            <option value="Shuttlecock">Shuttlecock</option>
+            <option value="Bags">Bags</option>
+            <option value="Footwear">Footwear</option>
+            <option value="Apparel">Apparel</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="equipBrand" class="form-label">Brand</label>
+          <input
+            type="text"
+            class="form-control"
+            id="equipBrand"
+            v-model="equipment.equipBrand"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="equipImgPath" class="form-label">Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="equipImgPath"
+            @change="handleImageUpload"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="equipPrice" class="form-label">Price</label>
+          <input
+            type="number"
+            step="0.01"
+            class="form-control"
+            id="equipPrice"
+            v-model="equipment.equipPrice"
+            required
+          />
+        </div>
+        <!-- Add more input fields for specific details based on category -->
+        <div v-if="equipment.equipCategory === 'Racquet'">
+          <!-- Racquet-specific details -->
+          <div class="mb-3">
+            <label for="flex" class="form-label">Flex</label>
+            <input type="text" class="form-control" id="flex" v-model="details.flex" />
+          </div>
+          <div class="mb-3">
+            <label for="frame" class="form-label">Frame</label>
+            <input type="text" class="form-control" id="frame" v-model="details.frame" />
+          </div>
+          <div class="mb-3">
+            <label for="shaft" class="form-label">Shaft</label>
+            <input type="text" class="form-control" id="shaft" v-model="details.shaft" />
+          </div>
+          <div class="mb-3">
+            <label for="joint" class="form-label">Joint</label>
+            <input type="text" class="form-control" id="joint" v-model="details.joint" />
+          </div>
+          <div class="mb-3">
+            <label for="length" class="form-label">Length</label>
+            <input type="text" class="form-control" id="length" v-model="details.length" />
+          </div>
+          <div class="mb-3">
+            <label for="weight" class="form-label">Weight</label>
+            <input type="text" class="form-control" id="weight" v-model="details.weight" />
+          </div>
+          <div class="mb-3">
+            <label for="stringAdvice" class="form-label">String Advice</label>
+            <input
+              type="text"
+              class="form-control"
+              id="stringAdvice"
+              v-model="details.stringAdvice"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="color" class="form-label">Color</label>
+            <input type="text" class="form-control" id="color" v-model="details.color" />
+          </div>
+          <div class="mb-3">
+            <label for="madeIn" class="form-label">Made In</label>
+            <input type="text" class="form-control" id="madeIn" v-model="details.madeIn" />
+          </div>
+        </div>
+        <!-- Add more conditional sections for other categories -->
+        <button type="submit" class="btn btn-primary">Create Equipment</button>
+      </form>
+    </main>
+  </template>
+  
+  <script>
+  import axios from 'axios';
+  
+  export default {
+    data() {
+      return {
+        equipment: {
+          equipName: '',
+          equipCategory: '',
+          equipBrand: '',
+          equipImgPath: '',
+          equipPrice: null
+        },
+        details: {},
+        selectedFile: null
+      };
+    },
+    methods: {
+        handleImageUpload(event) {
+  this.selectedFile = event.target.files[0];
+},
+      async handleSubmit() {
+  const formData = new FormData();
+   // Ensure equipCategory is included
+   formData.append('equipCategory', this.equipment.equipCategory);
+  formData.append('equipment', JSON.stringify(this.equipment));
+  formData.append('details', JSON.stringify(this.details));
+  formData.append('detailTable', this.getDetailTable());
+  formData.append('equipImgPath', this.selectedFile);
+  
+  try {
+    await axios.post('http://localhost:3000/api/equipment', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    alert('Equipment created successfully');
+    this.resetForm();
+  } catch (error) {
+    console.error('Error creating equipment:', error);
+    alert('Failed to create equipment. Please try again.');
+  }
+}
+
+,
+      getDetailTable() {
+        switch (this.equipment.equipCategory) {
+          case 'Racquet':
+            return 'racquet';
+          case 'Shuttlecock':
+            return 'shuttlecock';
+          case 'Bags':
+            return 'bags';
+          case 'Footwear':
+            return 'footwear';
+          case 'Apparel':
+            return 'apparel';
+          case 'Accessories':
+            return 'accessories';
+          default:
+            return '';
+        }
+      },
+      resetForm() {
+        this.equipment = {
+          equipName: '',
+          equipCategory: '',
+          equipBrand: '',
+          equipImgPath: '',
+          equipPrice: null
+        };
+        this.details = {};
+        this.selectedFile = null;
+      }
+    }
+  };
+  </script>
+  
+  <style scoped>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  </style>
+  
