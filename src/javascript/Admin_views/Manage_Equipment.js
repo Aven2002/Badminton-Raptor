@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Modal } from 'bootstrap';
-import Breadcrumb_Com from '@/components/BreadCrumb.vue';
+import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import SearchBar_Com from '@/components/Search_bar_com.vue';
 import RemoveButton from '@/components/Remove_equipment_btn_com.vue';

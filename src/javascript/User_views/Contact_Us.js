@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Breadcrumb_Com from '@/components/BreadCrumb.vue';
+import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import SuccessModal from '@/components/Success_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import { Modal } from 'bootstrap';

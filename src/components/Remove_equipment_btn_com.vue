@@ -1,6 +1,7 @@
 <template>
     <div>
       <button @click="confirmRemove" class="btn btn-danger mt-2" >
+        <i class="fa-solid fa-trash-can"></i>
         Remove
       </button>
       <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="equipmentRemoveConfirmationModal" />
@@ -25,7 +26,7 @@
     },
     data() {
       return {
-        confirmationMessage: 'Are you sure you want to remove equipment ID ${equipID} from database ?',
+        confirmationMessage: `Remove equipment ID ${this.equipID} from database?`,
         itemToRemove: null
       };
     },

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Breadcrumb_Com from '@/components/BreadCrumb.vue';
+import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 
 export default {
   components: {

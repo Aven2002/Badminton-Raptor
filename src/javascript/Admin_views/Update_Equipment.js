@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { Modal } from 'bootstrap';
-import Breadcrumb_Com from '@/components/BreadCrumb.vue';
+import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import SearchBar_Com from '@/components/Search_bar_com.vue';
-import Navbar from '@/components/Navbar_CRUD_com.vue'
+import Navbar from '@/components/Navbar_CRUD_com.vue';
+import UpdateButton from '@/components/UpdateButton.vue'; // Import the UpdateButton component
 
 export default {
   name: 'Update_Equipment',
@@ -11,7 +12,8 @@ export default {
     Breadcrumb_Com,
     ErrorModal,
     SearchBar_Com,
-    Navbar
+    Navbar,
+    UpdateButton // Register the UpdateButton component
   },
   data() {
     return {
@@ -67,11 +69,24 @@ export default {
     },
     getImagePath(equipImgPath) {
       try {
-         return `http://localhost:3000/assets/${equipImgPath}`
+        return `http://localhost:3000/assets/${equipImgPath}`;
       } catch (error) {
         console.error('Error loading image:', error);
         return require('@/assets/defaultImg.png'); // Fallback image
       }
     },
+    async handleItemUpdate(equipID, updatedData) {
+      try {
+        const response = await axios.put(`http://localhost:3000/api/equipment/${equipID}`, updatedData);
+        if (response.status === 200) {
+          // Optionally, fetch items again to update the list
+          await this.fetchItems();
+          // Show success message or update the UI accordingly
+        }
+      } catch (error) {
+        console.error('Error updating item:', error);
+        this.showErrorModal('Failed to update item. Please try again.');
+      }
+    }
   }
 };
