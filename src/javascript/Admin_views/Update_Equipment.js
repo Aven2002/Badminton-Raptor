@@ -3,16 +3,14 @@ import { Modal } from 'bootstrap';
 import Breadcrumb_Com from '@/components/BreadCrumb.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import SearchBar_Com from '@/components/Search_bar_com.vue';
-import RemoveButton from '@/components/Remove_equipment_btn_com.vue';
 import Navbar from '@/components/Navbar_CRUD_com.vue'
 
 export default {
-  name: 'Manage_Equipment',
+  name: 'Update_Equipment',
   components: {
     Breadcrumb_Com,
     ErrorModal,
     SearchBar_Com,
-    RemoveButton,
     Navbar
   },
   data() {
@@ -61,15 +59,6 @@ export default {
     handleSearch(query) {
       this.searchQuery = query.toLowerCase();
       this.currentPage = 1; // Reset to the first page on search
-    },
-    async handleItemRemoved(equipID) {
-      try {
-        await axios.delete(`http://localhost:3000/api/equipment/${equipID}`);
-        this.items = this.items.filter(item => item.equipID !== equipID);
-      } catch (error) {
-        console.error('Error deleting item:', error);
-        this.showErrorModal('Failed to delete item. Please try again.');
-      }
     },
     showErrorModal(message) {
       this.errorMessage = message;

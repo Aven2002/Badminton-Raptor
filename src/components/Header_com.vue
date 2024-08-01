@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Navbar_com from "./Navbar_com.vue";
+import Navbar_com from "./Navbar_view_com.vue";
 
 export default {
   name: "Header_com",

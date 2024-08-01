@@ -8,10 +8,15 @@
         :currentItem="'Manage Equipment'"
       />
     </div>
-
-    <!-- Search Bar -->
-    <div class="mb-3">
-      <SearchBar_Com @search="handleSearch" />
+    
+    <!-- Nav & Search Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="flex-grow-1">
+        <SearchBar_Com @search="handleSearch" />
+      </div>
+      <div class="ms-3">
+        <Navbar :navItems="navItems" defaultView="View" />
+      </div>
     </div>
 
     <div class="row">
