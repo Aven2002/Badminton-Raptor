@@ -45,7 +45,10 @@
                 <input type="number" step="0.01" id="equipPrice" class="form-control" v-model="localEquipment.equipPrice" />
               </div>
 
-              <button type="button" class="btn btn-secondary mb-3" @click="toggleDetails">Toggle Additional Details</button>
+              <button type="button" class="btn btn-secondary mt-3 mb-3" @click="toggleDetails">
+                <i class="fa-solid fa-compress "></i>
+                 Additional Details
+              </button>
 
               <div v-if="showAdditionalDetails">
                 <!-- Additional fields based on category -->
@@ -107,7 +110,7 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-update">Update</button>
+              <button type="submit" class="btn btn-update mt-3">Update</button>
             </form>
           </div>
         </div>
@@ -257,6 +260,14 @@ export default {
   background-color: #444;
   border-color: #007bff;
   box-shadow: none;
+  color:#fff;
+}
+
+.form-control:disabled {
+  background-color: #6c757d; 
+  border: 1px solid #495057; 
+  color: #e9ecef; 
+  cursor: not-allowed; 
 }
 
 .card-body {
