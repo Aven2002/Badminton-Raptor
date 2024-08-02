@@ -5,7 +5,7 @@ import axios from 'axios';
   import SearchBar_Com from '@/components/Search_bar_com.vue';
   import Navbar from '@/components/Navbar_CRUD_com.vue';
   import UpdateButton from '@/components/Update_equipment_btn_com.vue';
-  import EditEquipmentDetailsView from '@/components/Edit_equipment_details_view.vue';
+  import EditEquipmentDetailsView from '@/views/Admin_views/Edit_equipment_details_view.vue';
   
   export default {
     name: 'Update_Equipment',
