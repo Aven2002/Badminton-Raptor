@@ -44,11 +44,11 @@
   
   <style scoped>
   .navbar {
-    font-size: 11px; /* Smaller font size */
-    font-weight: bold;
+    font-size: 12px; /* Smaller font size */
+    font-weight:800;
     background-color: transparent;
     border-radius: 30px; /* Smaller border radius */
-    max-width: 500px; /* Reduced max width */
+    max-width: 600px; /* Reduced max width */
     border: solid #23a7be 2px;
     margin-bottom: 15px; /* Reduced margin */
   }

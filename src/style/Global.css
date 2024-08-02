@@ -1,0 +1,66 @@
+
+/* Dark- Table */
+.table-dark {
+    background-color: #333;
+    padding:15px;
+    border: 1px solid #444;
+    border-radius: 0.25rem;
+  }
+  .table-dark th, .table-dark td {
+    color: #e0e0e0; 
+  }
+  
+  .img-thumbnail {
+    width: 100px;
+    height: auto;
+    max-height:200px;
+  }
+  .table-hover tbody tr:hover {
+    cursor: pointer;
+  }
+  .table th, .table td {
+    text-align: center;
+  }
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+/* Dark Card */
+.card-dark {
+    background-color: #1e1e1e; /* Dark background for the card */
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Softer shadow for a more subtle effect */
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 20px;
+    color: #e0e0e0; /* Light text color for contrast */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .card-dark:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
+  }
+  
+  .card-header {
+    background-color: #333333; /* Darker background for the header */
+    border-bottom: 1px solid #444444; /* Subtle border */
+    color: #e0e0e0; /* Light text color for the header */
+    padding: 15px; /* Padding for the header content */
+    border-top-left-radius: 0.5rem; /* Rounded corners for the top left */
+    border-top-right-radius: 0.5rem; /* Rounded corners for the top right */
+    font-size: 1.25rem; /* Slightly larger font size for better readability */
+    font-weight: bold; /* Bold font for emphasis */
+  }
+  
+  .card-body {
+    padding: 15px; /* Padding for the card body content */
+  }
+  
+  .card-footer {
+    background-color: #333333; /* Dark background for the footer */
+    border-top: 1px solid #444444; /* Subtle border at the top */
+    padding: 10px; /* Padding for the footer content */
+    border-bottom-left-radius: 0.5rem; /* Rounded corners for the bottom left */
+    border-bottom-right-radius: 0.5rem; /* Rounded corners for the bottom right */
+  }
+  

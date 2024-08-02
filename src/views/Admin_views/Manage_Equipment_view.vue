@@ -1,7 +1,7 @@
 <template>
   <main class="content container">
     <!-- Breadcrumb -->
-    <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center custom-breadcrumb mb-3">
       <Breadcrumb_Com
         :homeLink="'/Home_view'"
         :breadcrumbItems="[]"
@@ -10,11 +10,11 @@
     </div>
     
     <!-- Nav & Search Bar -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <div class="flex-grow-1">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3">
+      <div class="flex-grow-1 mb-3 mb-md-0">
         <SearchBar_Com @search="handleSearch" />
       </div>
-      <div class="ms-3">
+      <div class="ms-md-3">
         <Navbar :navItems="navItems" defaultView="View" />
       </div>
     </div>
@@ -27,37 +27,39 @@
             <img src="@/assets/NoDataFound.png" alt="No Data Found" class="img-fluid" />
           </div>
           <div v-else>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Brand</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in paginatedItems" :key="item.equipID">
-                  <td>
-                    <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" @error="handleImageError" />
-                  </td>
-                  <td>{{ item.equipName }}</td>
-                  <td>RM{{ item.equipPrice }}</td>
-                  <td>{{ item.equipCategory }}</td>
-                  <td>{{ item.equipBrand }}</td>
-                  <td>
-                    <div class="d-flex justify-content-end" style="gap: 20px;">
-                      <RemoveButton :equipID="item.equipID" @item-removed="handleItemRemoved(item.equipID)" @error="showErrorModal" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table table-dark ">
+                <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in paginatedItems" :key="item.equipID">
+                    <td>
+                      <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" @error="handleImageError" />
+                    </td>
+                    <td>{{ item.equipName }}</td>
+                    <td>RM{{ item.equipPrice }}</td>
+                    <td>{{ item.equipCategory }}</td>
+                    <td>{{ item.equipBrand }}</td>
+                    <td>
+                      <div class="d-flex justify-content-center" style="gap: 20px;">
+                        <RemoveButton :equipID="item.equipID" @item-removed="handleItemRemoved(item.equipID)" @error="showErrorModal" />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <!-- Pagination Controls -->
-            <nav aria-label="Page navigation">
+            <nav aria-label="Page navigation" class="mt-3">
               <ul class="pagination justify-content-center">
                 <li class="page-item" :class="{ disabled: currentPage === 1 }">
                   <a class="page-link" href="#" @click.prevent="currentPage = currentPage - 1">Previous</a>
@@ -82,15 +84,4 @@
 
 <script src='@/javascript/Admin_views/Manage_Equipment'></script>
 
-<style scoped>
-.img-thumbnail {
-  width: 100px;
-  height: auto;
-}
-.table-hover tbody tr:hover {
-  cursor: pointer;
-}
-.table th, .table td {
-  text-align: center;
-}
-</style>
+<style> @import '@/style/Global.css'; </style>

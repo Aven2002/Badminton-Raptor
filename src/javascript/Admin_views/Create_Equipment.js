@@ -1,6 +1,10 @@
 import axios from 'axios';
+import Navbar from '@/components/Navbar_CRUD_com.vue';
   
   export default {
+    components: {
+      Navbar,
+    },
     data() {
       return {
         equipment: {
@@ -10,6 +14,11 @@ import axios from 'axios';
           equipImgPath: '',
           equipPrice: null
         },
+        navItems: [
+          { view: 'View', label: 'Manage Equipment', icon: 'fa-solid fa-eye', routeName: 'Manage_Equipment_view' },
+          { view: 'Add', label: 'Create Equipment', icon: 'fa-solid fa-circle-plus', routeName: 'Create_equipment_view' },
+          { view: 'Update', label: 'Update Equipment', icon: 'fa-solid fa-pen', routeName: 'Update_equipment_view' }
+        ],
         details: {},
         selectedFile: null
       };

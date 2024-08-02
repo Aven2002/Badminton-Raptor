@@ -8,7 +8,7 @@
     />
       </div>
   <div class="container d-flex justify-content-center align-items-center">
-    <div class="card">
+    <div class="card-dark">
       <div class="card-header">
         <h4>Send us a message</h4>
       </div>
@@ -68,3 +68,4 @@
 <script src='@/javascript/User_views/Contact_Us.js'></script>
 
 <style src='@/style/User_views/Contact_Us.css' scoped></style>
+<style> @import '@/style/Global.css'; </style>
