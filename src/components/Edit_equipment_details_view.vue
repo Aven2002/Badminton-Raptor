@@ -201,7 +201,7 @@ export default {
       this.showAdditionalDetails = !this.showAdditionalDetails;
     },
     getImagePath(path) {
-      return path ? `http://localhost:3000/${path}` : 'default-image.png';
+      return path ? `http://localhost:3000/${path}` : 'defaultImg.png';
     }
   },
   created() {
