@@ -23,7 +23,6 @@
           <!-- Left side: Current Image and Upload Button -->
           <div class="col-md-4 text-center">
             <img :src="getImagePath(localEquipment.equipImgPath)" alt="Equipment Image" class="img-fluid rounded shadow-lg" />
-            <input type="file" @change="handleFileUpload" class="mt-2" />
           </div>
 
           <!-- Right side: Input Fields -->
@@ -151,57 +150,48 @@ export default {
       }
     },
     async updateEquipment() {
-  try {
-    const formData = new FormData();
-    
-    // Append general equipment details
-    formData.append('equipName', this.localEquipment.equipName);
-    formData.append('equipCategory', this.localEquipment.equipCategory);
-    formData.append('equipBrand', this.localEquipment.equipBrand);
-    formData.append('equipPrice', this.localEquipment.equipPrice);
+    try {
+      const formData = new FormData();
+      
+      // Append details to formData
+      formData.append('equipName', this.localEquipment.equipName);
+      formData.append('equipCategory', this.localEquipment.equipCategory);
+      formData.append('equipBrand', this.localEquipment.equipBrand);
+      formData.append('equipPrice', this.localEquipment.equipPrice);
 
-    // Append additional details if applicable
-    if (this.additionalDetails) {
-      for (const key in this.additionalDetails) {
-        if (Object.prototype.hasOwnProperty.call(this.additionalDetails, key)) {
-          formData.append(`details[${key}]`, this.additionalDetails[key]);
+      if (this.additionalDetails) {
+        formData.append('details', JSON.stringify(this.additionalDetails));
+      }
+
+      if (this.selectedFile) {
+        formData.append('equipImgPath', this.selectedFile);
+      }
+
+      // Log FormData entries for debugging
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
+
+      // Make the PUT request
+      const response = await axios.put(`http://localhost:3000/api/equipment/${this.equipID}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-      }
+      });
+
+      // Handle success
+      console.log('Update successful:', response.data);
+      this.$emit('update-success');
+    } catch (error) {
+      console.error('Error updating equipment:', error.response ? error.response.data : error.message);
+      this.$emit('update-error', error.message);
     }
-
-    // Append the file if selected
-    if (this.selectedFile) {
-      formData.append('equipImgPath', this.selectedFile);
-    }
-
-    // Log FormData entries for debugging
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
-
-    // Make the PUT request
-    const response = await axios.put(`http://localhost:3000/api/equipment/${this.equipID}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-
-    // Handle success
-    console.log('Update successful:', response.data);
-    this.$emit('update-success');
-  } catch (error) {
-    console.error('Error updating equipment:', error.response ? error.response.data : error.message);
-    this.$emit('update-error', error.message);
-  }
-},
-    handleFileUpload(event) {
-      this.selectedFile = event.target.files[0];
-    },
+  },
     toggleDetails() {
       this.showAdditionalDetails = !this.showAdditionalDetails;
     },
     getImagePath(path) {
-      return path ? `http://localhost:3000/${path}` : 'defaultImg.png';
+      return path ? `http://localhost:3000/assets/${path}` : require('@/assets/defaultImg.png');
     }
   },
   created() {
@@ -214,19 +204,75 @@ export default {
 .card {
   background-color: #333;
   color: #fff;
+  border: 1px solid #444;
+  border-radius: 0.25rem;
 }
+
 .header h4 {
   font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
+
 .img-fluid {
   max-width: 100%;
   height: auto;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .btn-update {
   background-color: #007bff;
   color: #fff;
+  border: none;
+  border-radius: 0.25rem;
 }
+
 .btn-update:hover {
   background-color: #0056b3;
 }
+
+.btn-secondary {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 0.25rem;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.form-control {
+  background-color: #444;
+  border: 1px solid #555;
+  color: #fff;
+}
+
+.form-control:focus {
+  background-color: #444;
+  border-color: #007bff;
+  box-shadow: none;
+}
+
+.card-body {
+  position: relative;
+}
+
+.card-header {
+  border-bottom: 1px solid #444;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.row {
+  margin-bottom: 1rem;
+}
+
 </style>
