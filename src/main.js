@@ -6,7 +6,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Cookies from 'js-cookie';
-import '@/style/Global.css' 
+import '@/style/Global_style.css' 
 
 const app = createApp(App);
 

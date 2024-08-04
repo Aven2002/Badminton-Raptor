@@ -2,7 +2,7 @@
   <div id="app">
     <Header_com />
     <div class="view-container">
-      <router-view></router-view>
+      <router-view/>
     </div>
     <Footer_com />
   </div>
@@ -43,7 +43,7 @@ html, body {
 
 .view-container {
   flex: 1; /* Allow this container to grow and fill available space */
-  background-image: url('./assets/background/Bg_01.png');
+  background-image: url('@/assets/Background/Bg_01.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

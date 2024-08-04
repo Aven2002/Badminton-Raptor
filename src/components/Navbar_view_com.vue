@@ -10,20 +10,19 @@
       </button>
       <div class="collapse navbar-collapse" :class="{ show: isNavbarCollapsed }">
         <ul class="navbar-nav ms-auto">
-          <!-- Home link based on user role -->
           <li class="nav-item">
             <router-link :to="homeLink" class="nav-link" @click="toggleNavbar">Home</router-link>
           </li>
           <li class="nav-item dropdown" @mouseover="showDropdown" @mouseleave="hideDropdown">
-            <router-link to="/Browse_Equipment_view" class="nav-link dropdown-toggle" @click="toggleNavbar">Equipment</router-link>
+            <router-link to="/browse_equipment_view" class="nav-link dropdown-toggle" @click="toggleNavbar">Equipment</router-link>
             <ul class="dropdown-menu" :class="{ show: isDropdownVisible }">
               <li v-for="category in categories" :key="category">
-                <router-link :to="`/Browse_Equipment_view?filter=${category}`" class="dropdown-item" @click="toggleNavbar">{{ category }}</router-link>
+                <router-link :to="`/browse_equipment_view?filter=${category}`" class="dropdown-item" @click="toggleNavbar">{{ category }}</router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item" v-if="!isAdmin">
-            <router-link to="/Contact_Us_view" class="nav-link" @click="toggleNavbar">Contact Us</router-link>
+            <router-link to="/contact_us_view" class="nav-link" @click="toggleNavbar">Contact Us</router-link>
           </li>
         </ul>
         <LogoutButton />
@@ -38,24 +37,24 @@ import LogoutButton from '@/components/Logout_btn_com.vue';
 import axios from 'axios';
 
 export default {
-  name: "Navbar_com",
+  name: "Navbar_view_com",
   components: {
     LogoutButton
-  },
-  computed: {
-    ...mapGetters(['isAdmin']),
-    homeLink() {
-      return this.isAdmin ? '/Home_view_admin' : '/Home_view_user';
-    }
   },
   data() {
     return {
       title: "Badminton Raptor",
-      logo: require("../assets/logo.png"),
+      logo: require("@/assets/Icon/ComLogo.png"),
       isNavbarCollapsed: false,
       isDropdownVisible: false,
       categories: [],
     };
+  },
+  computed: {
+    ...mapGetters(['isAdmin']),
+    homeLink() {
+      return this.isAdmin ? '/home_view_admin' : '/home_view_user';
+    }
   },
   methods: {
     toggleNavbar() {
@@ -84,7 +83,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .navbar-brand {

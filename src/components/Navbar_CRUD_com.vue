@@ -6,8 +6,10 @@
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav">
-            <li v-for="item in navItems" :key="item.view" class="nav-item" :class="{ active: currentView === item.view }" @click="navigate(item.view)">
-              <a class="nav-link"><i :class="item.icon"></i> {{ item.label }}</a>
+            <li v-for="item in navItems" :key="item.view" class="nav-item" :class="{ active: currentView === item.view }">
+              <router-link class="nav-link" :to="{ name: item.routeName }" @click="navigate(item.view)">
+                <i :class="item.icon"></i> {{ item.label }}
+              </router-link>
             </li>
           </ul>
         </div>
@@ -17,6 +19,7 @@
   
   <script>
   export default {
+    name: 'Navbar_crud_com',
     props: {
       navItems: {
         type: Array,
@@ -29,14 +32,12 @@
     },
     data() {
       return {
-        currentView: this.defaultView // Default to the passed default view
+        currentView: this.defaultView 
       };
     },
     methods: {
       navigate(view) {
         this.currentView = view;
-        const routeName = this.navItems.find(item => item.view === view).routeName;
-        this.$router.push({ name: routeName });
       }
     }
   };
@@ -45,7 +46,7 @@
   <style scoped>
   .navbar {
     font-size: 12px; /* Smaller font size */
-    font-weight:800;
+    font-weight: 800;
     background-color: transparent;
     border-radius: 30px; /* Smaller border radius */
     max-width: 600px; /* Reduced max width */

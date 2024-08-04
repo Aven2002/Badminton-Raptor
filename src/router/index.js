@@ -1,81 +1,94 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import stateManagement from '@/State_management';
 
-// Import views
+import Home_view_Admin from '@/views/Admin/Home_view_Admin.vue';
+import Manage_Account_view from '@/views/Admin/Manage_Account_view.vue';
+import Manage_Equipment_view from '@/views/Admin/Manage_Equipment_view.vue';
+import Manage_Feedback_view from '@/views/Admin/Manage_Feedback_view.vue';
+import Manage_Recommendation_view from '@/views/Admin/Manage_Recommendation_view.vue';
+import Create_Equipment_com from '@/components/Create_Equipment_com.vue';
+import View_Account_com from '@/components/View_Account_com.vue';
+import View_Equipment_com from '@/components/View_Equipment_com.vue';
+import View_Feedback_com from '@/components/View_Feedback_com.vue';
+import View_Recommendation_com from '@/components/View_Recommendation_com.vue';
+import Update_Account_com from '@/components/Update_Account_com.vue';
+import Update_Equipment_com from '@/components/Update_Account_com.vue';
+
+import Home_view_User from '@/views/User/Home_view_User.vue';
+import Browse_Equipment_view from '@/views/User/Browse_Equipment_view.vue';
+import Compare_Equipment_view from '@/views/User/Compare_Equipment_view.vue';
+import Favorite_List_view from '@/views/User/Favorite_List_view.vue';
+import Equipment_Recommendation_view from '@/views/User/Equipment_Recommendation_view.vue';
+import Contact_Us_view from '@/views/User/Contact_Us_view.vue';
+
 import Landing_view from '@/views/Landing_view.vue';
-import Login_view from '@/views/Login_view.vue';
 import Settings_view from '@/views/Settings_view.vue';
-
-import Home_view_user from '@/views/User_views/Home_view_user.vue';
-import SignUp_view from '@/views/User_views/SignUp_view.vue';
-import Browse_Equipment_view from '@/views/User_views/Browse_Equipment_view.vue';
-import Compare_Equipment_view from '@/views/User_views/Compare_Equipment_view.vue';
-import Personalized_Recommendation_view from '@/views/User_views/Personalized_Recommendation_view.vue';
-import Favorite_List_view from '@/views/User_views/Favorite_List_view.vue';
-import Contact_Us_view from '@/views/User_views/Contact_Us_view.vue';
-import Reset_Password_view from '@/views/User_views/Reset_Password_view.vue';
-import Equipment_Details_view from '@/views/User_views/Equipment_Details_view.vue';
-
-import Home_view_admin from '@/views/Admin_views/Home_view_admin.vue';
-import Manage_Equipment_view from '@/views/Admin_views/Manage_Equipment_view.vue';
-import Create_equipment_view from '@/views/Admin_views/Create_equipment_view.vue';
-import Update_equipment_view from '@/views/Admin_views/Update_Equipment_view.vue';
-import Edit_equipment_details_view from '@/views/Admin_views/Edit_equipment_details_view.vue';
-
-import Manage_Account_view from '@/views/Admin_views/Manage_Account_view.vue';
-import Update_Account_view from '@/views/Admin_views/Update_Account_view.vue';
-
-import Manage_Feedback_view from '@/views/Admin_views/Manage_Feedback_view.vue';
-import Manage_Recommendation_view from '@/views/Admin_views/Manage_Recommendation_view.vue';
+import Log_In_view from '@/views/Log_In_view.vue';
+import Sign_Up_view from '@/views/Sign_Up_view.vue';
 
 const routes = [
-  // Define routes
-  { path: "/", name: "Landing_view", component: Landing_view },
-  { path: "/Login_view", name: "Login_view", component: Login_view },
-  { path: "/SignUp_view", name: "SignUp_view", component: SignUp_view },
-  { path: "/Home_view_user", name: "Home_view_user", component: Home_view_user, meta: { requiresUser: true } },
-  { path: "/Browse_Equipment_view", name: "Browse_Equipment_view", component: Browse_Equipment_view },
-  { path: "/Compare_Equipment_view", name: "Compare_Equipment_view", component: Compare_Equipment_view },
-  { path: "/Personalized_Recommendation_view", name: "Personalized_Recommendation_view", component: Personalized_Recommendation_view },
-  { path: "/Settings_view", name: "Settings_view", component: Settings_view },
-  { path: "/Favorite_List_view", name: "Favorite_List_view", component: Favorite_List_view },
-  { path: "/Contact_Us_view", name: "Contact_Us_view", component: Contact_Us_view, meta: { requiresUser: true } },
-  { path: "/Reset_Password_view", name: "Reset_Password_view", component: Reset_Password_view },
-  { path: '/equipment/:id', name: 'Equipment_Details_view', component: Equipment_Details_view, props: true },
 
-  { path: "/Home_view_admin", name: "Home_view_admin", component: Home_view_admin, meta: { requiresAdmin: true } },
+  //Admin Routes
+    { path: '/home_view_admin', component: Home_view_Admin},
+    { path: '/manage_equipment_view', component: Manage_Equipment_view },
+    { path: '/manage_account_view', component: Manage_Account_view },
+    { path: '/manage_feedback_view', component: Manage_Feedback_view },
+    { path: '/manage_recommendation_view', component: Manage_Recommendation_view },
+  {
+    path: '/manage_account_view',component: Manage_Account_view,
+    children: [
+      { path: 'update_account_com', component: Update_Account_com },
+      { path: 'view_account_com', component: View_Account_com }
+    ]
+  },
+  {
+    path: '/manage_equipment_view',component: Manage_Equipment_view,
+    children: [
+      { path: 'create_equipment_com', component: Create_Equipment_com },
+      { path: 'update_equipment_com', component: Update_Equipment_com },
+      { path: 'view_equipment_com', component: View_Equipment_com }
+    ]
+  },
+  {
+    path: '/manage_feedback_view',
+    component: Manage_Feedback_view,
+    children: [
+      {
+        path: 'view_feedback_com',
+        component: View_Feedback_com
+      },
+      {
+        path: '',
+        redirect: 'view_feedback_com'
+      }
+    ]
+  }, 
+  {
+    path: '/manage_recommendation_view',component: Manage_Recommendation_view,
+    children: [
+      { path: 'view_recommendation_com', component: View_Recommendation_com }
+    ]
+  },
 
-  { path: "/Manage_Equipment_view", name: "Manage_Equipment_view", component: Manage_Equipment_view },
-  { path: "/Manage_Equipment_view", name: "Create_equipment_view", component: Create_equipment_view },
-  { path: "/Manage_Equipment_view", name: "Update_equipment_view", component: Update_equipment_view },
-  { path: "/Manage_Equipment_view", name: "Edit_equipment_details_view", component: Edit_equipment_details_view },
+  //User Routes
+  { path: '/home_view_user', component: Home_view_User},
+  { path: '/browse_equipment_view', component: Browse_Equipment_view },
+  { path: '/compare_equipment_view', component: Compare_Equipment_view },
+  { path: '/equipment_recommendation_view', component: Equipment_Recommendation_view },
+  { path: '/manage_recommendation_view', component: Manage_Recommendation_view },
+  { path: '/favorite_list_view', component: Favorite_List_view},
+  { path: '/contact_us_view', component: Contact_Us_view },
 
-  { path: "/Manage_Account_view", name: "Manage_Account_view", component: Manage_Account_view },
-  { path: "/Manage_Account_view", name: "Update_Account_view", component: Update_Account_view },
+  //General Routes
+  {path: '/', component: Landing_view},
+  {path: '/sign_up_view', component: Sign_Up_view},
+  {path: '/log_in_view', component: Log_In_view},
+  {path: '/settings_view', component: Settings_view},
 
-  { path: "/Manage_Feedback_view", name: "Manage_Feedback_view", component: Manage_Feedback_view },
-
-  { path: "/Manage_Recommendation_view", name: "Manage_Recommendation_view", component: Manage_Recommendation_view }
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
-});
-
-router.beforeEach(async (to, from, next) => {
-  // Fetch user role before navigation
-  await stateManagement.dispatch('fetchUserRole');
+    history: createWebHistory(),
+    routes
+  });
   
-  const isAdmin = stateManagement.getters.isAdmin;
-  
-  if (to.meta.requiresAdmin && !isAdmin) {
-    next('/'); // Redirect to home or login page if not admin
-  } else if (to.meta.requiresUser && isAdmin) {
-    next('/'); // Redirect to home or login page if admin tries to access user-only page
-  } else {
-    next(); // Allow navigation
-  }
-});
-
-export default router;
+  export default router;

@@ -16,8 +16,8 @@
           <li>🌍 Facilitate Informed Decision-making</li>
         </ul>
         <div class="button mt-4">
-          <router-link to="/Login_view" class="btn btn-primary me-2">Login</router-link>
-          <router-link to="/SignUp_view" class="btn btn-success">Sign Up</router-link>
+          <router-link to="/log_in_view" class="btn btn-primary me-2">Login</router-link>
+          <router-link to="/sign_up_view" class="btn btn-success">Sign Up</router-link>
         </div>
       </div>
     </div>
@@ -30,6 +30,33 @@ export default {
 };
 </script>
 
-<style src='@/style/Landing.css' scoped></style>
+<style scoped>
+.content {
+  padding:80px 20px;
+  max-width: 1000px;
+  text-align: left;
+}
+
+.feature-list {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 16px;
+}
+
+.feature-list li {
+  margin: 10px 0;
+}
+
+h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+</style>
+
 
 
