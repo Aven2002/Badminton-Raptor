@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       favoriteItems: [],
+      filteredFavoriteItems: [], // Added this line
       loading: false,
       errorMessage: '',
       searchQuery: '',
@@ -34,12 +35,12 @@ export default {
   },
   computed: {
     totalPages() {
-      return Math.ceil(this.favoriteItems.length / this.itemsPerPage);
+      return Math.ceil(this.filteredFavoriteItems.length / this.itemsPerPage); // Updated to use filteredFavoriteItems
     },
     paginatedItems() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;
-      return this.favoriteItems.slice(start, end);
+      return this.filteredFavoriteItems.slice(start, end); // Updated to use filteredFavoriteItems
     },
   },  
   methods: {
@@ -48,7 +49,7 @@ export default {
       try {
         const response = await axios.get(`http://localhost:3000/api/favorite/${this.userID}`);
         this.favoriteItems = response.data;
-        this.filteredFavoriteItems = response.data;
+        this.filteredFavoriteItems = response.data; // Initialize filtered items
       } catch (error) {
         console.error('Error fetching favorite items:', error);
       } finally {
@@ -66,6 +67,7 @@ export default {
       this.filteredFavoriteItems = this.favoriteItems.filter(item =>
         item.equipName.toLowerCase().includes(this.searchQuery)
       );
+      this.currentPage = 1; // Reset to first page after search
     },
     handleError(errorMessage) {
       this.errorMessage = errorMessage;

@@ -41,11 +41,11 @@
                   <td>
                     <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail fixed-size" />
                   </td>
-                  <td class="align-middle">{{ item.equipName }}</td>
-                  <td class="align-middle">RM{{ formattedPrice(item.equipPrice) }}</td>
-                  <td class="align-middle">{{ item.equipCategory }}</td>
-                  <td class="align-middle">{{ item.equipBrand }}</td>
-                  <td class="align-middle" @click.stop="">
+                  <td>{{ item.equipName }}</td>
+                  <td>RM{{ formattedPrice(item.equipPrice) }}</td>
+                  <td>{{ item.equipCategory }}</td>
+                  <td>{{ item.equipBrand }}</td>
+                  <td @click.stop="">
                     <div class="d-flex justify-content-end" style="gap: 20px;">
                       <DownloadButton :equipID="item.equipID" @error="handleError" />
                       <RemoveButton :favoriteID="item.favoriteID" @item-removed="handleItemRemoved" @error="showErrorModal" />
