@@ -1,29 +1,31 @@
 <template>
   <main class="content container">
-    <!-- Breadcrumb -->
-    <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
-      <Breadcrumb_Com
-        :homeLink="'/Home_view'"
-        :breadcrumbItems="[]"
-        :currentItem="'Favourite List'"
-      />
+       <!-- Breadcrumb and Search Bar -->
+       <div class="mt-3">
+      <div class="row mb-1 align-items-center">
+        <div class="col-md-6">
+          <Breadcrumb_Com
+            :homeLink="'/Home_view'"
+            :breadcrumbItems="[]"
+            :currentItem="'Favourite List'"
+          />
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+          <SearchBar_Com @search="handleSearch" />
+        </div>
+      </div>
     </div>
 
-    <!-- Search Bar -->
-    <div class="mb-3">
-      <SearchBar_Com @search="handleSearch" />
-    </div>
-
+    <!-- Equipment Table -->
     <div class="row">
       <div class="col-md-12">
-        <h2>Favorites</h2>
-        <div v-if="loading" class="text-center">Loading...</div>
+        <div v-if="loading" class="text-center text-light">Loading...</div>
         <div v-else>
           <div v-if="filteredFavoriteItems.length === 0" class="text-center">
             <img src="@/assets/Icon/Empty_Icon.png" alt="No favorites" class="img-fluid" />
           </div>
           <div v-else>
-            <table class="table table-hover">
+            <table class="table table-dark table-hover">
               <thead>
                 <tr>
                   <th scope="col">Image</th>
@@ -45,10 +47,9 @@
                   <td>{{ item.equipBrand }}</td>
                   <td @click.stop="">
                     <div class="d-flex justify-content-end" style="gap: 20px;">
-  <DownloadButton :equipID="item.equipID" @error="handleError" />
-  <RemoveButton :favoriteID="item.favoriteID" @item-removed="handleItemRemoved" @error="showErrorModal" />
-</div>
-
+                      <DownloadButton :equipID="item.equipID" @error="handleError" />
+                      <RemoveButton :favoriteID="item.favoriteID" @item-removed="handleItemRemoved" @error="showErrorModal" />
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -58,24 +59,26 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Error Modal -->
     <ErrorModal :errorMessage="errorMessage" />
   </main>
 </template>
 
-  
-  <script src='@/javascript/User/Favorite_List.js'></script>
-  
-  <style scoped>
-  .img-thumbnail {
-    width: 100px;
-    height: auto;
-  }
-  .table-hover tbody tr:hover {
-    cursor: pointer;
-  }
-  .table th, .table td {
-    text-align: center;
-  }
-  </style>
-  
+<script src='@/javascript/User/Favorite_List.js'></script>
+
+<style> 
+
+@import '@/style/Global_style.css'; 
+
+.img-thumbnail {
+  width: 100px; 
+  height: 150px; 
+}
+.text-light {
+  color: #e0e0e0; /* Light color for loading text */
+}
+.table-dark tbody tr:hover {
+  background-color: #333;
+  cursor: pointer; 
+}
+</style>
