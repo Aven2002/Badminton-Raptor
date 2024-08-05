@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="container mt-3">
-      <!-- Breadcrumb -->
-    <div class="d-flex justify-content-start custom-breadcrumb">
+        <!-- Breadcrumb -->
+    <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
       <Breadcrumb_Com
         :homeLink="'/Home_view'"
         :breadcrumbItems="[]"
         :currentItem="'Compare Equipment'"
       />
     </div>
-
+    
       <!-- Category Selection Bar -->
       <div class="category-bar d-flex">
         <div
@@ -60,7 +60,7 @@
                         <td>{{ formatPrice(equipmentDetails[side].equipPrice) }}</td>
                       </tr>
                       <tr v-for="(detail, key) in dynamicDetails(equipmentDetails[side])" :key="key">
-                        <th scope="row">{{ key }}</th>
+                        <th scope="row">{{ getLabel(key) }}</th>
                         <td>{{ detail }}</td>
                       </tr>
                     </tbody>
@@ -77,78 +77,4 @@
 
 <script src="@/javascript/User/Compare_Equipment.js"></script>
 
-<style scoped>
-.custom-breadcrumb {
-  margin-bottom: 10px;
-}
-
-/* Category Bar */
-.category-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color:transparent;
-  border:none;
-  overflow-x: auto;
-}
-
-.category-icon {
-  width: 75px;
-  height: 75px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #495057;
-  border-radius: 5px;
-  margin: 3px;
-  cursor: pointer;
-  transition: border 0.3s ease, background-color 0.3s ease;
-}
-
-.category-icon img {
-  max-width: 50px;
-  max-height: 50px;
-}
-
-.category-icon:hover {
-  border: 3px solid #007bff;
-}
-
-.category-icon.active {
-  background-color: #007bff;
-}
-
-.dark-card {
-  background-color: #343a40;
-  color: #fff;
-  border: 1px solid #495057;
-}
-
-.dark-card .card-body {
-  padding: 8px;
-}
-
-.equipment-img {
-  max-width: 80px;
-  height: auto;
-  margin-bottom: 5px;
-}
-
-.table-dark th,
-.table-dark td {
-  color: #fff;
-  padding: 5px;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.form-select-sm {
-  font-size: 12px;
-}
-
-.details {
-  font-size: 12px;
-}
-</style>
+<style src='@/style/User/Compare_Equipment.css' scoped></style>

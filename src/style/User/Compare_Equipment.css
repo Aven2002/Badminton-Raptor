@@ -1,58 +1,75 @@
+.custom-breadcrumb {
+  margin-bottom: 10px;
+}
 
-/* Category cards */
-.category-card {
-    width: 80px;
-    height: 80px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: border-color 0.3s, transform 0.3s;
-    background-color: #212529;
-    margin-bottom: 20px;
-  }
-  
-  /* Card hover effects */
-  .category-card:hover {
-    border: 2px solid #007bff;
-    transform: scale(1.02);
-  }
-  
-  /* Image styling for the cards */
-  .card-img-top {
-    max-height: 50px;
-    max-width: 50px;
-    object-fit: contain;
-    margin: 20px auto;
-    display: block;
-  }
-  
-  /* Equipment image styling */
-  .equipment-img {
-    height: 150px;
-    width: 150px;
-    object-fit: contain;
-    margin: 10px 0;
-  }
-  
-  /* Equipment dropdown styling */
-  .form-select {
-    border-radius: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    background-color: #343a40; /* Dark theme background */
-    color: #f8f9fa; /* Light text color */
-    border: 1px solid #495057; /* Darker border */
-  }
-  
-  .form-select-sm {
-    font-size: 10px;
-  }
-  
-  /* Details section styling */
-  .details {
-    border-top: 1px solid #495057; /* Darker border for details */
-    padding-top: 10px;
-    color: #212529; /* Light text color for dark theme */
-    text-align: left;
-    font-size:12px;
-  }
-  
-  
+/* Category Bar */
+.category-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  overflow-x: auto;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.category-icon {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(73, 80, 87, 0.8); /* Semi-transparent background */
+  border-radius: 8px;
+  margin: 5px;
+  cursor: pointer;
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.category-icon img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.category-icon:hover {
+  border: 5px solid #0761c2;
+}
+
+.category-icon.active {
+  background-color: rgba(141, 154, 176, 0.8); /* Semi-transparent active background */
+}
+
+.dark-card {
+  background-color: #343a40;
+  color: #fff;
+  border: 1px solid #495057;
+}
+
+.dark-card .card-body {
+  padding: 8px;
+}
+
+.equipment-img {
+  max-width: 80px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.table-dark th,
+.table-dark td {
+  color: #fff;
+  padding: 5px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.form-select-sm {
+  font-size: 12px;
+}
+
+.details {
+  font-size: 12px;
+}

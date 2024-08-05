@@ -22,6 +22,32 @@ export default {
         Center: null,
         Right: null,
       },
+      dynamicKeys: {
+        Racquet: ['flex', 'frame', 'shaft', 'joint', 'length', 'weight', 'stringAdvice', 'color', 'madeIn'],
+        Shuttlecock: ['quantityPerTube', 'description'],
+        Bags: ['color', 'size', 'description'],
+        Footwear: ['color', 'upper', 'midsole', 'outsole', 'description'],
+        Apparel: ['color', 'material'],
+        Accessories: ['description'],
+      },
+      labelMapping: {
+        color: 'Color',
+        madeIn: 'Made In',
+        flex: 'Flex',
+        frame: 'Frame',
+        shaft: 'Shaft',
+        joint: 'Joint',
+        length: 'Length',
+        weight: 'Weight',
+        stringAdvice: 'String Advice',
+        quantityPerTube: 'Quantity Per Tube',
+        description: 'Description',
+        size: 'Size',
+        upper: 'Upper',
+        midsole: 'Midsole',
+        outsole: 'Outsole',
+        material: 'Material',
+      },
     };
   },
   methods: {
@@ -55,15 +81,7 @@ export default {
       }
     },
     dynamicDetails(details) {
-      const dynamicKeys = {
-        Racquet: ['flex', 'frame', 'shaft', 'joint', 'length', 'weight', 'stringAdvice', 'color', 'madeIn'],
-        Shuttlecock: ['quantityPerTube', 'description'],
-        Bags: ['color', 'size', 'description'],
-        Footwear: ['color', 'upper', 'midsole', 'outsole', 'description'],
-        Apparel: ['color', 'material'],
-        Accessories: ['description'],
-      };
-      return dynamicKeys[this.selectedCategory].reduce((acc, key) => {
+      return this.dynamicKeys[this.selectedCategory].reduce((acc, key) => {
         if (details[key] !== undefined) {
           acc[key] = details[key];
         }
@@ -89,7 +107,10 @@ export default {
     },
     formatPrice(price) {
       return `RM ${price.toFixed(2)}`;
-    }
+    },
+    getLabel(key) {
+      return this.labelMapping[key] || key;
+    },
   },
   watch: {
     selectedCategory(newCategory) {
