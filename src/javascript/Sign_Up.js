@@ -109,7 +109,7 @@ export default {
       
       // Add event listener for the modal hidden event
       successModal._element.addEventListener('hidden.bs.modal', () => {
-        this.$router.push('/Login_view');
+        this.$router.push('/log_in_view');
       });
     },
     showErrorModal(message, redirect = true) {

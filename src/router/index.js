@@ -15,6 +15,7 @@ import Update_Equipment_com from '@/components/Update_Account_com.vue';
 
 import Home_view_User from '@/views/User/Home_view_User.vue';
 import Browse_Equipment_view from '@/views/User/Browse_Equipment_view.vue';
+import Equipment_Details_view from '@/views/User/Equipment_Details_view.vue';
 import Compare_Equipment_view from '@/views/User/Compare_Equipment_view.vue';
 import Favorite_List_view from '@/views/User/Favorite_List_view.vue';
 import Equipment_Recommendation_view from '@/views/User/Equipment_Recommendation_view.vue';
@@ -72,6 +73,7 @@ const routes = [
   //User Routes
   { path: '/home_view_user', component: Home_view_User},
   { path: '/browse_equipment_view', component: Browse_Equipment_view },
+  { path: '/equipment/:id', name: 'Equipment_Details_view', component: Equipment_Details_view, props: true },
   { path: '/compare_equipment_view', component: Compare_Equipment_view },
   { path: '/equipment_recommendation_view', component: Equipment_Recommendation_view },
   { path: '/manage_recommendation_view', component: Manage_Recommendation_view },

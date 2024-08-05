@@ -74,6 +74,7 @@
   <style scoped>
   .breadcrumb {
     background-color: transparent;
+    font-size: 15px;
   }
   .breadcrumb-item a {
     color: #007bff;

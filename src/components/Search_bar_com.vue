@@ -33,7 +33,7 @@
   
   <style scoped>
   .search-bar {
-    width: 100%;
+    max-width: 450px;
     margin-bottom: 20px;
   }
   
