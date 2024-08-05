@@ -127,49 +127,5 @@
     transform: rotateY(180deg);
   }
   
-  /* Pagination Styles */
-  .pagination {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping to prevent overflow */
-  }
   
-  .page-item {
-    margin: 0 2px; /* Reduced margin to fit more items */
-  }
-  
-  .page-link {
-    color: #ffffff; /* White text */
-    background-color: #2c2c2c; /* Darker grey background */
-    border: none; /* No border */
-    border-radius: 4px; /* Rounded corners */
-    padding: 6px 12px; /* Smaller padding for buttons */
-    font-size: 0.75rem; /* Smaller font size */
-    text-align: center; /* Centered text */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap; /* Prevent text from wrapping */
-  }
-  
-  .page-link i {
-    font-size: 0.75rem; /* Size of the icons */
-  }
-  
-  .page-link:hover {
-    color: #fff; /* White text on hover */
-    background-color: #007bff; /* Blue background on hover */
-  }
-  
-  .page-item.disabled .page-link {
-    color: #6c757d; /* Gray text for disabled state */
-    background-color: #2c2c2c; /* Darker grey background */
-  }
-  
-  .page-item.active .page-link {
-    color: #fff; /* White text for active page */
-    background-color: #007bff; /* Blue background for active page */
-  }
   

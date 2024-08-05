@@ -6,6 +6,7 @@ import SearchBar_Com from '@/components/Search_Bar_com.vue';
 import DownloadButton from '@/components/Download_btn_com.vue';
 import RemoveButton from '@/components/Remove_favorite_btn_com.vue';
 import Cookies from 'js-cookie';
+import Pagination from '@/components/Pagination_com.vue';
 
 export default {
   name: 'FavoriteList',
@@ -14,21 +15,33 @@ export default {
     ErrorModal,
     SearchBar_Com,
     DownloadButton,
-    RemoveButton
+    RemoveButton,
+    Pagination
   },
   data() {
     return {
       favoriteItems: [],
-      filteredFavoriteItems: [],
       loading: false,
       errorMessage: '',
       searchQuery: '',
-      userID: Cookies.get('userID') || '000'
+      userID: Cookies.get('userID') || '000',
+      currentPage: 1,
+      itemsPerPage: 5,
     };
   },
   created() {
     this.fetchFavoriteItems();
   },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.favoriteItems.length / this.itemsPerPage);
+    },
+    paginatedItems() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.favoriteItems.slice(start, end);
+    },
+  },  
   methods: {
     async fetchFavoriteItems() {
       this.loading = true;
@@ -67,6 +80,12 @@ export default {
       this.errorMessage = message;
       const errorModal = new Modal(document.getElementById('errorModal'));
       errorModal.show();
+    },
+    formattedPrice(price) {
+      return price.toFixed(2);
+    },
+    handlePageChange(page) {
+      this.currentPage = page;
     }
   }
 };

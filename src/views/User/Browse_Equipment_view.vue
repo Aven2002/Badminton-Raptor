@@ -65,25 +65,12 @@
               </div>
             </div>
           </div>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                <a class="page-link" href="#" @click.prevent="changePage(currentPage - 1)" aria-label="Previous">
-                  <i class="fas fa-chevron-left"></i>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
-                <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
-              </li>
-              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                <a class="page-link" href="#" @click.prevent="changePage(currentPage + 1)" aria-label="Next">
-                  <i class="fas fa-chevron-right"></i>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+           <!-- Pagination Controls -->
+          <Pagination
+            :totalPages="totalPages"
+            :currentPage="currentPage"
+            @page-changed="handlePageChange"
+          />
         </div>
       </div>
     </div>

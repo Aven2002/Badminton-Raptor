@@ -1,12 +1,14 @@
 import axios from 'axios';
 import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import SearchBar_Com from '@/components/Search_Bar_com.vue';
+import Pagination from '@/components/Pagination_com.vue';
 
 export default {
   name: 'Browse_Equipment_view',
   components: {
     Breadcrumb_Com,
-    SearchBar_Com
+    SearchBar_Com,
+    Pagination
   },
   data() {
     return {
@@ -119,10 +121,8 @@ export default {
       this.maxPrice = Math.max(...prices);
       this.priceRange = this.maxPrice;
     },
-    changePage(page) {
-      if (page > 0 && page <= this.totalPages) {
-        this.currentPage = page;
-      }
+    handlePageChange(page) {
+      this.currentPage = page;
     },
     goToDetails(productID) {
       this.$router.push({ name: 'Equipment_Details_view', params: { id: productID } });
