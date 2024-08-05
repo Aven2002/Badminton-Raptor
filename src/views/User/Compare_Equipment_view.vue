@@ -1,64 +1,154 @@
 <template>
-  <!-- Breadcrumb -->
-  <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
-        <Breadcrumb_Com
-      :homeLink="'/Home_view'"
-      :breadcrumbItems="[]"
-      :currentItem="'Compare Equipment'"
-    />
-    </div>
-  <div class="container mt-5">
-    <div class="row">
-      <!-- Category Selection Cards -->
-      <div class="col-6 col-md-2 mb-3" v-for="category in categories" :key="category">
-        <div class="card category-card" @click="selectCategory(category)">
-          <img :src="getCategoryImage(category)" class="card-img-top" :alt="category" />
-          <div class="card-body">
-          </div>
-        </div>
-      </div>
+  <div>
+    <div class="container mt-3">
+      <!-- Breadcrumb -->
+    <div class="d-flex justify-content-start custom-breadcrumb">
+      <Breadcrumb_Com
+        :homeLink="'/Home_view'"
+        :breadcrumbItems="[]"
+        :currentItem="'Compare Equipment'"
+      />
     </div>
 
-    <!-- Only show equipment dropdowns if a category is selected -->
-    <template v-if="selectedCategory">
-      <div class="row mt-4">
-        <div class="col-md-4" v-for="side in ['Left', 'Center', 'Right']" :key="side">
-          <div class="mb-3">
-            <select :id="'equipment' + side" v-model="selectedEquipment[side]" @change="fetchEquipmentDetails(side)" class="form-select form-select-sm">
-              <option v-for="equip in equipmentNames" :key="equip.equipID" :value="equip.equipID">{{ equip.equipName }}</option>
-            </select>
-          </div>
-          <div v-if="equipmentDetails[side]" class="details">
-            <div class="col-md-12 d-flex flex-column align-items-center left-section">
-              <img class="equipment-img" :src="getImageURL(equipmentDetails[side].equipImgPath)" alt="Equipment Image">
-            </div>
-            <table class="table table-striped">
-              <tbody>
-                <tr>
-                  <th scope="row">Name</th>
-                  <td>{{ equipmentDetails[side].equipName }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">Brand</th>
-                  <td>{{ equipmentDetails[side].equipBrand }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">Price</th>
-                  <td>{{ formatPrice(equipmentDetails[side].equipPrice) }}</td>
-                </tr>
-                <tr v-for="(detail, key) in dynamicDetails(equipmentDetails[side])" :key="key">
-                  <th scope="row">{{ key }}</th>
-                  <td>{{ detail }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <!-- Category Selection Bar -->
+      <div class="category-bar d-flex">
+        <div
+          class="category-icon"
+          v-for="category in categories"
+          :key="category"
+          @click="selectCategory(category)"
+          :class="{ active: selectedCategory === category }"
+        >
+          <img :src="getCategoryImage(category)" :alt="category" />
         </div>
       </div>
-    </template>
+
+      <!-- Equipment Selection and Details -->
+      <template v-if="selectedCategory">
+        <div class="row mt-2">
+          <div class="col-md-4" v-for="side in ['Left', 'Center', 'Right']" :key="side">
+            <div class="card dark-card mb-2">
+              <div class="card-body p-2">
+                <div class="mb-2">
+                  <select
+                    :id="'equipment' + side"
+                    v-model="selectedEquipment[side]"
+                    @change="fetchEquipmentDetails(side)"
+                    class="form-select form-select-sm"
+                  >
+                    <option v-for="equip in equipmentNames" :key="equip.equipID" :value="equip.equipID">
+                      {{ equip.equipName }}
+                    </option>
+                  </select>
+                </div>
+                <div v-if="equipmentDetails[side]" class="details">
+                  <div class="d-flex flex-column align-items-center">
+                    <img class="equipment-img" :src="getImageURL(equipmentDetails[side].equipImgPath)" alt="Equipment Image" />
+                  </div>
+                  <table class="table table-dark table-striped table-sm">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ equipmentDetails[side].equipName }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Brand</th>
+                        <td>{{ equipmentDetails[side].equipBrand }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Price</th>
+                        <td>{{ formatPrice(equipmentDetails[side].equipPrice) }}</td>
+                      </tr>
+                      <tr v-for="(detail, key) in dynamicDetails(equipmentDetails[side])" :key="key">
+                        <th scope="row">{{ key }}</th>
+                        <td>{{ detail }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
-<script src='@/javascript/User/Compare_Equipment'></script>
+<script src="@/javascript/User/Compare_Equipment.js"></script>
 
-<style src='@/style/User/Compare_Equipment.css' scoped></style>
+<style scoped>
+.custom-breadcrumb {
+  margin-bottom: 10px;
+}
+
+/* Category Bar */
+.category-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:transparent;
+  border:none;
+  overflow-x: auto;
+}
+
+.category-icon {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #495057;
+  border-radius: 5px;
+  margin: 3px;
+  cursor: pointer;
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.category-icon img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.category-icon:hover {
+  border: 3px solid #007bff;
+}
+
+.category-icon.active {
+  background-color: #007bff;
+}
+
+.dark-card {
+  background-color: #343a40;
+  color: #fff;
+  border: 1px solid #495057;
+}
+
+.dark-card .card-body {
+  padding: 8px;
+}
+
+.equipment-img {
+  max-width: 80px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.table-dark th,
+.table-dark td {
+  color: #fff;
+  padding: 5px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.form-select-sm {
+  font-size: 12px;
+}
+
+.details {
+  font-size: 12px;
+}
+</style>
