@@ -9,12 +9,12 @@
         <router-link :to="card.link" class="text-decoration-none">
           <div class="card text-center h-100">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
-              <i :class="card.icon" class="fa-3x mb-3"></i>
+              <i :class="card.icon" class="fa-4x mb-3"></i>
               <h5 class="card-title">{{ card.title }}</h5>
             </div>
           </div>
         </router-link>
-      </div> 
+      </div>
     </div>
   </div>
 </template>
@@ -38,26 +38,51 @@ export default {
 
 
 <style scoped>
-h3{
+.home {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h3 {
+  font-weight: 800;
   text-align: left;
-  margin-left:50px;
-  font-weight: bold;
-  padding:20px;
+  margin: 25px 50px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .card {
-  background-color: #1e1e1e;
-  border: none;
+  background-color: #2e2e2e;
+  border-radius: 12px;
   color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.card-body {
+  padding: 20px;
 }
 
 .card-title {
-  margin-bottom: 0;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.fa-4x {
+  color: #4484c0; /* Bright color for icons */
+  transition: color 0.3s;
+}
+
+.card:hover .fa-4x {
+  color: #ffffff; /* Icon color change on hover */
 }
 </style>
