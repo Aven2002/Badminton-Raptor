@@ -1,6 +1,3 @@
-.container {
-    padding:10px;
-  }
   
   h4 {
     color: #ffffff;
@@ -47,7 +44,7 @@
     font-size: 15px;
   }
   .custom-breadcrumb{
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 250px;
   }
   

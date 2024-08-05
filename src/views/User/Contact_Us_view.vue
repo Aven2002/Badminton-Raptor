@@ -8,7 +8,7 @@
       />
         </div>
     <div class="container d-flex justify-content-center align-items-center">
-      <div class="card-dark">
+      <div class="card-dark mb-3">
         <div class="card-header">
           <h4>Send us a message</h4>
         </div>
