@@ -25,7 +25,7 @@ export default {
         race: '',
         profileImg: ''
       },
-      userID: Cookies.get('userID') || '000',
+      userID: Cookies.get('userID'),
       profileImages: [
         require('@/assets/Profile_Img/Profile_Img_01.png'),
         require('@/assets/Profile_Img/Profile_Img_02.png'),
@@ -51,22 +51,33 @@ export default {
   },
   computed: {
     formattedUserID() {
-      // Pad userID to always be 3 digits
-      return this.userID.toString().padStart(3, '0');
+      const userID = Cookies.get('userID');
+      return userID ? `${userID}` : '???';
     }
   },
+  mounted() {
+    this.checkLoginStatus();
+  },
   created() {
-    this.fetchUserInfo();
+    if (this.userID) {
+      this.fetchUserInfo(this.userID);
+    }
   },
   methods: {
-    async fetchUserInfo() {
+    checkLoginStatus() {
+      const userID = Cookies.get('userID');
+      if (!userID) {
+        this.showErrorModal("You are not logged in");
+      } else {
+        this.fetchUserInfo(userID);
+      }
+    },
+    async fetchUserInfo(userID) {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/${this.userID}`);
-        let userData = response.data[0];
-        
-        // Format date of birth to yyyy-MM-dd
-        userData.dob = this.formatDateForInput(userData.dob);
-
+        const response = await axios.get(`http://localhost:3000/api/account/${userID}`);
+        let userData = response.data[0] || {}; 
+        userData.profileImg = userData.profileImg || require('@/assets/Profile_Img/Profile_Img_Default.png');
+        userData.dob = userData.dob ? this.formatDateForInput(userData.dob) : '';
         this.user = userData;
       } catch (error) {
         console.error('Error fetching user info:', error);
@@ -78,7 +89,7 @@ export default {
       return `${year}-${month}-${day}`;
     },
     formatDate(date) {
-      return new Date(date).toLocaleDateString(); // Format date as desired
+      return new Date(date).toLocaleDateString(); 
     },
     async updateProfile() {
       try {
@@ -109,6 +120,9 @@ export default {
       this.errorMessage = message;
       const errorModal = new Modal(document.getElementById('errorModal'));
       errorModal.show();
+      document.getElementById('errorModal').addEventListener('hidden.bs.modal', () => {
+        this.$router.push('/home_view_user');
+      });
     }
   }
 };

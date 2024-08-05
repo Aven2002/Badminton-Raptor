@@ -50,8 +50,7 @@
         try {
           const userID = Cookies.get('userID');
           if (!userID) {
-            console.warn('No userID found in cookies');
-            this.isAdmin = false; // Default to non-admin if no userID
+            this.isAdmin = false; 
             return;
           }
   
