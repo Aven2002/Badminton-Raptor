@@ -4,7 +4,7 @@
 
       <!-- Search Bar -->
       <div class="d-flex flex-column flex-md-row justify-content-end mb-2">
-          <SearchBar_Com @search="handleSearch" />
+        <SearchBar_Com searchType="equipname" @search="handleSearch" />
       </div>
 
       <div class="row">

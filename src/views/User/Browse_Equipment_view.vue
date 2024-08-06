@@ -36,7 +36,7 @@
       <div class="col-md-9">
         <!-- Search and Sort Bar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-          <SearchBar_Com @search="updateSearchQuery" />
+          <SearchBar_Com searchType="equipname" @search="updateSearchQuery" />
           <div class="d-flex align-items-center">
             <label for="sort" class="me-2 sort-label">Sort by:</label>
             <select id="sort" class="form-control w-auto" v-model="sortOrder">

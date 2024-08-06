@@ -8,7 +8,7 @@
         type="text"
         v-model="searchQuery"
         @input="emitSearch"
-        placeholder="Search by equipment name ..."
+        :placeholder="placeholderText"
         class="form-control search-input"
       />
     </div>
@@ -18,10 +18,28 @@
 <script>
 export default {
   name: 'SearchBar',
+  props: {
+    searchType: {
+      required: true,
+      validator: function (value) {
+        return ['username', 'equipname'].includes(value);
+      }
+    }
+  },
   data() {
     return {
       searchQuery: ''
     };
+  },
+  computed: {
+    placeholderText() {
+      if (this.searchType === 'username') {
+        return 'Search by username ...';
+      } else if (this.searchType === 'equipname') {
+        return 'Search by equipment name ...';
+      }
+      return 'Search ...'; // default fallback
+    }
   },
   methods: {
     emitSearch() {

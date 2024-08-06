@@ -58,13 +58,28 @@ export default {
     handlePageChange(page) {
       this.currentPage = page;
     },
-    removeFeedbackFromList(feedbackID) {
-      this.items = this.items.filter(item => item.feedbackID !== feedbackID);
+    async removeFeedbackFromList(feedbackID) {
+      try {
+        await axios.delete(`http://localhost:3000/api/feedback/${feedbackID}`);
+        this.items = this.items.filter(item => item.feedbackID !== feedbackID);
+      } catch (error) {
+        console.error('Error removing feedback:', error);
+      }
     },
-    showFeedbackModal(feedback) {
+    async showFeedbackModal(feedback) {
       this.selectedFeedback = feedback;
+      await this.updateFeedbackStatus(feedback.feedbackID);
       const feedbackModal = new Modal(document.getElementById('feedbackModal'));
       feedbackModal.show();
+    },
+    async updateFeedbackStatus(feedbackID) {
+      try {
+        await axios.put(`http://localhost:3000/api/feedback/${feedbackID}`);
+        const feedback = this.items.find(item => item.feedbackID === feedbackID);
+        if (feedback) feedback.status = 1;
+      } catch (error) {
+        console.error('Error updating feedback status:', error);
+      }
     }
   }
 };

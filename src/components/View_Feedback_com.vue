@@ -17,7 +17,7 @@
           </div>
           <div v-else>
             <div class="table-responsive">
-              <table class="table table-dark ">
+              <table class="table table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Feedback ID</th>
@@ -28,7 +28,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in paginatedItems" :key="item.feedbackID" @click="showFeedbackModal(item)">
+                  <tr
+                    v-for="item in paginatedItems"
+                    :key="item.feedbackID"
+                    :style="{
+                      backgroundColor: item.status === 0 ? '#f8d7da' : '#d4edda',
+                      color: item.status === 0 ? '#721c24' : '#155724', /* Adjust text color for readability */
+                      borderRadius: '4px' /* Optional: Add border radius to improve appearance */
+                    }"
+                    @click="showFeedbackModal(item)"
+                  >
                     <td>{{ item.feedbackID }}</td>
                     <td>{{ item.email }}</td>
                     <td>{{ item.contactNum }}</td>
@@ -54,7 +63,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modals -->
     <FeedbackModal :feedback="selectedFeedback" />
     <ErrorModal :errorMessage="errorMessage" />
   </main>
@@ -62,4 +71,6 @@
 
 <script src='@/javascript/Admin/View_Feedback'></script>
 
-<style> @import '@/style/Global_style.css'; </style>
+<style scoped>
+/* Scoped styles can be added here if needed */
+</style>
