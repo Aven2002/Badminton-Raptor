@@ -35,7 +35,7 @@
                     <td>{{ item.feedbackCategory }}</td>
                     <td>
                       <div class="d-flex justify-content-center" style="gap: 20px;">
-                        <RemoveButton :feedbackID="item.feedbackID" @error="showErrorModal" />
+                        <RemoveButton :feedbackID="item.feedbackID" @item-removed="removeFeedbackFromList" @error="showErrorModal" />
                       </div>
                     </td>
                   </tr>
@@ -44,19 +44,11 @@
             </div>
 
             <!-- Pagination Controls -->
-            <nav aria-label="Page navigation" class="mt-3">
-              <ul class="pagination justify-content-center">
-                <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                  <a class="page-link" href="#" @click.prevent="currentPage = currentPage - 1">Previous</a>
-                </li>
-                <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
-                  <a class="page-link" href="#" @click.prevent="currentPage = page">{{ page }}</a>
-                </li>
-                <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                  <a class="page-link" href="#" @click.prevent="currentPage = currentPage + 1">Next</a>
-                </li>
-              </ul>
-            </nav>
+            <Pagination
+              :totalPages="totalPages"
+              :currentPage="currentPage"
+              @page-changed="handlePageChange"
+            />
           </div>
         </div>
       </div>

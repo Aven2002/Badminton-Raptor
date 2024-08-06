@@ -3,13 +3,15 @@ import { Modal } from 'bootstrap';
 import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import RemoveButton from '@/components/Remove_feedback_btn_com.vue';
+import Pagination from '@/components/Pagination_com.vue';
 
 export default {
   name: 'View_Feedback',
   components: {
     Breadcrumb_Com,
     ErrorModal,
-    RemoveButton
+    RemoveButton,
+    Pagination
   },
   data() {
     return {
@@ -17,7 +19,7 @@ export default {
       loading: false,
       errorMessage: '',
       currentPage: 1,
-      itemsPerPage: 6,
+      itemsPerPage: 9,
     };
   },
   created() {
@@ -49,6 +51,12 @@ export default {
       this.errorMessage = message;
       const errorModal = new Modal(document.getElementById('errorModal'));
       errorModal.show();
+    },
+    handlePageChange(page) {
+      this.currentPage = page;
+    },
+    removeFeedbackFromList(feedbackID) {
+      this.items = this.items.filter(item => item.feedbackID !== feedbackID);
     },
   }
 };
