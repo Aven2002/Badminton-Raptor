@@ -4,6 +4,7 @@ import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import RemoveButton from '@/components/Remove_feedback_btn_com.vue';
 import Pagination from '@/components/Pagination_com.vue';
+import FeedbackModal from '@/components/Feedback_modal_com.vue';
 
 export default {
   name: 'View_Feedback',
@@ -11,7 +12,8 @@ export default {
     Breadcrumb_Com,
     ErrorModal,
     RemoveButton,
-    Pagination
+    Pagination,
+    FeedbackModal
   },
   data() {
     return {
@@ -20,6 +22,7 @@ export default {
       errorMessage: '',
       currentPage: 1,
       itemsPerPage: 9,
+      selectedFeedback: null
     };
   },
   created() {
@@ -58,5 +61,10 @@ export default {
     removeFeedbackFromList(feedbackID) {
       this.items = this.items.filter(item => item.feedbackID !== feedbackID);
     },
+    showFeedbackModal(feedback) {
+      this.selectedFeedback = feedback;
+      const feedbackModal = new Modal(document.getElementById('feedbackModal'));
+      feedbackModal.show();
+    }
   }
 };

@@ -28,12 +28,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in paginatedItems" :key="item.feedbackID">
+                  <tr v-for="item in paginatedItems" :key="item.feedbackID" @click="showFeedbackModal(item)">
                     <td>{{ item.feedbackID }}</td>
                     <td>{{ item.email }}</td>
                     <td>{{ item.contactNum }}</td>
                     <td>{{ item.feedbackCategory }}</td>
-                    <td>
+                    <td @click.stop>
                       <div class="d-flex justify-content-center" style="gap: 20px;">
                         <RemoveButton :feedbackID="item.feedbackID" @item-removed="removeFeedbackFromList" @error="showErrorModal" />
                       </div>
@@ -55,6 +55,7 @@
     </div>
 
     <!-- Modal -->
+    <FeedbackModal :feedback="selectedFeedback" />
     <ErrorModal :errorMessage="errorMessage" />
   </main>
 </template>
