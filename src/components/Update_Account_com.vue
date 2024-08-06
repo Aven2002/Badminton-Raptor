@@ -64,6 +64,13 @@
           </div>
         </div>
       </div>
+      <div id="updateToast" class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast toast-success" role="alert" aria-live="assertive" aria-atomic="true" v-if="toastMessage">
+          <div class="toast-body">
+            {{ toastMessage }}
+          </div>
+        </div>
+      </div>
       <ErrorModal :errorMessage="errorMessage" />
     </div>
   </main>
@@ -84,4 +91,12 @@ background-color: darkgray;
 color: black;
 }
 
+.toast-success {
+  background-color: #28a745; /* Green background */
+  color: #fff; /* White text */
+}
+
+.toast-success .toast-body {
+  color: #fff; /* Ensure the text inside the toast is white */
+}
 </style>

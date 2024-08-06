@@ -60,9 +60,6 @@
             <strong class="me-auto">Notification</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <div class="toast-body">
-            {{ toastMessage }}
-          </div>
         </div>
       </div>
     </div>
@@ -70,7 +67,7 @@
   
   <script>
   import axios from 'axios';
-  import { Modal, Toast } from 'bootstrap';
+  import { Modal } from 'bootstrap';
   
   export default {
     name: 'UpdateButton',
@@ -137,27 +134,16 @@
           await axios.put(`http://localhost:3000/api/account/${this.userID}`, this.user);
           const modal = Modal.getInstance(document.getElementById(`updateModal-${this.userID}`));
           modal.hide();
-          this.showToast('User information updated successfully.');
           this.$emit('user-updated', this.user);
         } catch (error) {
           console.error('Error updating user data:', error);
-          this.showToast('Failed to update user information.');
         }
-      },
-      toggleEditMode() {
-        this.editMode = !this.editMode;
       },
       selectProfileImage(img) {
         this.user.profileImg = img;
         this.editingProfileImage = false;
         this.editMode = true;
       },
-      showToast(message) {
-        this.toastMessage = message;
-        const toastElement = document.getElementById(`updateToast-${this.userID}`);
-        const toast = new Toast(toastElement);
-        toast.show();
-      }
     }
   };
   </script>
@@ -179,5 +165,53 @@
     background-color: #7cde9a;
     border: solid #1e5c1f 1px;
   }
+
+  /* Dark theme for the Bootstrap modal */
+.modal-content {
+  background-color: #343a40; /* Dark background for the modal */
+  color: #ffffff; /* White text color */
+}
+
+.modal-header {
+  border-bottom: 1px solid #6c757d; /* Slightly lighter border */
+}
+
+.modal-title {
+  color: #ffffff; /* White title text */
+}
+
+.modal-body {
+  color: #e9ecef; /* Light gray text color */
+}
+
+.btn-close {
+  filter: invert(100%); /* Invert colors for the close button to fit the dark theme */
+}
+
+.modal-footer {
+  border-top: 1px solid #6c757d; /* Slightly lighter border */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Primary button background color */
+  border: none; /* Remove border */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+.form-control,
+.form-select {
+  background-color: #495057; /* Dark background for input fields */
+  color: #ffffff; /* White text color */
+  border: 1px solid #6c757d; /* Light border */
+}
+
+.form-control::placeholder,
+.form-select option {
+  color: #adb5bd; /* Light gray placeholder text */
+}
+
   </style>
   
