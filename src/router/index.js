@@ -76,7 +76,7 @@ const routes = [
   { path: '/', component: Landing_view },
   { path: '/sign_up_view', component: Sign_Up_view },
   { path: '/log_in_view', component: Log_In_view },
-  { path: '/settings_view', component: Settings_view }
+  { path: '/settings_view', name: 'Settings_view', component: Settings_view }
 ];
 
 const router = createRouter({
