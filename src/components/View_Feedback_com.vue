@@ -1,15 +1,13 @@
 <template>
   <main class="content container">
     <!-- Breadcrumb -->
-    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center custom-breadcrumb mb-3">
+    <div class="d-flex flex-column flex-sm-row justify-content-start custom-breadcrumb mt-3">
       <Breadcrumb_Com
         :homeLink="'/Home_view'"
         :breadcrumbItems="[]"
         :currentItem="'Manage Feedback'"
       />
     </div>
-    
-
     <div class="row">
       <div class="col-md-12">
         <div v-if="loading" class="text-center">Loading...</div>

@@ -3,7 +3,12 @@
       <button @click="confirmRemove" class="btn btn-danger mt-2" >
         Remove
       </button>
-      <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="accountConfirmationModal" />
+      <ConfirmationModal
+      :confirmationMessage="confirmationMessage"
+      :modalId="modalId"
+      @confirm="handleConfirm"
+      @abort="handleAbort"
+    />
     </div>
   </template>
   
@@ -26,7 +31,8 @@
     data() {
       return {
         confirmationMessage: `Confirm to delete account - User ID: ${this.userID} ?`,
-        itemToRemove: null
+        itemToRemove: null,
+        modalId: `confirmationModal-${this.userID}` 
       };
     },
     methods: {
@@ -49,9 +55,12 @@
           this.$emit('error', 'An error occurred while removing the account. Please try again later.');
         }
       },
+      async handleAbort() {
+          this.itemToRemove = null;
+      },
       showConfirmationModal(message) {
         this.confirmationMessage = message;
-        const confirmationModal = new Modal(document.getElementById('accountonfirmationModal'));
+        const confirmationModal = new Modal(document.getElementById(this.modalId));
         confirmationModal.show();
       }
     }

@@ -53,16 +53,9 @@ const routes = [
     path: '/manage_feedback_view',
     component: Manage_Feedback_view,
     children: [
-      {
-        path: 'view_feedback_com',
-        component: View_Feedback_com
-      },
-      {
-        path: '',
-        redirect: 'view_feedback_com'
-      }
+      { path: 'view_feedback_com', name: 'View_Feedback', component: View_Feedback_com }
     ]
-  }, 
+  },
   {
     path: '/manage_recommendation_view',component: Manage_Recommendation_view,
     children: [

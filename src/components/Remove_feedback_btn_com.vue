@@ -3,7 +3,12 @@
       <button @click="confirmRemove" class="btn btn-danger mt-2" >
         Remove
       </button>
-      <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="feedbackConfirmationModal" />
+      <ConfirmationModal
+      :confirmationMessage="confirmationMessage"
+      :modalId="modalId"
+      @confirm="handleConfirm"
+      @abort="handleAbort"
+    />
     </div>
   </template>
   
@@ -26,7 +31,8 @@
     data() {
       return {
         confirmationMessage: `Confirm to delete Feedback ID: ${this.feedbackID} ?`,
-        itemToRemove: null
+        itemToRemove: null,
+        modalId: `confirmationModal-${this.feedbackID}`
       };
     },
     methods: {
@@ -49,9 +55,12 @@
           this.$emit('error', 'An error occurred while removing the feedback. Please try again later.');
         }
       },
+      async handleAbort() {
+          this.itemToRemove = null;
+      },
       showConfirmationModal(message) {
         this.confirmationMessage = message;
-        const confirmationModal = new Modal(document.getElementById('feedbackConfirmationModal'));
+        const confirmationModal = new Modal(document.getElementById(this.modalId));
         confirmationModal.show();
       }
     }
