@@ -71,6 +71,7 @@
             </div>
             <!-- Right Column: Conditional Details -->
             <div class="col-md-6">
+              <!-- Racquet Details -->
               <div v-if="equipment.equipCategory === 'Racquet'">
                 <div class="mb-2">
                   <label for="flex" class="form-label">Flex</label>
@@ -98,12 +99,7 @@
                 </div>
                 <div class="mb-2">
                   <label for="stringAdvice" class="form-label">String Advice</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="stringAdvice"
-                    v-model="details.stringAdvice"
-                  />
+                  <input type="text" class="form-control" id="stringAdvice" v-model="details.stringAdvice" />
                 </div>
                 <div class="mb-2">
                   <label for="color" class="form-label">Color</label>
@@ -114,10 +110,84 @@
                   <input type="text" class="form-control" id="madeIn" v-model="details.madeIn" />
                 </div>
               </div>
-              <!-- Add more conditional sections for other categories -->
+
+              <!-- Shuttlecock Details -->
+              <div v-if="equipment.equipCategory === 'Shuttlecock'">
+                <div class="mb-2">
+                  <label for="quantityPerTube" class="form-label">Quantity Per Tube</label>
+                  <input type="number" class="form-control" id="quantityPerTube" v-model="details.quantityPerTube" />
+                </div>
+                <div class="mb-2">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" v-model="details.description"></textarea>
+                </div>
+              </div>
+
+              <!-- Bags Details -->
+              <div v-if="equipment.equipCategory === 'Bags'">
+                <div class="mb-2">
+                  <label for="color" class="form-label">Color</label>
+                  <input type="text" class="form-control" id="color" v-model="details.color" />
+                </div>
+                <div class="mb-2">
+                  <label for="size" class="form-label">Size</label>
+                  <input type="text" class="form-control" id="size" v-model="details.size" />
+                </div>
+                <div class="mb-2">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" v-model="details.description"></textarea>
+                </div>
+              </div>
+
+              <!-- Footwear Details -->
+              <div v-if="equipment.equipCategory === 'Footwear'">
+                <div class="mb-2">
+                  <label for="color" class="form-label">Color</label>
+                  <input type="text" class="form-control" id="color" v-model="details.color" />
+                </div>
+                <div class="mb-2">
+                  <label for="upper" class="form-label">Upper</label>
+                  <input type="text" class="form-control" id="upper" v-model="details.upper" />
+                </div>
+                <div class="mb-2">
+                  <label for="midsole" class="form-label">Midsole</label>
+                  <input type="text" class="form-control" id="midsole" v-model="details.midsole" />
+                </div>
+                <div class="mb-2">
+                  <label for="outsole" class="form-label">Outsole</label>
+                  <input type="text" class="form-control" id="outsole" v-model="details.outsole" />
+                </div>
+                <div class="mb-2">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" v-model="details.description"></textarea>
+                </div>
+              </div>
+
+              <!-- Apparel Details -->
+              <div v-if="equipment.equipCategory === 'Apparel'">
+                <div class="mb-2">
+                  <label for="color" class="form-label">Color</label>
+                  <input type="text" class="form-control" id="color" v-model="details.color" />
+                </div>
+                <div class="mb-2">
+                  <label for="material" class="form-label">Material</label>
+                  <input type="text" class="form-control" id="material" v-model="details.material" />
+                </div>
+              </div>
+
+              <!-- Accessories Details -->
+              <div v-if="equipment.equipCategory === 'Accessories'">
+                <div class="mb-2">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" v-model="details.description"></textarea>
+                </div>
+              </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary mt-3">Create Equipment</button>
+          <!-- Submit Button -->
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
         </form>
       </div>
     </div>
@@ -149,11 +219,26 @@
   margin-bottom: 0.75rem; /* Reduced margin for form groups */
 }
 
-/* Ensure form elements fit within the card */
-.form-control {
-  font-size: 0.875rem; /* Slightly smaller font size */
-  padding: 0.5rem 0.75rem; /* Reduced padding */
-}
+.form-label {
+    color: #bbbbbb;
+  }
+  
+  .form-control, .form-control-range, .form-select {
+    background-color: #2c2c2c;
+    border: 1px solid #444444;
+    color: #ffffff;
+  }
+  
+  .form-control::placeholder, .form-control-range::placeholder, .form-select::placeholder {
+    color: #ffffff;
+  }
+  
+  .form-control:focus {
+    background-color: #2c2c2c;
+    border-color: #555555;
+    box-shadow: none;
+    color:white;
+  }
 
 .btn {
   font-size: 0.875rem; /* Smaller font size for the button */
