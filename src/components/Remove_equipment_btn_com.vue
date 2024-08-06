@@ -4,7 +4,12 @@
         <i class="fa-solid fa-trash-can"></i>
         Remove
       </button>
-      <ConfirmationModal :confirmationMessage="confirmationMessage" @confirm="handleConfirm" modalId="equipmentRemoveConfirmationModal" />
+      <ConfirmationModal
+      :confirmationMessage="confirmationMessage"
+      :modalId="modalId"
+      @confirm="handleConfirm"
+      @abort="handleAbort"
+    />
     </div>
   </template>
   
@@ -27,7 +32,8 @@
     data() {
       return {
         confirmationMessage: `Remove equipment ID ${this.equipID} from database?`,
-        itemToRemove: null
+        itemToRemove: null,
+        modalId: `confirmationModal-${this.equipID}` 
       };
     },
     methods: {
@@ -50,9 +56,12 @@
           this.$emit('error', 'An error occurred while removing the equipment. Please try again later.');
         }
       },
+      async handleAbort() {
+          this.itemToRemove = null;
+      },
       showConfirmationModal(message) {
         this.confirmationMessage = message;
-        const confirmationModal = new Modal(document.getElementById('equipmentRemoveConfirmationModal'));
+        const confirmationModal = new Modal(document.getElementById(this.modalId));
         confirmationModal.show();
       }
     }

@@ -43,7 +43,6 @@ export default {
     },
     async handleConfirm() {
       if (this.itemToRemove) {
-        console.log(`Removing item with ID: ${this.itemToRemove}`); // Debug log
         await this.removeFromFavorites(this.itemToRemove);
         this.itemToRemove = null;
       }
