@@ -79,4 +79,19 @@ export default {
   box-shadow: none; /* Remove default box-shadow */
   color: #fff; /* White text on focus */
 }
+
+@media (max-width: 300px) { /* For small screens */
+  .input-group {
+    border-radius: 25px; /* Medium radius for small screens */
+  }
+
+  .input-group-text {
+    padding: 9px 12px; /* Adjust padding for small screens */
+  }
+
+  .search-input {
+    font-size: 14px; /* Smaller font size for small screens */
+    padding: 9px 18px; /* Adjust padding for small screens */
+  }
+}
 </style>

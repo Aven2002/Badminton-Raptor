@@ -1,19 +1,9 @@
 <template>
   <main class="content container">
-    <!-- Breadcrumb -->
-    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center custom-breadcrumb mb-3">
-      <Breadcrumb_Com
-        :homeLink="'/home_view_admin'"
-        :breadcrumbItems="[]"
-        :currentItem="'Manage Equipment'"
-      />
-    </div>
     
-    <!-- Nav & Search Bar -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3">
-      <div class="flex-grow-1 mb-3 mb-md-0">
+    <!-- Breadcrumb & Search Bar -->
+    <div class="d-flex flex-column flex-md-row justify-content-end mb-2">
         <SearchBar_Com @search="handleSearch" />
-      </div>
     </div>
 
     <div class="row">
@@ -38,15 +28,15 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in paginatedItems" :key="item.equipID">
-                    <td>
+                    <td class="align-middle">
                       <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" @error="handleImageError" />
                     </td>
-                    <td>{{ item.equipName }}</td>
-                    <td>RM{{ item.equipPrice }}</td>
-                    <td>{{ item.equipCategory }}</td>
-                    <td>{{ item.equipBrand }}</td>
-                    <td>
-                      <div class="d-flex justify-content-center" style="gap: 20px;">
+                    <td class="align-middle">{{ item.equipName }}</td>
+                    <td class="align-middle">RM{{ item.equipPrice }}</td>
+                    <td class="align-middle">{{ item.equipCategory }}</td>
+                    <td class="align-middle">{{ item.equipBrand }}</td>
+                    <td class="align-middle">
+                      <div class="d-flex justify-content-center">
                         <RemoveButton :equipID="item.equipID" @item-removed="handleItemRemoved(item.equipID)" @error="showErrorModal" />
                       </div>
                     </td>
@@ -56,19 +46,11 @@
             </div>
 
             <!-- Pagination Controls -->
-            <nav aria-label="Page navigation" class="mt-3">
-              <ul class="pagination justify-content-center">
-                <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                  <a class="page-link" href="#" @click.prevent="currentPage = currentPage - 1">Previous</a>
-                </li>
-                <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
-                  <a class="page-link" href="#" @click.prevent="currentPage = page">{{ page }}</a>
-                </li>
-                <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                  <a class="page-link" href="#" @click.prevent="currentPage = currentPage + 1">Next</a>
-                </li>
-              </ul>
-            </nav>
+            <Pagination
+              :totalPages="totalPages"
+              :currentPage="currentPage"
+              @page-changed="handlePageChange"
+            />
           </div>
         </div>
       </div>

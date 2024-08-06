@@ -19,6 +19,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 90px; 
+    border-radius:10px;
   }
   
   .btn-update:hover {

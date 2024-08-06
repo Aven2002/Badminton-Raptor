@@ -4,17 +4,18 @@ import axios from 'axios';
   import ErrorModal from '@/components/Error_modal_com.vue';
   import SearchBar_Com from '@/components/Search_Bar_com.vue';
   import UpdateButton from '@/components/Update_equipment_btn_com.vue';
-  import EditEquipmentDetailsView from '@/views/Admin_views/Edit_equipment_details_view.vue';
-  
+  import EditEquipmentDetailsView from '@/components/Edit_equipment_details_view.vue';
+  import Pagination from '@/components/Pagination_com.vue';
+
   export default {
     name: 'Update_Equipment',
     components: {
       Breadcrumb_Com,
       ErrorModal,
       SearchBar_Com,
-      Navbar,
       UpdateButton,
-      EditEquipmentDetailsView
+      EditEquipmentDetailsView,
+      Pagination
     },
     data() {
       return {
@@ -23,7 +24,7 @@ import axios from 'axios';
         errorMessage: '',
         searchQuery: '',
         currentPage: 1,
-        itemsPerPage: 6,
+        itemsPerPage: 5,
         currentView: 'list',
         selectedEquipID: null,
       };
@@ -73,12 +74,15 @@ import axios from 'axios';
         this.selectedEquipID = equipID;
         this.currentView = 'edit';
       },
+      handlePageChange(page) {
+        this.currentPage = page;
+      },
       getImagePath(equipImgPath) {
         try {
           return `http://localhost:3000/assets/${equipImgPath}`;
         } catch (error) {
           console.error('Error loading image:', error);
-          return require('@/assets/defaultImg.png'); // Fallback image
+          return require('@/assets/Icon/Default_Img_Icon.png'); // Fallback image
         }
       }
     }

@@ -1,40 +1,49 @@
 <template>
-  <div>
-    <nav>
-      <ul>
-        <li><router-link to="/manage_equipment_view/create_equipment_com">Create </router-link></li>
-        <li><router-link to="/manage_equipment_view/view_equipment_com">View </router-link></li>
-        <li><router-link to="/manage_equipment_view/update_equipment_com">Update </router-link></li>
-      </ul>
-    </nav>
-    <router-view />
+  <div class="container">
+    <Navbar_CRUD_com class="navbar-crud" :navItems="navItems" :basePath="'/manage_equipment_view'" />
+    <div class="content">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
+import Navbar_CRUD_com from '@/components/Navbar_CRUD_com.vue';
 
 export default {
   name: 'Manage_Equipment_view',
   components: {
+    Navbar_CRUD_com
   },
   data() {
     return {
-      currentView: 'View',
       navItems: [
+        { view: 'Home', label: 'Home', icon: 'fa-solid fa-home', routeName: 'home_view_admin' },
         { view: 'View', label: 'View', icon: 'fa-solid fa-eye', routeName: 'view_equipment_com' },
         { view: 'Add', label: 'Create', icon: 'fa-solid fa-circle-plus', routeName: 'create_equipment_com' },
         { view: 'Update', label: 'Update', icon: 'fa-solid fa-pen', routeName: 'update_equipment_com' }
       ]
     };
-  },
-  methods: {
-    changeView(view) {
-      this.currentView = view;
-    }
   }
 };
 </script>
 
-<style>
-/* Add your styles here */
+<style scoped>
+.navbar-crud {
+  position: absolute;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+  .navbar-crud {
+    position: relative;
+    border:none;
+  }
+}
+
+.content {
+  margin-top: 30px; 
+}
+
+
 </style>

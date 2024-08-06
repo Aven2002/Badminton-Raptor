@@ -4,14 +4,16 @@ import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import SearchBar_Com from '@/components/Search_Bar_com.vue';
 import RemoveButton from '@/components/Remove_equipment_btn_com.vue';
+import Pagination from '@/components/Pagination_com.vue';
 
 export default {
-  name: 'Manage_Equipment',
+  name: 'View_Equipment',
   components: {
     Breadcrumb_Com,
     ErrorModal,
     SearchBar_Com,
-    RemoveButton
+    RemoveButton,
+    Pagination
   },
   data() {
     return {
@@ -20,7 +22,7 @@ export default {
       errorMessage: '',
       searchQuery: '',
       currentPage: 1,
-      itemsPerPage: 6,
+      itemsPerPage: 5,
     };
   },
   created() {
@@ -77,5 +79,8 @@ export default {
         return require('@/assets/Icon/Default_Img_Icon.png'); // Fallback image
       }
     },
+    handlePageChange(page) {
+      this.currentPage = page;
+    }
   }
 };
