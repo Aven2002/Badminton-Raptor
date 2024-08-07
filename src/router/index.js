@@ -59,7 +59,7 @@ const routes = [
     path: '/manage_recommendation_view',
     component: Manage_Recommendation_view,
     children: [
-      { path: 'view_recommendation_com', component: View_Recommendation_com }
+      { path: 'view_recommendation_com', name: 'View_Recommendation', component: View_Recommendation_com }
     ]
   },
 
