@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Cookies from 'js-cookie';
 
 import Home_view_Admin from '@/views/Admin/Home_view_Admin.vue';
 import Manage_Account_view from '@/views/Admin/Manage_Account_view.vue';
@@ -21,6 +22,7 @@ import Favorite_List_view from '@/views/User/Favorite_List_view.vue';
 import Equipment_Recommendation_view from '@/views/User/Equipment_Recommendation_view.vue';
 import Contact_Us_view from '@/views/User/Contact_Us_view.vue';
 
+import Forbidden_view from '@/views/Forbidden_view.vue';
 import Landing_view from '@/views/Landing_view.vue';
 import Settings_view from '@/views/Settings_view.vue';
 import Log_In_view from '@/views/Log_In_view.vue';
@@ -28,51 +30,56 @@ import Sign_Up_view from '@/views/Sign_Up_view.vue';
 
 const routes = [
   // Admin Routes
-  { path: '/home_view_admin', component: Home_view_Admin },
+  { path: '/home_view_admin', component: Home_view_Admin, meta: { requiresAuth: true, requiresRole: 'Admin' } },
   {
     path: '/manage_equipment_view',
     component: Manage_Equipment_view,
-    redirect: '/manage_equipment_view/view_equipment_com', // Default child route
+    redirect: '/manage_equipment_view/view_equipment_com',
+    meta: { requiresAuth: true, requiresRole: 'Admin' },
     children: [
-      { path: 'create_equipment_com', component: Create_Equipment_com },
-      { path: 'update_equipment_com', component: Update_Equipment_com },
-      { path: 'view_equipment_com', component: View_Equipment_com }
+      { path: 'create_equipment_com', component: Create_Equipment_com, meta: { requiresAuth: true, requiresRole: 'Admin' } },
+      { path: 'update_equipment_com', component: Update_Equipment_com, meta: { requiresAuth: true, requiresRole: 'Admin' } },
+      { path: 'view_equipment_com', component: View_Equipment_com, meta: { requiresAuth: true, requiresRole: 'Admin' } }
     ]
   },
   {
     path: '/manage_account_view',
     component: Manage_Account_view,
-    redirect: '/manage_account_view/view_account_com', // Default child route
+    redirect: '/manage_account_view/view_account_com',
+    meta: { requiresAuth: true, requiresRole: 'Admin' },
     children: [
-      { path: 'update_account_com', component: Update_Account_com },
-      { path: 'view_account_com', component: View_Account_com }
+      { path: 'update_account_com', component: Update_Account_com, meta: { requiresAuth: true, requiresRole: 'Admin' } },
+      { path: 'view_account_com', component: View_Account_com, meta: { requiresAuth: true, requiresRole: 'Admin' } }
     ]
   },
   {
     path: '/manage_feedback_view',
     component: Manage_Feedback_view,
+    meta: { requiresAuth: true, requiresRole: 'Admin' },
     children: [
-      { path: 'view_feedback_com', name: 'View_Feedback', component: View_Feedback_com }
+      { path: 'view_feedback_com', name: 'View_Feedback', component: View_Feedback_com, meta: { requiresAuth: true, requiresRole: 'Admin' } }
     ]
   },
   {
     path: '/manage_recommendation_view',
     component: Manage_Recommendation_view,
+    meta: { requiresAuth: true, requiresRole: 'Admin' },
     children: [
-      { path: 'view_recommendation_com', name: 'View_Recommendation', component: View_Recommendation_com }
+      { path: 'view_recommendation_com', name: 'View_Recommendation', component: View_Recommendation_com, meta: { requiresAuth: true, requiresRole: 'Admin' } }
     ]
   },
 
   // User Routes
-  { path: '/home_view_user', component: Home_view_User },
-  { path: '/browse_equipment_view', component: Browse_Equipment_view },
-  { path: '/equipment/:id', name: 'Equipment_Details_view', component: Equipment_Details_view, props: true },
-  { path: '/compare_equipment_view', component: Compare_Equipment_view },
-  { path: '/equipment_recommendation_view', component: Equipment_Recommendation_view },
-  { path: '/favorite_list_view', component: Favorite_List_view },
-  { path: '/contact_us_view', component: Contact_Us_view },
+  { path: '/home_view_user', component: Home_view_User, meta: { requiresAuth: true, requiresRole: 'User' } },
+  { path: '/browse_equipment_view', component: Browse_Equipment_view, meta: { requiresAuth: true, requiresRole: 'User' } },
+  { path: '/equipment/:id', name: 'Equipment_Details_view', component: Equipment_Details_view, props: true, meta: { requiresAuth: true, requiresRole: 'User' } },
+  { path: '/compare_equipment_view', component: Compare_Equipment_view, meta: { requiresAuth: true, requiresRole: 'User' } },
+  { path: '/equipment_recommendation_view', component: Equipment_Recommendation_view, meta: { requiresAuth: true, requiresRole: 'User' } },
+  { path: '/favorite_list_view', component: Favorite_List_view, meta: { requiresAuth: true, requiresRole: 'User' } },
+  { path: '/contact_us_view', component: Contact_Us_view, meta: { requiresAuth: true, requiresRole: 'User' } },
 
-  // General Routes
+  // General Routes (Accessible without login)
+  { path: '/forbidden', component: Forbidden_view },
   { path: '/', component: Landing_view },
   { path: '/sign_up_view', component: Sign_Up_view },
   { path: '/log_in_view', component: Log_In_view },
@@ -82,6 +89,28 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+});
+
+// Navigation Guard to protect routes
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = Cookies.get('userID');  // Check if the userID cookie exists
+  const userRole = Cookies.get('userRole');  // Check the user role
+
+  console.log('Authenticated:', isAuthenticated);
+  console.log('User Role:', userRole);
+  console.log('Required Role:', to.meta.requiresRole);
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isAuthenticated) {
+      next({ path: '/log_in_view' });
+    } else if (to.matched.some(record => record.meta.requiresRole) && userRole !== to.meta.requiresRole) {
+      next({ path: '/forbidden' });
+    } else {
+      next();  // Allow access to the route
+    }
+  } else {
+    next();  // Allow access to routes that don't require authentication
+  }
 });
 
 export default router;

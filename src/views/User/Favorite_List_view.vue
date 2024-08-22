@@ -11,7 +11,7 @@
           />
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-          <SearchBar_Com @search="handleSearch" />
+          <SearchBar_Com searchType="equipname" @search="handleSearch" />
         </div>
       </div>
     </div>

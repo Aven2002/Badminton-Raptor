@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { Modal } from 'bootstrap';
 import Cookies from 'js-cookie';
@@ -91,7 +90,10 @@ export default {
         }
 
         const response = await axios.get(`http://localhost:3000/api/account/${userID}/role`);
-        this.isAdmin = response.data.userRole === 'Admin'; // Ensure this matches the role in your API
+        const userRole = response.data.userRole;
+
+        this.isAdmin = userRole === 'Admin'; // Ensure this matches the role in your API
+        Cookies.set('userRole', userRole); // Save the userRole to cookies
       } catch (error) {
         console.error('Error fetching user role:', error);
         this.isAdmin = false; // Default to non-admin in case of error
