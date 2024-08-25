@@ -49,23 +49,26 @@ export default {
     },
     async login() {
       try {
-        const response = await axios.get('http://localhost:3000/api/account');
-        const users = response.data;
-        const user = users.find(
-          (u) => (u.username === this.identifier || u.email === this.identifier) && u.password === this.password
-        );
-
-        if (user) {
-          Cookies.set('userID', user.userID);
+        const response = await axios.post('http://localhost:3000/api/account/verifyPassword', {
+          identifier: this.identifier, // Can be either username or email
+          password: this.password,
+        });
+    
+        if (response.data.success) {
+          Cookies.set('userID', response.data.userID);
           await this.checkUserRole(); // Ensure role is checked before redirecting
           this.$router.push(this.homeLink); // Redirect based on user role
         } else {
-          this.showError('Incorrect username or password.');
+          this.showError('Incorrect Password or Username'); // Show specific error message
         }
       } catch (error) {
-        this.showError('An error occurred while logging in. Please try again later.');
+        if (error.response && error.response.status === 401) {
+          this.showError('Incorrect Password or Username'); // Handle 401 errors specifically
+        } else {
+          this.showError('An error occurred while logging in. Please try again later.');
+        }
       }
-    },
+    },   
     showError(message) {
       this.errorMessage = message;
       const errorModal = new Modal(document.getElementById('errorModal'));

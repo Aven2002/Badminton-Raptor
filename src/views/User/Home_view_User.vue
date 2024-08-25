@@ -30,7 +30,8 @@ export default {
         { id: 3, title: 'Personalized Recommendation', link: '/equipment_recommendation_view', icon: 'fa-solid fa-person' },
         { id: 4, title: 'Settings', link: '/settings_view', icon: 'fa-solid fa-gears' },
         { id: 5, title: 'Favorite List', link: '/favorite_list_view', icon: 'fa-solid fa-star' },
-        { id: 6, title: 'Contact Us', link: '/contact_us_view', icon: 'fa-solid fa-comment-dots' }
+        { id: 6, title: 'Contact Us', link: '/contact_us_view', icon: 'fa-solid fa-comment-dots' },
+        { id: 6, title: 'ChatBox', link: '/contact_us_view', icon: 'fa-solid fa-robot' }
       ]
     };
   }

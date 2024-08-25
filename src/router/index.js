@@ -27,6 +27,7 @@ import Landing_view from '@/views/Landing_view.vue';
 import Settings_view from '@/views/Settings_view.vue';
 import Log_In_view from '@/views/Log_In_view.vue';
 import Sign_Up_view from '@/views/Sign_Up_view.vue';
+import Reset_Password_view from '@/views/Reset_Password_view.vue';
 
 const routes = [
   // Admin Routes
@@ -83,7 +84,8 @@ const routes = [
   { path: '/', component: Landing_view },
   { path: '/sign_up_view', component: Sign_Up_view },
   { path: '/log_in_view', component: Log_In_view },
-  { path: '/settings_view', name: 'Settings_view', component: Settings_view }
+  { path: '/settings_view', name: 'Settings_view', component: Settings_view },
+  { path: '/reset_password_view', name: 'Reset_Password_view', component: Reset_Password_view }
 ];
 
 const router = createRouter({

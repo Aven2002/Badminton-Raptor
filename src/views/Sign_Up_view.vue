@@ -14,6 +14,9 @@
           <li :class="['page-item', { active: step === 3 }]">
             <a class="page-link" href="#" @click.prevent="goToStep(3)" :class="{ disabled: !isStep2Valid }">Verify</a>
           </li>
+          <li :class="['page-item', { active: step === 4 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(4)" :class="{ disabled: !isStep3Valid }">Security Questions</a>
+          </li>
         </ul>
       </nav>
       <!-- Back Button -->
@@ -154,25 +157,58 @@
                 </div>
                 <div class="row">
                   <div class="col-6 text-center">
-                    <button type="button" class="btn btn-secondary" @click="prevStep">Back</button>
+                    <button type="button" class="btn btn-secondary" @click="goToStep(2)">Back</button>
                   </div>
                   <div class="col-6 text-center">
-                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <button type="button" class="btn btn-primary" @click="nextStep">Next</button>
                   </div>
                 </div>
               </div>
+
+              <!-- Section 4: Security Questions -->
+<div v-else-if="step === 4">
+  <h4>Security Questions</h4>
+  <div class="row">
+    <div class="col-md-4" v-for="(question, index) in form.securityQuestions" :key="index">
+      <div class="mb-3">
+        <label :for="'securityQuestion' + (index + 1)" class="form-label">Security Question {{ index + 1 }}</label>
+        <select :id="'securityQuestion' + (index + 1)" class="form-control" v-model="form.securityQuestions[index].question" required>
+          <option value="">Select a question</option>
+          <option v-for="option in getAvailableQuestions(index)" :key="option.id" :value="option.question">
+            {{ option.question }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label :for="'answer' + (index + 1)" class="form-label">Answer {{ index + 1 }}</label>
+        <input type="text" :id="'answer' + (index + 1)" class="form-control" v-model="form.securityQuestions[index].answer" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 text-center">
+      <button type="button" class="btn btn-secondary" @click="goToStep(3)">Back</button>
+    </div>
+    <div class="col-6 text-center">
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+</div>
+
+
             </form>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- Modal -->
-    <ErrorModal :errorMessage="errorMessage" />
+     <!-- Modal -->
+     <ErrorModal :errorMessage="errorMessage" />
     <SuccessModal :successMessage="successMessage" />
   </div>
 </template>
 
+
+   
 <script src='@/javascript/Sign_Up.js'></script>
 
 <style src='@/style/Sign_Up.css' scoped></style>

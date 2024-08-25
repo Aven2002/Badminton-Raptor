@@ -5,7 +5,7 @@ import BackBtn from '@/components/Back_btn_com.vue';
 import { Toast, Modal } from 'bootstrap';
 
 export default {
-  name:'Sign_Up_view',
+  name: 'Sign_Up_view',
   components: {
     SuccessModal,
     ErrorModal,
@@ -25,7 +25,12 @@ export default {
         age: '',
         race: '',
         contactNum: '',
-        dob: ''
+        dob: '',
+        securityQuestions: [
+          { question: '', answer: '', options: [] },
+          { question: '', answer: '', options: [] },
+          { question: '', answer: '', options: [] }
+        ]
       },
       profileImgs: [
         require('@/assets/Profile_Img/Profile_Img_01.png'),
@@ -42,6 +47,9 @@ export default {
       return this.form.fname && this.form.lname && this.form.username &&
              this.form.email && this.form.password && this.form.gender &&
              this.form.age && this.form.race && this.form.contactNum && this.form.dob;
+    },
+    isStep3Valid() {
+      return this.form.securityQuestions.every(q => q.question && q.answer);
     }
   },
   methods: {
@@ -51,7 +59,7 @@ export default {
       }
     },
     nextStep() {
-      if (this.step < 3) {
+      if (this.step < 4) {
         this.step++;
       }
     },
@@ -69,14 +77,14 @@ export default {
   
         if (response.data && response.data.id) {
           this.showToast('Account created successfully!', 'success');
-          this.showSuccessModal('Your account created successfully! Kindly use your credential to login');
+          this.showSuccessModal('Your account has been created successfully! Please log in with your credentials.');
         } else {
           this.showErrorModal('An error occurred while submitting. Please try again later.');
         }
       } catch (error) {
         console.log('Error response:', error.response); // Log error response for debugging
         
-        if (error.response && error.response.status == 400) {
+        if (error.response && error.response.status === 400) {
           this.showErrorModal('Username has been taken. Please choose a new username.', false);
           this.step--; // Revert to the previous step if the username is taken
         } else {
@@ -84,7 +92,27 @@ export default {
           this.showErrorModal('An error occurred while submitting. Please try again later.');
         }
       }
-    },    
+    },
+    async fetchSecurityQuestions() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/security/security-questions');
+        console.log('Fetched questions:', response.data); // Check the structure here
+        this.securityQuestions = response.data; // Set the questions array
+      } catch (error) {
+        console.error('Error fetching security questions:', error);
+      }
+    },
+    
+    getAvailableQuestions(index) {
+      // Extract selected questions from the form
+      const selectedQuestions = this.form.securityQuestions.map(q => q.question).filter(q => q);
+  
+      // Return available questions, ensuring each option has a 'question' property
+      return this.securityQuestions.filter(
+        option => option.question && !selectedQuestions.includes(option.question) && option.question !== (this.form.securityQuestions[index] && this.form.securityQuestions[index].question)
+      );
+    },
+    
     showToast(message, type) {
       const toastHTML = `
         <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -101,6 +129,9 @@ export default {
       document.body.appendChild(toastContainer);
       const toast = new Toast(toastContainer.querySelector('.toast'));
       toast.show();
+      setTimeout(() => {
+        document.body.removeChild(toastContainer); // Clean up the toast container
+      }, 5000); // Adjust the timeout to match the toast duration
     },
     showSuccessModal(message) {
       this.successMessage = message;
@@ -123,6 +154,9 @@ export default {
           this.$router.push('/');
         });
       }
-    },
+    }
+  },
+  created() {
+    this.fetchSecurityQuestions();
   }
 };
