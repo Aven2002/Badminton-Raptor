@@ -29,7 +29,7 @@ export default {
         securityQuestions: ['', '', ''],
         answers: ['', '', '']
       },
-      securityQuestions: [] ,
+      securityQuestions: [],
       profileImgs: [
         require('@/assets/Profile_Img/Profile_Img_01.png'),
         require('@/assets/Profile_Img/Profile_Img_02.png'),
@@ -47,7 +47,8 @@ export default {
              this.form.age && this.form.race && this.form.contactNum && this.form.dob;
     },
     isStep3Valid() {
-      return this.form.securityQuestions.every(q => q.question && q.answer);
+      // Check that all questions and answers are filled
+      return this.form.securityQuestions.every(q => q) && this.form.answers.every(a => a);
     }
   },
   methods: {
@@ -70,8 +71,19 @@ export default {
       this.form.profileImg = img;
     },
     async signUp() {
+      // Format security answers for API
+      const securityAnswers = this.form.securityQuestions.map((question, index) => ({
+        questionID: this.securityQuestions.find(q => q.question === question)?.id || null,
+        answer: this.form.answers[index]
+      }));
+      
+      const payload = {
+        ...this.form,
+        securityAnswers
+      };
+
       try {
-        const response = await axios.post('http://localhost:3000/api/account/createAccount', this.form);
+        const response = await axios.post('http://localhost:3000/api/account/createAccount', payload);
   
         if (response.data && response.data.id) {
           this.showToast('Account created successfully!', 'success');
@@ -95,22 +107,19 @@ export default {
       try {
         const response = await axios.get('http://localhost:3000/api/security/security-questions');
         console.log('Fetched questions:', response.data); // Check the structure here
-        this.securityQuestions = response.data.map(q => ({ question: q.question, answer: '', options: [] }));
+        this.securityQuestions = response.data.map(q => ({ id: q.id, question: q.question }));
       } catch (error) {
         console.error('Error fetching security questions:', error);
       }
-    },    
+    },
     
-    getAvailableQuestions(index) {
-      // Extract selected questions from the form
-      const selectedQuestions = this.form.securityQuestions.map(q => q.question).filter(q => q);
-    
-      // Return available questions, excluding selected ones
-      return this.securityQuestions.filter(
-        option => option.question && !selectedQuestions.includes(option.question) && option.question !== this.form.securityQuestions[index].question
-      );
-    },    
-    
+    getAvailableQuestions(currentIndex) {
+      // Extract selected questions from the form, excluding the current dropdown's question
+      const selectedQuestions = this.form.securityQuestions.filter((q, index) => index !== currentIndex && q);
+  
+      // Return available questions, excluding selected ones and allowing the current question to be selected again
+      return this.securityQuestions.filter(option => option.question && !selectedQuestions.includes(option.question));
+    },  
     showToast(message, type) {
       const toastHTML = `
         <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">

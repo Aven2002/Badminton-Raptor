@@ -165,40 +165,51 @@
                 </div>
               </div>
 
-              <!-- Section 4: Security Questions -->
+           <!-- Section 4: Security Questions -->
 <div v-else-if="step === 4">
   <h4>Security Questions</h4>
   <div class="row">
     <div class="col-md-12">
-      <div class="mb-3">
-        <label for="question1" class="form-label">Select Question 1</label>
-        <select class="form-control" id="question1" v-model="form.securityQuestions[0]" required>
-          <option v-for="(question, index) in securityQuestions" :key="index" :value="question">{{ question }}</option>
-        </select>
+      <!-- Question 1 -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="question1" class="form-label">Select Question 1</label>
+          <select class="form-control" id="question1" v-model="form.securityQuestions[0]" required>
+            <option v-for="q in getAvailableQuestions(0)" :key="q.question" :value="q.question">{{ q.question }}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="answer1" class="form-label">Answer 1</label>
+          <input type="text" class="form-control" id="answer1" v-model="form.answers[0]" required>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="answer1" class="form-label">Answer 1</label>
-        <input type="text" class="form-control" id="answer1" v-model="form.answers[0]" required>
+
+      <!-- Question 2 -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="question2" class="form-label">Select Question 2</label>
+          <select class="form-control" id="question2" v-model="form.securityQuestions[1]" required>
+            <option v-for="q in getAvailableQuestions(1)" :key="q.question" :value="q.question">{{ q.question }}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="answer2" class="form-label">Answer 2</label>
+          <input type="text" class="form-control" id="answer2" v-model="form.answers[1]" required>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="question2" class="form-label">Select Question 2</label>
-        <select class="form-control" id="question2" v-model="form.securityQuestions[1]" required>
-          <option v-for="(question, index) in securityQuestions" :key="index" :value="question">{{ question }}</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label for="answer2" class="form-label">Answer 2</label>
-        <input type="text" class="form-control" id="answer2" v-model="form.answers[1]" required>
-      </div>
-      <div class="mb-3">
-        <label for="question3" class="form-label">Select Question 3</label>
-        <select class="form-control" id="question3" v-model="form.securityQuestions[2]" required>
-          <option v-for="(question, index) in securityQuestions" :key="index" :value="question">{{ question }}</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label for="answer3" class="form-label">Answer 3</label>
-        <input type="text" class="form-control" id="answer3" v-model="form.answers[2]" required>
+
+      <!-- Question 3 -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="question3" class="form-label">Select Question 3</label>
+          <select class="form-control" id="question3" v-model="form.securityQuestions[2]" required>
+            <option v-for="q in getAvailableQuestions(2)" :key="q.question" :value="q.question">{{ q.question }}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="answer3" class="form-label">Answer 3</label>
+          <input type="text" class="form-control" id="answer3" v-model="form.answers[2]" required>
+        </div>
       </div>
     </div>
   </div>
@@ -207,11 +218,10 @@
       <button type="button" class="btn btn-secondary" @click="goToStep(3)">Back</button>
     </div>
     <div class="col-6 text-center">
-      <button type="button" class="btn btn-primary" @click="submitSecurityAnswers">Submit</button>
+      <button type="button" class="btn btn-primary" @click="signUp">Submit</button>
     </div>
   </div>
 </div>
-
 
 
 
