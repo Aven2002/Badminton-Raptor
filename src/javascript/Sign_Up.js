@@ -26,12 +26,10 @@ export default {
         race: '',
         contactNum: '',
         dob: '',
-        securityQuestions: [
-          { question: '', answer: '', options: [] },
-          { question: '', answer: '', options: [] },
-          { question: '', answer: '', options: [] }
-        ]
+        securityQuestions: ['', '', ''],
+        answers: ['', '', '']
       },
+      securityQuestions: [] ,
       profileImgs: [
         require('@/assets/Profile_Img/Profile_Img_01.png'),
         require('@/assets/Profile_Img/Profile_Img_02.png'),
@@ -73,7 +71,7 @@ export default {
     },
     async signUp() {
       try {
-        const response = await axios.post('http://localhost:3000/api/account', this.form);
+        const response = await axios.post('http://localhost:3000/api/account/createAccount', this.form);
   
         if (response.data && response.data.id) {
           this.showToast('Account created successfully!', 'success');
@@ -97,21 +95,21 @@ export default {
       try {
         const response = await axios.get('http://localhost:3000/api/security/security-questions');
         console.log('Fetched questions:', response.data); // Check the structure here
-        this.securityQuestions = response.data; // Set the questions array
+        this.securityQuestions = response.data.map(q => ({ question: q.question, answer: '', options: [] }));
       } catch (error) {
         console.error('Error fetching security questions:', error);
       }
-    },
+    },    
     
     getAvailableQuestions(index) {
       // Extract selected questions from the form
       const selectedQuestions = this.form.securityQuestions.map(q => q.question).filter(q => q);
-  
-      // Return available questions, ensuring each option has a 'question' property
+    
+      // Return available questions, excluding selected ones
       return this.securityQuestions.filter(
-        option => option.question && !selectedQuestions.includes(option.question) && option.question !== (this.form.securityQuestions[index] && this.form.securityQuestions[index].question)
+        option => option.question && !selectedQuestions.includes(option.question) && option.question !== this.form.securityQuestions[index].question
       );
-    },
+    },    
     
     showToast(message, type) {
       const toastHTML = `

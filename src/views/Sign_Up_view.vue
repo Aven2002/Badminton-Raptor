@@ -169,19 +169,36 @@
 <div v-else-if="step === 4">
   <h4>Security Questions</h4>
   <div class="row">
-    <div class="col-md-4" v-for="(question, index) in form.securityQuestions" :key="index">
+    <div class="col-md-12">
       <div class="mb-3">
-        <label :for="'securityQuestion' + (index + 1)" class="form-label">Security Question {{ index + 1 }}</label>
-        <select :id="'securityQuestion' + (index + 1)" class="form-control" v-model="form.securityQuestions[index].question" required>
-          <option value="">Select a question</option>
-          <option v-for="option in getAvailableQuestions(index)" :key="option.id" :value="option.question">
-            {{ option.question }}
-          </option>
+        <label for="question1" class="form-label">Select Question 1</label>
+        <select class="form-control" id="question1" v-model="form.securityQuestions[0]" required>
+          <option v-for="(question, index) in securityQuestions" :key="index" :value="question">{{ question }}</option>
         </select>
       </div>
       <div class="mb-3">
-        <label :for="'answer' + (index + 1)" class="form-label">Answer {{ index + 1 }}</label>
-        <input type="text" :id="'answer' + (index + 1)" class="form-control" v-model="form.securityQuestions[index].answer" required>
+        <label for="answer1" class="form-label">Answer 1</label>
+        <input type="text" class="form-control" id="answer1" v-model="form.answers[0]" required>
+      </div>
+      <div class="mb-3">
+        <label for="question2" class="form-label">Select Question 2</label>
+        <select class="form-control" id="question2" v-model="form.securityQuestions[1]" required>
+          <option v-for="(question, index) in securityQuestions" :key="index" :value="question">{{ question }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="answer2" class="form-label">Answer 2</label>
+        <input type="text" class="form-control" id="answer2" v-model="form.answers[1]" required>
+      </div>
+      <div class="mb-3">
+        <label for="question3" class="form-label">Select Question 3</label>
+        <select class="form-control" id="question3" v-model="form.securityQuestions[2]" required>
+          <option v-for="(question, index) in securityQuestions" :key="index" :value="question">{{ question }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="answer3" class="form-label">Answer 3</label>
+        <input type="text" class="form-control" id="answer3" v-model="form.answers[2]" required>
       </div>
     </div>
   </div>
@@ -190,10 +207,12 @@
       <button type="button" class="btn btn-secondary" @click="goToStep(3)">Back</button>
     </div>
     <div class="col-6 text-center">
-      <button type="submit" class="btn btn-primary">Sign Up</button>
+      <button type="button" class="btn btn-primary" @click="submitSecurityAnswers">Submit</button>
     </div>
   </div>
 </div>
+
+
 
 
             </form>

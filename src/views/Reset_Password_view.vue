@@ -1,113 +1,85 @@
 <template>
-    <div>
-      <div v-if="!showModal" class="reset-password-container d-flex justify-content-center align-items-center">
-        <div class="card">
-          <div class="card-header text-white text-center">
-            <h4 class="card-title">Reset Password</h4>
-          </div>
+    <div class="reset-password-container">
+    <!-- Navigation Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <nav class="pagination-container">
+        <ul class="pagination mb-0">
+          <li :class="['page-item', { active: step === 1 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(1)">Username</a>
+          </li>
+          <li :class="['page-item', { active: step === 2 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(2)" :class="{ disabled: !accountConfirmed }">Account Confirmation</a>
+          </li>
+          <li :class="['page-item', { active: step === 3 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(3)" :class="{ disabled: !isStep2Valid }">Security Question</a>
+          </li>
+          <li :class="['page-item', { active: step === 4 }]">
+            <a class="page-link" href="#" @click.prevent="goToStep(4)" :class="{ disabled: !isAnswerVerified }">Reset Password</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Back Button -->
+      <BackBtn />
+    </div>
+
+   <!-- Form Sections -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-lg">
           <div class="card-body">
-            <!-- Step 1: Enter Username -->
-            <div v-if="step === 1">
-              <div class="form-group">
-                <label for="username" class="form-label">Enter your Username:</label>
+            <!-- Form for each step -->
+            <form @submit.prevent="processForm">
+              <!-- Step 1: Username Entry -->
+              <div v-if="step === 1">
+                <h4 class="text-center">Enter your username</h4>
                 <input type="text" class="form-control" v-model="username" />
+                <button class="btn btn-primary mt-3 d-block mx-auto" @click="checkUsername">Next</button>
               </div>
-              <button class="btn btn-primary mt-3" @click="checkUsername">Next</button>
-            </div>
-  
-            <!-- Step 2: Is that you? -->
-            <div v-if="step === 2">
-              <div class="form-group">
-                <h4 class="form-label">Is this you?</h4>
-                <img :src="profileImg" alt="Profile Image" class="rounded-circle" width="150" height="150" />
-                <h5 class="form-label">{{ username }}</h5>
-                <div class="mt-3">
+
+              <!-- Step 2: Account Confirmation -->
+              <div v-if="step === 2">
+                <h4 class="text-center">Account Information</h4>
+                <p class="text-center">Is this your account?</p>
+                <img :src="profileImg" alt="Profile Image" class="rounded-circle d-block mx-auto" width="150" height="150" />
+                <p class="text-center">{{ username }}</p>
+                <div class="mt-3 text-center">
                   <button class="btn btn-success me-3" @click="confirmIdentity(true)">Yes</button>
                   <button class="btn btn-danger" @click="confirmIdentity(false)">No</button>
                 </div>
               </div>
-            </div>
-  
-            <!-- Step 3: Answer Security Question -->
-            <div v-if="step === 3">
-              <div class="form-group">
-                <h4 class="form-label">Security Question</h4>
-                <p class="form-label">{{ securityQuestion }}</p>
+
+              <!-- Step 3: Security Question -->
+              <div v-if="step === 3">
+                <h4 class="text-center">Security Question</h4>
+                <p class="text-center">{{ securityQuestion }}</p>
                 <label for="answer" class="form-label">Your Answer:</label>
-                <input type="text" class="form-control" v-model="securityAnswer" />
-                <button class="btn btn-primary mt-3" @click="verifyAnswer">Submit Answer</button>
+                <input type="text" class="form-control" id="answer" v-model="securityAnswer" />
+                <button class="btn btn-primary mt-3 d-block mx-auto" @click="verifyAnswer">Submit Answer</button>
               </div>
-            </div>
+
+              <!-- Step 4: Password Reset -->
+              <div v-if="step === 4">
+                <h4 class="text-center">Reset Your Password</h4>
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" v-model="newPassword" required />
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" v-model="confirmPassword" required />
+                <button type="submit" class="btn btn-primary mt-3 d-block mx-auto" @click="updatePassword">Reset Password</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-  
-      <!-- Modals -->
-      <ErrorModal :errorMessage="errorMessage" />
-      <SuccessModal :successMessage="successMessage" />
-      <UpdateModal
-        v-if="showModal"
-        :username="username"
-        @close="hideUpdatePasswordModal"
-      />
     </div>
-  </template>
-  
-  
-  <script src='@/javascript/Reset_Password.js'></script>
-  
-  <style scoped>
-  body {
-    color: #ffffff;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .reset-password-container {
-    padding: 100px;
-  }
-  
-  .card {
-    background-color: #1e1e1e;
-    border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    max-width: 400px;
-    width: 100%;
-  }
-  
-  .card-header {
-    background-color: #333333;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #444444;
-  }
-  
-  .card-title {
-    margin-bottom: 0;
-  }
-  
-  .card-body {
-    padding: 1.5rem;
-  }
-  
-  .form-label {
-    color: #bbbbbb;
-  }
-  
-  .form-control {
-    background-color: #2c2c2c;
-    border: 1px solid #444444;
-    color: #ffffff;
-  }
-  
-  .form-control::placeholder {
-    color: #bbbbbb;
-    font-size: 13px;
-  }
-  
-  .form-control:focus {
-    background-color: #2c2c2c;
-    border-color: #555555;
-    box-shadow: none;
-    color: white;
-  }
-  </style>
-  
+  </div>
+
+    <!-- Modals for success and error handling -->
+    <ErrorModal :errorMessage="errorMessage" />
+    <SuccessModal :successMessage="successMessage" />
+  </div>
+</template>
+
+
+<script src='@/javascript/Reset_Password.js'></script>
+<style src='@/style/Reset_Password.css' scoped></style>
