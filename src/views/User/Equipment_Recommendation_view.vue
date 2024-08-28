@@ -1,7 +1,7 @@
 <template>
   <main class="content container mt-3">
     <!-- Breadcrumb and Back Button -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-5">
         <Breadcrumb_Com
             :homeLink="'/Home_view'"
             :breadcrumbItems="[]"
@@ -25,7 +25,7 @@
             v-for="item in recommendations"
             :key="item.equipID"
           >
-            <div class="card-container">
+            <div class="card-container mb-5">
               <div class="card" @click="goToDetails(item.equipID)">
                 <div class="card-front">
                   <img class="card-img-top" :src="getImagePath(item.equipImgPath)" alt="Equipment Image">
@@ -115,60 +115,90 @@ export default {
   perspective: 800px;
 }
 
+.card-img-top {
+  max-width: 100%; /* Ensures the image does not exceed the card width */
+  max-height: 280px; /* Limits the height of the image */
+  object-fit: contain; /* Ensures the image maintains aspect ratio and fits within the card */
+  display: block; /* Removes extra space below the image */
+  margin: auto; /* Centers the image horizontally */
+}
+
 .card {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  cursor: pointer;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  border: #2c2c2c solid 2px;
-  background-color: #ebe7df;
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.card-front {
-  z-index: 2;
-  transform: rotateY(0deg);
-}
-
-.card-back {
-  background-color: #2c2c2c;
-  color: #ffffff;
-  transform: rotateY(180deg);
-  text-align: center;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-back h5.card-title {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.card-back p.card-text {
-  font-size: 1rem;
-  margin-bottom: 5px;
-}
-
-.card-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
+  width: 300px; /* Increased card width */
+  height: 300px; /* Increased card height */
+  background: rgb(103, 225, 255);
+  transition: all 0.4s;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+  font-size: 16px; /* Adjusted font size */
+  font-weight: 700; /* Adjusted font weight */
+  overflow: hidden; /* Ensures content does not overflow */
 }
 
 .card:hover {
-  transform: rotateY(180deg);
+  border-radius: 15px;
+  cursor: pointer;
+  transform: scale(1.2);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+  background: rgb(103, 151, 255);
+}
+
+.card-front {
+  height: 100%;
+  width: 100%;
+  transition: all 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  border-radius: 15px;
+}
+
+.card:hover .card-front {
+  height: 0px;
+  opacity: 0;
+}
+
+.card-back {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  display: flex;
+  flex-direction: column; /* Stacks content vertically */
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  transition: all 0.4s;
+  font-size: 1rem; /* Adjusted font size */
+  transform: rotate(90deg) scale(-1);
+  overflow: hidden; /* Ensures content does not overflow */
+  padding: 10px; /* Adds padding inside the card-back */
+}
+
+.card:hover .card-back {
+  opacity: 1;
+  transform: rotate(0deg);
+  font-size: 1rem; /* Adjusted font size */
+}
+
+/* Center cards and have two per row */
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.col-md-4 {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 0 0 50%; /* Two cards per row on smaller screens */
+    max-width: 50%;
+  }
 }
 </style>
+
+

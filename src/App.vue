@@ -46,6 +46,7 @@ html, body {
   background-image: url('@/assets/Background/Bg_01.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  position: relative;
+  background-attachment: fixed;
 }
 </style>
