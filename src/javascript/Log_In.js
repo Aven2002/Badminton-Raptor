@@ -2,11 +2,13 @@ import axios from 'axios';
 import { Modal } from 'bootstrap';
 import Cookies from 'js-cookie';
 import ErrorModal from '@/components/Error_modal_com.vue';
+import BackBtn from '@/components/Back_btn_com.vue';
 
 export default {
   name: 'Log_In_view',
   components: {
-    ErrorModal
+    ErrorModal,
+    BackBtn
   },
   data() {
     return {
