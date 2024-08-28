@@ -1,21 +1,26 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
+      <!-- Logo and Title -->
       <router-link :to="homeLink" class="navbar-brand d-flex align-items-center">
         <img :src="logo" alt="Logo" class="logo">
         <span class="ms-2">{{ title }}</span>
       </router-link>
+      
+      <!-- Toggler Button -->
       <button class="navbar-toggler" type="button" @click="toggleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
+      <!-- Navigation Links -->
       <div class="collapse navbar-collapse" :class="{ show: isNavbarCollapsed }">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+          <li v-if="userID" class="nav-item">
             <router-link :to="homeLink" class="nav-link" @click="toggleNavbar">Home</router-link>
           </li>
 
           <!-- Show Equipment Dropdown and Contact Us Only for Non-Admin Users -->
-          <template v-if="userRole !== 'Admin'">
+          <template v-if="userID && !isAdmin">
             <li class="nav-item dropdown" @mouseover="showDropdown" @mouseleave="hideDropdown">
               <router-link to="/browse_equipment_view" class="nav-link dropdown-toggle" @click="toggleNavbar">Equipment</router-link>
               <ul class="dropdown-menu" :class="{ show: isDropdownVisible }">
@@ -29,18 +34,21 @@
             </li>
           </template>
         </ul>
-        <!-- Logout Button for All Users -->
-        <LogoutButton />
+
+        <!-- Logout Button for Logged In Users -->
+        <template v-if="userID">
+          <LogoutButton />
+        </template>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import LogoutButton from '@/components/Logout_btn_com.vue';
 import axios from 'axios';
-import Cookies from 'js-cookie'; // Ensure you have this installed
+import Cookies from 'js-cookie';
 
 export default {
   name: "Navbar_view_com",
@@ -54,16 +62,17 @@ export default {
       isNavbarCollapsed: false,
       isDropdownVisible: false,
       categories: [],
-      userRole: null, // Store the userRole here
+      userID: Cookies.get('userID') || null,
     };
   },
   computed: {
     ...mapGetters(['isAdmin']),
     homeLink() {
-      return this.userRole === 'Admin' ? '/home_view_admin' : '/home_view_user';
+      return this.isAdmin ? '/home_view_admin' : '/home_view_user';
     }
   },
   methods: {
+    ...mapActions(['fetchUserRole']),
     toggleNavbar() {
       this.isNavbarCollapsed = !this.isNavbarCollapsed;
     },
@@ -83,17 +92,12 @@ export default {
         .catch(error => {
           console.error('Error fetching equipment:', error);
         });
-    },
-    fetchUserRole() {
-      const userID = Cookies.get('userID'); // Assuming userID is stored in a cookie
-      if (userID) {
-        axios.get(`http://localhost:3000/api/account/${userID}/role`)
-          .then(response => {
-            this.userRole = response.data.userRole; // Store the userRole
-          })
-          .catch(error => {
-            console.error('Error fetching user role:', error);
-          });
+    }
+  },
+  watch: {
+    userID(newID) {
+      if (newID) {
+        this.fetchUserRole(); // Fetch user role when userID changes
       }
     }
   },

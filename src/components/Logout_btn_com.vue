@@ -1,14 +1,14 @@
 <template>
-    <div class="dropdown">
-      <button
+  <div class="dropdown">
+    <button
       class="btn btn-transparent rounded-circle dropdown-toggle"
       id="userDropdown"
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
       <img :src="userImg" alt="Profile" class="profile-img" />
-      </button>
-<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="userDropdown">
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="userDropdown">
       <li class="dropdown-item-text">
         <strong>{{ username }}</strong>
       </li>
@@ -20,34 +20,35 @@
       </li>
     </ul>
 
-      <!-- Confirmation Modal -->
-      <ConfirmationModal
-        :confirmationMessage="confirmationMessage"
-        @confirm="handleConfirm"
-        modalId="logoutConfirmationModal"
-      />
-    </div>
-  </template>
-  
-  <script>
-import axios from 'axios';
-  import Cookies from 'js-cookie';
-  import ConfirmationModal from '@/components/Confirmation_modal_com.vue';
-  import { Modal } from 'bootstrap';
-  
-  export default {
-    name: 'Logout_btn_com',
-    components: {
-      ConfirmationModal,
-    },
-    data() {
-      return {
-        confirmationMessage: '',
-      };
-    },
-    methods: {
-    ...mapActions(['logout']), // Map Vuex logout action to component
+    <!-- Confirmation Modal -->
+    <ConfirmationModal
+      :confirmationMessage="confirmationMessage"
+      @confirm="handleConfirm"
+      modalId="logoutConfirmationModal"
+    />
+  </div>
+</template>
 
+<script>
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import ConfirmationModal from '@/components/Confirmation_modal_com.vue';
+import { Modal } from 'bootstrap';
+
+export default {
+  name: 'Logout_btn_com',
+  components: {
+    ConfirmationModal,
+  },
+  data() {
+    return {
+      userID: null,
+      userImg: '', // Store the user profile image path
+      username: '', // Store the username
+      confirmationMessage: '',
+    };
+  },
+  methods: {
     getUserData() {
       // Fetch the user data using the userID stored in cookies
       const userID = Cookies.get('userID');
@@ -63,31 +64,34 @@ import axios from 'axios';
           });
       }
     },
-      handleLogout() {
-        this.showConfirmationModal('Log out from your account?');
-      },
-      showConfirmationModal(message) {
-        this.confirmationMessage = message;
-        const confirmationModal = new Modal(document.getElementById('logoutConfirmationModal'));
-        confirmationModal.show();
-      },
-      handleConfirm() {
-        // Remove the userID cookie
-        Cookies.remove('userID');
-        // Redirect to the landing page
-        this.$router.push('/');
-    
-        // Hide the confirmation modal
-        const confirmationModalElement = document.getElementById('logoutConfirmationModal');
-        const confirmationModal = Modal.getInstance(confirmationModalElement);
-        if (confirmationModal) {
-          confirmationModal.hide();
-        }
+    handleLogout() {
+      this.showConfirmationModal('Log out from your account?');
+    },
+    showConfirmationModal(message) {
+      this.confirmationMessage = message;
+      const confirmationModal = new Modal(document.getElementById('logoutConfirmationModal'));
+      confirmationModal.show();
+    },
+    handleConfirm() {
+      // Remove the userID cookie
+      Cookies.remove('userID');
+      // Redirect to the landing page
+      this.$router.push('/');
+  
+      // Hide the confirmation modal
+      const confirmationModalElement = document.getElementById('logoutConfirmationModal');
+      const confirmationModal = Modal.getInstance(confirmationModalElement);
+      if (confirmationModal) {
+        confirmationModal.hide();
       }
     }
-  };
-  </script>
-  
+  },
+  created() {
+    this.getUserData();
+  }
+};
+</script>
+
 <style scoped>
 /* Profile Image Styling */
 .profile-img {

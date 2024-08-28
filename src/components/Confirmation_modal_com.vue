@@ -50,7 +50,7 @@
   }
   
   .modal-header {
-    background-color: #f2ef44;
+    background-color: #46db28;
     color: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
