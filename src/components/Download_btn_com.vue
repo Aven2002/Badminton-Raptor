@@ -1,5 +1,5 @@
 <template>
-    <button @click="downloadPDF" class="btn download-btn mt-2">
+    <button @click="downloadPDF" class="custom-button-primary mt-2">
       <i class="fa-solid fa-cloud-arrow-down"></i>
       Download 
     </button>
@@ -37,35 +37,4 @@
     };
     </script>
     
-    <style scoped>
-  .download-btn {
-    background: transparent;
-    border: none;
-    color: #007bff;
-    font-size: 12px;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center; /* Center icon and text vertically */
-    justify-content: center; /* Center icon and text horizontally */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    width: 90px; /* Smaller width */
-  }
-  
-  .download-btn i {
-    margin-right: 4px; /* Smaller margin */
-    font-size: 12px; /* Smaller icon size */
-  }
-  
-  .download-btn:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .download-btn:focus,
-  .download-btn:active {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-  }
-  </style>
-  
     

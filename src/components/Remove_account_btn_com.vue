@@ -1,7 +1,8 @@
 <template>
     <div>
-      <button @click="confirmRemove" class="btn btn-danger mt-2" >
-        Remove
+      <button @click="confirmRemove" class="custom-button-danger">
+        <i class="fa-solid fa-trash-can"></i>
+        <span class="button-text">Remove</span>
       </button>
       <ConfirmationModal
       :confirmationMessage="confirmationMessage"
@@ -67,27 +68,4 @@
   };
   </script>
   
-  <style scoped>
-  .btn-danger {
-    background-color: #dc3545;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 90px; 
-  }
-  
-  .btn-danger:hover {
-    background-color: #db4957;
-    border : solid black 1px;
-  }
-  
-  .btn-danger:focus,
-  .btn-danger:active {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);
-  }
-  </style>
   

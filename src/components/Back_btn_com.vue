@@ -23,9 +23,9 @@
     padding: 10px 20px;
     border-radius: 7px;
     border: none;
-    font-size: 14px;
+    font-size: 16px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 800;
     letter-spacing: 2px;
     background: transparent;
     color: #333333;

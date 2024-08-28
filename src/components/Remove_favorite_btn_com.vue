@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button @click="confirmRemove" class="btn btn-danger mt-2">
-      Remove
+    <button @click="confirmRemove" class="custom-button-danger mt-2">
+        <i class="fa-solid fa-trash-can"></i>
+        <span class="button-text">Remove</span>
     </button>
     <ConfirmationModal
       :confirmationMessage="confirmationMessage"
