@@ -4,7 +4,7 @@ import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import RemoveButton from '@/components/Remove_recommendation_btn_com.vue';
 import Pagination from '@/components/Pagination_com.vue';
-import RecommendationModal from '@/components/Recommendation_modal_com.vue';
+import RecommendationModal from '@/components/Recommendation_Details_modal_com.vue';
 
 export default {
   name: 'View_Recommendation',
@@ -35,7 +35,17 @@ export default {
     paginatedItems() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       return this.items.slice(start, start + this.itemsPerPage);
-    }
+    },
+    truncatedItems() {
+      return this.items.map(item => {
+        // Truncate equipment_ids if length exceeds 10 characters
+        const maxLength = 10;
+        const truncatedEquipmentIds = item.equipment_ids.length > maxLength
+          ? item.equipment_ids.substring(0, maxLength) + '...'
+          : item.equipment_ids;
+        return { ...item, equipment_ids: truncatedEquipmentIds };
+      });
+    },
   },
   methods: {
     async fetchItems() {
@@ -51,8 +61,10 @@ export default {
     },
     showErrorModal(message) {
       this.errorMessage = message;
-      const errorModal = new Modal(document.getElementById('errorModal'));
-      errorModal.show();
+      this.$nextTick(() => {
+        const errorModal = new Modal(document.getElementById('errorModal'));
+        errorModal.show();
+      });
     },
     handlePageChange(page) {
       this.currentPage = page;
@@ -65,25 +77,12 @@ export default {
         console.error('Error removing recommendation:', error);
       }
     },
-    async showRecommendationModal(item) {
-        this.selectedRecommendation = item;
-        try {
-          const response = await axios.get(`http://localhost:3000/api/recommendation/${item.recommendationID}`);
-          this.selectedRecommendation = response.data;
-      
-          this.$nextTick(() => {
-            const modalElement = document.getElementById('recommendationModal');
-            if (modalElement) {
-              const recommendationModal = new Modal(modalElement);
-              recommendationModal.show();
-            } else {
-              console.error('Modal element not found');
-            }
-          });
-        } catch (error) {
-          console.error('Error fetching recommendation details:', error);
-        }
-      }
-      
+    selectRecommendation(recommendation) {
+      this.selectedRecommendation = recommendation;
+      this.$nextTick(() => {
+        const recommendationModal = new Modal(document.getElementById('recommendationModal'));
+        recommendationModal.show();
+      });
+    }
   }
 };

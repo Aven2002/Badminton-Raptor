@@ -22,8 +22,9 @@
                   <tr>
                     <th scope="col">Recommendation ID</th>
                     <th scope="col">UserID</th>
-                    <th scope="col">Category</th>
+                    <th scope="col">Equipment IDs</th>
                     <th scope="col">Rating</th>
+                    <th scope="col">Last Shown At</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -33,15 +34,16 @@
                     :key="item.recommendationID"
                     :style="{
                       backgroundColor: item.status === 0 ? '#f8d7da' : '#d4edda',
-                      color: item.status === 0 ? '#721c24' : '#155724', /* Adjust text color for readability */
-                      borderRadius: '4px' /* Optional: Add border radius to improve appearance */
+                      color: item.status === 0 ? '#721c24' : '#155724',
+                      borderRadius: '4px'
                     }"
-                    @click="showRecommendationModal(item)"
+                    @click="selectRecommendation(item)"
                   >
                     <td>{{ item.recommendationID }}</td>
                     <td>{{ item.userID }}</td>
-                    <td>{{ item.category }}</td>
+                    <td class="truncate">{{ item.equipment_ids }}</td>
                     <td>{{ item.rating }}</td>
+                    <td>{{ item.last_shown_at }}</td>
                     <td @click.stop>
                       <div class="d-flex justify-content-center" style="gap: 20px;">
                         <RemoveButton :recommendationID="item.recommendationID" @item-removed="removeRecommendationFromList" @error="showErrorModal" />
@@ -64,16 +66,22 @@
     </div>
 
     <!-- Modals -->
-    <div v-if="selectedRecommendation" :id="'recommendationModal' + selectedRecommendation.recommendationID" class="modal fade" tabindex="-1" aria-labelledby="recommendationModalLabel" aria-hidden="true">
-      <RecommendationModal :recommendation="selectedRecommendation" />
-    </div>
+    <RecommendationModal
+      v-if="selectedRecommendation"
+      :recommendation="selectedRecommendation"
+      @close="selectedRecommendation = null"
+    />
     <ErrorModal :errorMessage="errorMessage" />
   </main>
 </template>
 
-
-<script src='@/javascript/Admin/View_Recommendation'></script>
+<script src='@/javascript/Admin/View_Recommendation.js'></script>
 
 <style scoped>
-/* Scoped styles can be added here if needed */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; /* Adjust the width as needed */
+}
 </style>
