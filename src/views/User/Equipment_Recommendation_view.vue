@@ -2,12 +2,15 @@
   <main class="content container mt-3">
     <!-- Breadcrumb and Back Button -->
     <div class="d-flex justify-content-between align-items-center mb-5">
-        <Breadcrumb_Com
-            :homeLink="'/Home_view'"
-            :breadcrumbItems="[]"
-            :currentItem="'Recommended Equipment'" />
-       <BackBtn />
+      <Breadcrumb_Com
+        :homeLink="'/Home_view'"
+        :breadcrumbItems="[]"
+        :currentItem="'Recommended Equipment'"
+      />
+      <!-- Trigger Rating Modal via Back Button -->
+      <BackBtn @click="triggerRatingModal" />
     </div>
+
     <!-- Equipment Cards Section -->
     <div class="col-md-12">
       <div v-if="loading" class="text-center">Loading...</div>
@@ -28,7 +31,11 @@
             <div class="card-container mb-5">
               <div class="card" @click="goToDetails(item.equipID)">
                 <div class="card-front">
-                  <img class="card-img-top" :src="getImagePath(item.equipImgPath)" alt="Equipment Image">
+                  <img
+                    class="card-img-top"
+                    :src="getImagePath(item.equipImgPath)"
+                    alt="Equipment Image"
+                  />
                 </div>
                 <div class="card-back">
                   <h5 class="card-title">{{ item.equipName }}</h5>
@@ -40,75 +47,96 @@
         </div>
       </div>
     </div>
+
+    <!-- Rating Modal -->
+    <RatingModal :recommendationId="currentRecommendationId" />
   </main>
 </template>
 
 <script>
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Modal } from 'bootstrap';
 import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import BackBtn from '@/components/Back_btn_com.vue';
+import RatingModal from '@/components/Recommendation_Rating_modal.vue';
 
 export default {
   name: 'Equipment_Recommendation_view',
   components: {
     Breadcrumb_Com,
-    BackBtn
+    BackBtn,
+    RatingModal
   },
   data() {
     return {
       recommendations: [],
-      loading: true
+      loading: true,
+      currentRecommendationId: 0, // To store the recommendationId for the rating modal
     };
-  },
-  created() {
-    this.fetchRecommendations();
   },
   methods: {
     async fetchRecommendations() {
-      try {
-        const userID = Cookies.get('userID');
-        if (userID) {
-          const response = await axios.get(`http://localhost:5000/api/recommendations`, {
-            params: { user_id: userID }
-          });
-          // Fetch equipment details for each recommendation
-          const recommendationsWithDetails = await Promise.all(response.data.recommendations.map(async item => {
-            const detailsResponse = await axios.get(`http://localhost:3000/api/equipment/${item.equipID}/details`);
-            return {
-              ...item,
-              equipImgPath: detailsResponse.data.equipment.equipImgPath
-            };
-          }));
-          this.recommendations = recommendationsWithDetails;
-        } else {
-          console.error('UserID not found in cookies.');
-        }
-        this.loading = false;
-      } catch (error) {
-        console.error('Error fetching recommendations:', error);
-        this.loading = false;
+  try {
+    const userID = Cookies.get('userID');
+    if (userID) {
+      const response = await axios.get('http://localhost:5000/api/recommendations', {
+        params: { user_id: userID }
+      });
+
+      // Check if the backend response includes recommendationId
+      if (response.data.recommendationId) {
+        this.currentRecommendationId = response.data.recommendationId;
       }
-    },
-    goBack() {
-      this.$router.go(-1); // Navigate back in the browser history
-    },
+
+      // Fetch equipment details for each recommendation
+      const recommendationsWithDetails = await Promise.all(
+        response.data.recommendations.map(async (item) => {
+          const detailsResponse = await axios.get(
+            `http://localhost:3000/api/equipment/${item.equipID}/details`
+          );
+          return {
+            ...item,
+            equipName: detailsResponse.data.equipment.equipName,
+            equipPrice: detailsResponse.data.equipment.equipPrice,
+            equipImgPath: detailsResponse.data.equipment.equipImgPath,
+          };
+        })
+      );
+
+      this.recommendations = recommendationsWithDetails;
+    } else {
+      console.error('UserID not found in cookies.');
+    }
+    this.loading = false;
+  } catch (error) {
+    console.error('Error fetching recommendations:', error);
+    this.loading = false;
+  }
+},
     goToDetails(productID) {
       this.$router.push({ name: 'Equipment_Details_view', params: { id: productID } });
     },
     getImagePath(equipImgPath) {
-      // Adjust based on where your images are served
       const imagePath = `http://localhost:3000/assets/${equipImgPath}`;
       return imagePath;
     },
     formattedPrice(price) {
-      // Convert price to a number and then format it
       const numericPrice = parseFloat(price);
       return numericPrice.toFixed(2);
+    },
+    triggerRatingModal() {
+      // Trigger the modal when the back button is pressed
+      const ratingModalInstance = new Modal(document.getElementById('ratingModal'));
+      ratingModalInstance.show();
     }
+  },
+  mounted() {
+    this.fetchRecommendations();
   }
 };
 </script>
+
 
 <style scoped>
 .card-container {
