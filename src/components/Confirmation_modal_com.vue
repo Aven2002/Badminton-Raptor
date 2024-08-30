@@ -3,16 +3,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" >Action Confirmation</h5>
           </div>
           <div class="modal-body text-center">
             <img src='@/assets/Icon/Question_Mark_Icon.png' alt="Question Mark Icon" class="img-fluid my-3" />
             <p>{{ confirmationMessage }}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="abortProcess">Cancel</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="$emit('confirm')">Confirm</button>
+            <button type="button" class="custom-button-danger" data-bs-dismiss="modal" @click="abortProcess">Cancel</button>
+            <button type="button" class="custom-button-success" data-bs-dismiss="modal" @click="$emit('confirm')">Confirm</button>
           </div>
         </div>
       </div>
@@ -42,58 +41,15 @@
     }
   };
   </script>
-  
+
   <style scoped>
-  .modal-content {
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .modal-header {
-    background-color: #46db28;
-    color: white;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  
-  .modal-footer {
-    background-color: #f8f9fa;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  
-  .btn-close {
-    filter: invert(1);
-  }
-  
-  .modal-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #495057;
-  }
-  
-  .modal-body p {
-    margin: 20px 0;
-    font-size: 1.1rem;
-  }
-  
-  .btn-secondary {
-    background-color: #343a40;
-    border-color: #343a40;
-    color: white;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #495057;
-    border-color: #495057;
+  .modal-title {
+    color: #d0ee4b; 
   }
   
   .img-fluid {
-    max-width: 150px;
-  }
-  
-  #confirmationModalLabel {
-    font-weight: bold;
-    font-size: 21px;
+    max-width: 30%;
+    max-height:30%;
   }
   </style>
   

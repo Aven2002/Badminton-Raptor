@@ -3,8 +3,7 @@ import App from "./App.vue";
 import router from './router';
 import stateManagement from './State_management';
 import axios from 'axios';
-import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Cookies from 'js-cookie';
 import '@/style/Global_style.css' 

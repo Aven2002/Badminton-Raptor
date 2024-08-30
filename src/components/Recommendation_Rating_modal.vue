@@ -76,13 +76,10 @@ export default {
   }
 };
 </script>
-  
-<style src='@/style/Global_style.css' scoped></style>
 
   <style scoped>
-  .modal-body p {
-    margin: 20px 0;
-    font-size: 1.1rem;
+  .modal-title {
+    color: #26b602; 
   }
 
   .emoji-container {
@@ -98,7 +95,7 @@ export default {
   }
 
   .emoji :hover{
-    background-color: lightgrey; /* Background color for unselected emoji */
+    background-color: lightgrey; 
     border-radius: 50%; 
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
   }

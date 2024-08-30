@@ -25,6 +25,7 @@
     overflow-x: auto;
   }
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 /* Dark Card */
 .card-dark {
     background-color: #1e1e1e; /* Dark background for the card */
@@ -64,14 +65,9 @@
     border-bottom-right-radius: 0.5rem; /* Rounded corners for the bottom right */
   }
   
-  /* Transparent Button */
-  .btn-transparent {
-    background-color: transparent;
-    color: #fff;
-    border: solid #23a7be 2px;
-    border-radius: 0.25rem;
-  }
-  
+ 
+  /*----------------------------------------------------------------------------------------------------------------------------------*/
+  /*Custom Button*/
   /* Danger Button */
   .custom-button-danger {
     cursor: pointer;
@@ -186,38 +182,48 @@
     letter-spacing: 0px;
   }
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 /*Dark Modal*/
 .modal-dialog {
-  max-width: 60%;
+  max-width: 50%;
+  max-height: 50%;
   margin: 20px auto;
 }
 
 .modal-content {
-  background-color: #2c2c2c; /* Darker background color for better contrast */
+  background-color: #2c2c2c; /* Dark theme for entire modal */
   color: #e0e0e0; /* Lighter text color for improved readability */
-  border-radius: 8px; /* Rounded corners for a modern look */
-  border: 1px solid #444; /* Subtle border to define the modal */
+  border-radius: 50px; /* Round corners */
+}
+
+.modal-header, 
+.modal-body, 
+.modal-footer {
+  background-color: inherit; /* Inherit dark theme from modal-content */
+  padding: 1.5rem; /* Adequate padding for all sections */
+  border: none; /* Remove border colors if you prefer cleaner look */
 }
 
 .modal-header {
-  border-bottom: 1px solid #555; /* Darker border for better separation */
-  padding: 1rem; /* Adequate padding */
-  background-color: #1c1c1c; /* Darker background for header */
-}
-
-.modal-body {
-  background-color: #333; /* Slightly lighter background color for body */
-  padding: 1.5rem; /* Adequate padding */
+  border-bottom: 1px solid #555; /* Darker bottom border */
+  width: 90%; /* Make the border 70% of the modal's width */
+  margin: 0 auto; /* Center the border horizontally */
 }
 
 .modal-footer {
-  border-top: 1px solid #555; /* Darker border for footer */
-  padding: 1rem; /* Adequate padding */
-  background-color: #1c1c1c; /* Darker background for footer */
+  border-top: 1px solid #555; /* Darker top border */
+  width: 90%; /* Make the border 70% of the modal's width */
+  margin: 0 auto; /* Center the border horizontally */
 }
 
 .modal-title {
   color: #fff; /* White title color */
-  font-size: 1.25rem; /* Slightly larger title font size */
+  font-size: 28px; /* Larger font size for emphasis */
   font-weight: bold; /* Bold title for emphasis */
 }
+
+.modal-body p {
+  font-size: 20px; /* Font size for body text */
+}
+
+
