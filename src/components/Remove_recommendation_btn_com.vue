@@ -31,7 +31,7 @@
     },
     data() {
       return {
-        confirmationMessage: `Confirm to delete Recommendation ID: ${this.recommendationID} ?`,
+        confirmationMessage: `Confirm to delete recommendation - Recommendation ID: ${this.recommendationID} ?`,
         itemToRemove: null,
         modalId: `confirmationModal-${this.recommendationID}`
       };

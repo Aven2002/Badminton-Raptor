@@ -31,7 +31,7 @@
     },
     data() {
       return {
-        confirmationMessage: `Confirm to delete Feedback ID: ${this.feedbackID} ?`,
+        confirmationMessage: `Confirm to delete feedback - Feedback ID: ${this.feedbackID} ?`,
         itemToRemove: null,
         modalId: `confirmationModal-${this.feedbackID}`
       };

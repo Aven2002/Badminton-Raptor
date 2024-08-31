@@ -31,7 +31,7 @@
     },
     data() {
       return {
-        confirmationMessage: `Remove equipment ID ${this.equipID} from database?`,
+        confirmationMessage: `Confirm to delete equipment - Equipment ID: ${this.equipID} ?`,
         itemToRemove: null,
         modalId: `confirmationModal-${this.equipID}` 
       };
