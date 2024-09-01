@@ -38,7 +38,7 @@
                       <td>{{ item.fname + ' ' + item.lname }}</td>
                       <td>{{ item.email }}</td>
                       <td>{{ item.contactNum }}</td>
-                      <td>
+                      <td @click.stop>
                         <div class="d-flex justify-content-center" style="gap: 20px;">
                           <RemoveButton :userID="item.userID"  @error="showErrorModal" />
                         </div>

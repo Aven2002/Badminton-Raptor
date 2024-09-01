@@ -24,7 +24,7 @@ import axios from 'axios';
         errorMessage: '',
         searchQuery: '',
         currentPage: 1,
-        itemsPerPage: 5,
+        itemsPerPage: 4,
         currentView: 'list',
         selectedEquipID: null,
       };
@@ -43,6 +43,11 @@ import axios from 'axios';
         const start = (this.currentPage - 1) * this.itemsPerPage;
         const end = start + this.itemsPerPage;
         return this.filteredItems.slice(start, end);
+      }
+    },
+    watch: {
+      currentView(newView) {
+        this.$emit('view-change', newView);
       }
     },
     methods: {

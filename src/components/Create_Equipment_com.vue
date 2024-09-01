@@ -1,8 +1,8 @@
 <template>
   <main class="container mt-3">
-    <div class="card card-dark mb-5">
+    <div class="card custom-card-dark mb-3">
       <div class="card-header">
-        <h2>Create New Equipment</h2>
+        <h2>Equipment Information</h2>
       </div>
       <div class="card-body">
         <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
@@ -186,7 +186,7 @@
           </div>
           <!-- Submit Button -->
           <div class="mt-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Create</button>
           </div>
         </form>
       </div>
@@ -197,26 +197,18 @@
 <script src='@/javascript/Admin/Create_Equipment.js'></script>
 
 <style scoped>
-/* Global style imports */
-@import '@/style/Global_style.css';
-
-/* Adjustments for smaller card */
 .card {
   margin: 0 auto;
-  max-width: 800px; /* Adjust the max-width as needed */
+  max-width: 1200px; /* Adjust the max-width as needed */
   padding: 15px;
+}
+
+.card-header {
+  padding: 10px;
 }
 
 .card-header h2 {
-  font-size: 1.5rem; /* Slightly smaller font size for the header */
-}
-
-.card-body {
-  padding: 15px;
-}
-
-.mb-2 {
-  margin-bottom: 0.75rem; /* Reduced margin for form groups */
+  font-size: 1.5rem; 
 }
 
 .form-label {
@@ -240,9 +232,48 @@
     color:white;
   }
 
-.btn {
-  font-size: 0.875rem; /* Smaller font size for the button */
-  padding: 0.5rem 1rem; /* Adjust button padding */
+  .btn {
+  margin-left:auto;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-in-out;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.btn-primary:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(45deg, #0056b3, #007bff);
+  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.6);
+  transform: translateY(-3px);
 }
 
 /* Adjust space for navbar */

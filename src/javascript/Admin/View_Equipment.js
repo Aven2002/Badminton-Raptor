@@ -22,7 +22,7 @@ export default {
       errorMessage: '',
       searchQuery: '',
       currentPage: 1,
-      itemsPerPage: 5,
+      itemsPerPage: 4,
       selectedEquipment: null
     };
   },
@@ -40,7 +40,16 @@ export default {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;
       return this.filteredItems.slice(start, end);
-    }
+    },
+    truncatedItems() {
+      return this.items.map(item => {
+        const maxLength = 10;
+        const truncatedEquipmentName = item.equipName.length > maxLength
+          ? item.equipName.substring(0, maxLength) + '...'
+          : item.equipName;
+        return { ...item, equipmentName: truncatedEquipmentName };
+      });
+    },
   },
   methods: {
     async fetchItems() {
@@ -58,6 +67,14 @@ export default {
       this.searchQuery = query.toLowerCase();
       this.currentPage = 1; // Reset to the first page on search
     },
+    getImagePath(equipImgPath) {
+      try {
+        return `http://localhost:3000/assets/${equipImgPath}`;
+      } catch (error) {
+        console.error('Error loading image:', error);
+        return require('@/assets/Icon/Default_Img_Icon.png'); // Fallback image
+      }
+    },
     async handleItemRemoved(equipID) {
       try {
         await axios.delete(`http://localhost:3000/api/equipment/${equipID}`);
@@ -71,14 +88,6 @@ export default {
       this.errorMessage = message;
       const errorModal = new Modal(document.getElementById('errorModal'));
       errorModal.show();
-    },
-    getImagePath(equipImgPath) {
-      try {
-         return `http://localhost:3000/assets/${equipImgPath}`
-      } catch (error) {
-        console.error('Error loading image:', error);
-        return require('@/assets/Icon/Default_Img_Icon.png'); // Fallback image
-      }
     },
     handlePageChange(page) {
       this.currentPage = page;

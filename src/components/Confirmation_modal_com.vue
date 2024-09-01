@@ -5,7 +5,7 @@
           <div class="modal-header">
             <h5 class="modal-title" >Action Confirmation</h5>
           </div>
-          <div class="modal-body text-center">
+          <div class="modal-body">
             <img src='@/assets/Icon/Question_Mark_Icon.png' alt="Question Mark Icon" class="img-fluid my-3" />
             <p>{{ confirmationMessage }}</p>
           </div>
@@ -50,6 +50,15 @@
   .img-fluid {
     max-width: 30%;
     max-height:30%;
+  }
+
+  .modal-body p{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .modal-footer button{
+    margin:10px;
   }
   </style>
   

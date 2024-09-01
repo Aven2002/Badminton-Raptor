@@ -49,7 +49,7 @@
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 /* Dark Card */
-.card-dark {
+.custom-card-dark {
     background-color: #1e1e1e; /* Dark background for the card */
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Softer shadow for a more subtle effect */
@@ -59,14 +59,13 @@
     transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
   }
   
-  .card-dark:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
+  .custom-card-dark:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
   }
   
-  .card-header {
+  .custom-card-dark.card-header {
     background-color: #333333; /* Darker background for the header */
-    border-bottom: 1px solid #444444; /* Subtle border */
+    border-bottom: 2px solid #b4b3b3; /* Subtle border */
     color: #e0e0e0; /* Light text color for the header */
     padding: 15px; /* Padding for the header content */
     border-top-left-radius: 0.5rem; /* Rounded corners for the top left */
@@ -75,11 +74,11 @@
     font-weight: bold; /* Bold font for emphasis */
   }
   
-  .card-body {
+  .custom-card-dark.card-body {
     padding: 15px; /* Padding for the card body content */
   }
   
-  .card-footer {
+  .custom-card-dark.card-footer {
     background-color: #333333; /* Dark background for the footer */
     border-top: 1px solid #444444; /* Subtle border at the top */
     padding: 10px; /* Padding for the footer content */
@@ -87,7 +86,6 @@
     border-bottom-right-radius: 0.5rem; /* Rounded corners for the bottom right */
   }
   
- 
   /*----------------------------------------------------------------------------------------------------------------------------------*/
   /*Custom Button*/
   /* Danger Button */

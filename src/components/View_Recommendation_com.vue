@@ -77,6 +77,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 150px; /* Adjust the width as needed */
+  max-width: 150px; 
 }
 </style>

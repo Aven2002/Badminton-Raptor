@@ -10,7 +10,7 @@
             <p><strong>Name:</strong> {{ equipment?.equipName }}</p>
             <p><strong>Category:</strong> {{ equipment?.equipCategory }}</p>
             <p><strong>Brand:</strong> {{ equipment?.equipBrand }}</p>
-            <p><strong>Price:</strong> {{ equipment?.equipPrice }}</p>
+            <p><strong>Price:</strong> RM {{ parseFloat(equipment?.equipPrice).toFixed(2) }}</p>
             <p><strong>Created At:</strong> {{ new Date(equipment?.created_at).toLocaleString() }}</p>
   
             <div v-if="showAdditionalDetails">

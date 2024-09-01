@@ -1,27 +1,21 @@
 <template>
-    <div class="container mt-3">
-      <!-- Breadcrumb -->
-      <div class="d-flex justify-content-between align-items-center">
-        <Breadcrumb_Com
-          :homeLink="'/Home_view'"
-          :breadcrumbItems="[]"
-          :currentItem="'Edit Equipment'"
-        />
-      </div>
-      <div class="card bg-dark text-light">
-        <!-- Top Section -->
-        <div class="card-header">
-          <div class="header">
-            <h4>Edit Equipment</h4>
-            <p class="equip-id">ID: {{ localEquipment.equipID }}</p>
-          </div>
+    <div class="container">
+         <!-- Close Button -->
+         <div class="text-end mb-4">
+        <button class="custom-back-button" @click="closeEditView">
+          Back <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </button>
+        </div>
+      <div class="custom-card-dark mb-5">
+        <div class="card-header mb-3">
+          <h4>Equipment ID: {{ localEquipment.equipID }}</h4>
         </div>
   
         <!-- Equipment Information -->
         <div class="card-body">
           <div class="row">
             <!-- Left side: Current Image and Upload Button -->
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center mt-2">
               <img :src="getImagePath(localEquipment.equipImgPath)" alt="Equipment Image" class="img-fluid rounded shadow-lg" />
             </div>
   
@@ -45,72 +39,117 @@
                   <input type="number" step="0.01" id="equipPrice" class="form-control" v-model="localEquipment.equipPrice" />
                 </div>
   
-                <button type="button" class="btn btn-secondary mt-3 mb-3" @click="toggleDetails">
-                  <i class="fa-solid fa-compress "></i>
-                   Additional Details
-                </button>
-  
                 <div v-if="showAdditionalDetails">
                   <!-- Additional fields based on category -->
                   <div v-if="localEquipment.equipCategory === 'Racquet'">
-                    <label for="flex" class="form-label">Flex:</label>
-                    <input type="text" id="flex" class="form-control" v-model="additionalDetails.flex" />
-                    <label for="frame" class="form-label">Frame:</label>
-                    <input type="text" id="frame" class="form-control" v-model="additionalDetails.frame" />
-                    <label for="shaft" class="form-label">Shaft:</label>
-                    <input type="text" id="shaft" class="form-control" v-model="additionalDetails.shaft" />
-                    <label for="joint" class="form-label">Joint:</label>
-                    <input type="text" id="joint" class="form-control" v-model="additionalDetails.joint" />
-                    <label for="length" class="form-label">Length:</label>
-                    <input type="text" id="length" class="form-control" v-model="additionalDetails.length" />
-                    <label for="weight" class="form-label">Weight:</label>
-                    <input type="text" id="weight" class="form-control" v-model="additionalDetails.weight" />
-                    <label for="stringAdvice" class="form-label">String Advice:</label>
-                    <input type="text" id="stringAdvice" class="form-control" v-model="additionalDetails.stringAdvice" />
-                    <label for="color" class="form-label">Color:</label>
-                    <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
-                    <label for="madeIn" class="form-label">Made In:</label>
-                    <input type="text" id="madeIn" class="form-control" v-model="additionalDetails.madeIn" />
+                    <div class="mb-3">
+                      <label for="flex" class="form-label">Flex:</label>
+                      <input type="text" id="flex" class="form-control" v-model="additionalDetails.flex" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="frame" class="form-label">Frame:</label>
+                      <input type="text" id="frame" class="form-control" v-model="additionalDetails.frame" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="shaft" class="form-label">Shaft:</label>
+                      <input type="text" id="shaft" class="form-control" v-model="additionalDetails.shaft" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="joint" class="form-label">Joint:</label>
+                      <input type="text" id="joint" class="form-control" v-model="additionalDetails.joint" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="length" class="form-label">Length:</label>
+                      <input type="text" id="length" class="form-control" v-model="additionalDetails.length" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="weight" class="form-label">Weight:</label>
+                      <input type="text" id="weight" class="form-control" v-model="additionalDetails.weight" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="stringAdvice" class="form-label">String Advice:</label>
+                      <input type="text" id="stringAdvice" class="form-control" v-model="additionalDetails.stringAdvice" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="color" class="form-label">Color:</label>
+                        <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="madeIn" class="form-label">Made In:</label>
+                        <input type="text" id="madeIn" class="form-control" v-model="additionalDetails.madeIn" />
+                    </div>
                   </div>
                   <div v-else-if="localEquipment.equipCategory === 'Shuttlecock'">
-                    <label for="quantityPerTube" class="form-label">Quantity Per Tube:</label>
-                    <input type="number" id="quantityPerTube" class="form-control" v-model="additionalDetails.quantityPerTube" />
-                    <label for="description" class="form-label">Description:</label>
-                    <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                    <div class="mb-3">
+                      <label for="quantityPerTube" class="form-label">Quantity Per Tube:</label>
+                      <input type="number" id="quantityPerTube" class="form-control" v-model="additionalDetails.quantityPerTube" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description:</label>
+                      <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                    </div>
                   </div>
                   <div v-else-if="localEquipment.equipCategory === 'Bags'">
-                    <label for="color" class="form-label">Color:</label>
-                    <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
-                    <label for="size" class="form-label">Size:</label>
-                    <input type="text" id="size" class="form-control" v-model="additionalDetails.size" />
-                    <label for="description" class="form-label">Description:</label>
-                    <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                    <div class="mb-3">
+                      <label for="color" class="form-label">Color:</label>
+                      <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="size" class="form-label">Size:</label>
+                      <input type="text" id="size" class="form-control" v-model="additionalDetails.size" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description:</label>
+                      <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                    </div>
                   </div>
                   <div v-else-if="localEquipment.equipCategory === 'Footwear'">
-                    <label for="color" class="form-label">Color:</label>
-                    <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
-                    <label for="upper" class="form-label">Upper:</label>
-                    <input type="text" id="upper" class="form-control" v-model="additionalDetails.upper" />
-                    <label for="midsole" class="form-label">Midsole:</label>
-                    <input type="text" id="midsole" class="form-control" v-model="additionalDetails.midsole" />
-                    <label for="outsole" class="form-label">Outsole:</label>
-                    <input type="text" id="outsole" class="form-control" v-model="additionalDetails.outsole" />
-                    <label for="description" class="form-label">Description:</label>
-                    <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                    <div class="mb-3">
+                      <label for="color" class="form-label">Color:</label>
+                      <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="upper" class="form-label">Upper:</label>
+                      <input type="text" id="upper" class="form-control" v-model="additionalDetails.upper" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="midsole" class="form-label">Midsole:</label>
+                      <input type="text" id="midsole" class="form-control" v-model="additionalDetails.midsole" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="outsole" class="form-label">Outsole:</label>
+                      <input type="text" id="outsole" class="form-control" v-model="additionalDetails.outsole" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description:</label>
+                      <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                     </div>
                   </div>
                   <div v-else-if="localEquipment.equipCategory === 'Apparel'">
-                    <label for="color" class="form-label">Color:</label>
-                    <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
-                    <label for="material" class="form-label">Material:</label>
-                    <input type="text" id="material" class="form-control" v-model="additionalDetails.material" />
+                    <div class="mb-3">
+                      <label for="color" class="form-label">Color:</label>
+                      <input type="text" id="color" class="form-control" v-model="additionalDetails.color" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="material" class="form-label">Material:</label>
+                      <input type="text" id="material" class="form-control" v-model="additionalDetails.material" />
+                    </div>
                   </div>
                   <div v-else-if="localEquipment.equipCategory === 'Accessories'">
-                    <label for="description" class="form-label">Description:</label>
-                    <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description:</label>
+                      <input type="text" id="description" class="form-control" v-model="additionalDetails.description" />
+                    </div>
                   </div>
                 </div>
-  
-                <button type="submit" class="btn btn-update mt-3">Update</button>
+                
+                <div class="button-container d-flex justify-content-between mt-5">
+                  <button type="button" class="btn btn-additional" @click="toggleDetails">
+                  <i class="fa-solid fa-compress"></i>
+                  Additional Details
+                </button>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
               </form>
             </div>
           </div>
@@ -121,13 +160,9 @@
   
   <script>
   import axios from 'axios';
-  import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
   
   export default {
     name: 'EditEquipment',
-    components: {
-      Breadcrumb_Com
-    },
     props: {
       equipID: {
         type: Number,
@@ -139,10 +174,15 @@
         localEquipment: {},
         additionalDetails: {},
         showAdditionalDetails: false,
-        selectedFile: null
+        selectedFile: null,
+        isCardVisible: true,
       };
     },
     methods: {
+      closeEditView() {
+        this.currentView = 'list';
+        this.$emit('update-success');
+      },
       async fetchEquipmentDetails() {
         try {
           const response = await axios.get(`http://localhost:3000/api/equipment/${this.equipID}/details`);
@@ -204,47 +244,91 @@
   </script>
   
   <style scoped>
+  .img-fluid{
+    max-height:350px;
+  }
+
   .card {
     background-color: #333;
     color: #fff;
     border: 1px solid #444;
     border-radius: 0.25rem;
   }
-  
-  .header h4 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+
+  .card-header{
+    border-bottom: 2px solid #6c757d;
+    padding:10px;
   }
-  
+
+  .card-body{
+    text-align:left;
+    margin-left:30px;
+  }
+
+  .card-header h4{
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
   .img-fluid {
     max-width: 100%;
     height: auto;
     border-radius: 0.25rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+
+  .btn {
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-in-out;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.btn-primary:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(45deg, #0056b3, #007bff);
+  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.6);
+  transform: translateY(-3px);
+}
   
-  .btn-update {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 0.25rem;
-  }
-  
-  .btn-update:hover {
-    background-color: #0056b3;
-  }
-  
-  .btn-secondary {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+  .btn-additional {
     background-color: transparent;
     color: #fff;
     border: 1px solid #007bff;
     border-radius: 0.25rem;
   }
   
-  .btn-secondary:hover {
+  .btn-additional:hover {
     background-color: rgba(0, 123, 255, 0.1);
     color: #007bff;
     border-color: #007bff;
@@ -269,21 +353,78 @@
     color: #e9ecef; 
     cursor: not-allowed; 
   }
-  
-  .card-body {
-    position: relative;
-  }
-  
-  .card-header {
-    border-bottom: 1px solid #444;
-  }
-  
-  .mb-3 {
-    margin-bottom: 1rem;
-  }
-  
-  .row {
-    margin-bottom: 1rem;
-  }
-  
+
+  .custom-back-button {
+      position: relative;
+      padding: 10px 20px;
+      border-radius: 7px;
+      border: none;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: transparent;
+      color: #333333;
+      overflow: hidden;
+      box-shadow: 0 0 0 0 transparent;
+      -webkit-transition: all 0.2s ease-in;
+      -moz-transition: all 0.2s ease-in;
+      transition: all 0.2s ease-in;
+    }
+    
+    .custom-back-button:hover {
+      background: #333333;
+      box-shadow: 0 0 30px 5px #444444;
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out;
+      color:#fff;
+    }
+    
+    .custom-back-button:hover::before {
+      -webkit-animation: sh02 0.5s 0s linear;
+      -moz-animation: sh02 0.5s 0s linear;
+      animation: sh02 0.5s 0s linear;
+    }
+    
+    .custom-back-button::before {
+      content: '';
+      display: block;
+      width: 0px;
+      height: 86%;
+      position: absolute;
+      top: 7%;
+      left: 0%;
+      opacity: 0;
+      background: #fff;
+      box-shadow: 0 0 50px 30px #fff;
+      -webkit-transform: skewX(-20deg);
+      -moz-transform: skewX(-20deg);
+      -ms-transform: skewX(-20deg);
+      -o-transform: skewX(-20deg);
+      transform: skewX(-20deg);
+    }
+    
+    @keyframes sh02 {
+      from {
+        opacity: 0;
+        left: 0%;
+      }
+    
+      50% {
+        opacity: 1;
+      }
+    
+      to {
+        opacity: 0;
+        left: 100%;
+      }
+    }
+    
+    .custom-back-button:active {
+      box-shadow: 0 0 0 0 transparent;
+      -webkit-transition: box-shadow 0.2s ease-in;
+      -moz-transition: box-shadow 0.2s ease-in;
+      transition: box-shadow 0.2s ease-in;
+    }
   </style>

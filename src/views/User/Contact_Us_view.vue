@@ -1,6 +1,6 @@
 <template>
     <!-- Breadcrumb -->
-    <div class="d-flex justify-content-between align-items-center custom-breadcrumb">
+    <div class="custom-breadcrumb">
           <Breadcrumb_Com
         :homeLink="'/Home_view'"
         :breadcrumbItems="[]"
@@ -8,7 +8,7 @@
       />
         </div>
     <div class="container d-flex justify-content-center align-items-center">
-      <div class="card-dark mb-3">
+      <div class="custom-card-dark mb-3">
         <div class="card-header">
           <h4>Send us a message</h4>
         </div>
@@ -68,5 +68,4 @@
   <script src='@/javascript/User/Contact_Us.js'></script>
   
   <style src='@/style/User/Contact_Us.css' scoped></style>
-  <style> @import '@/style/Global_style.css'; </style>
   

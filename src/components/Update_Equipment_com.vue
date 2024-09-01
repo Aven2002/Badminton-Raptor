@@ -15,7 +15,8 @@
               <img src="@/assets/Icon/Empty_Icon.png" alt="Empty Icon" class="img-fluid" />
             </div>
             <div v-else>
-              <table class="table table-dark">
+              <div class="table-container">
+                <table class="custom-table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Image</th>
@@ -48,6 +49,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
 
               <!-- Pagination Controls -->
               <Pagination
@@ -72,5 +74,13 @@
 
 <script src='@/javascript/Admin/Update_Equipment'></script>
 
-<style> @import '@/style/Global_style.css'; </style>
+<style scoped>
+.img-thumbnail{
+  width: 90px;
+  height:90px;
+} 
+.custom-table-dark tr{
+  cursor:default;
+}
+</style>
 

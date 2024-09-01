@@ -65,7 +65,6 @@ export default {
     border-radius: 30px;
     max-width: 450px;
     border: solid #e26277 2px;
-    margin-bottom: 15px;
   }
   
   .nav-item {

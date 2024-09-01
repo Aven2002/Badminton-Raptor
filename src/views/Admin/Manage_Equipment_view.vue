@@ -1,8 +1,9 @@
 <template>
   <div class="container">
-    <Navbar_CRUD_com class="navbar-crud" :navItems="navItems" :basePath="'/manage_equipment_view'" />
+    <!-- Conditionally render the Navbar_CRUD_com component -->
+    <Navbar_CRUD_com v-if="currentView !== 'edit'" class="navbar-crud" :navItems="navItems" :basePath="'/manage_equipment_view'" />
     <div class="content">
-      <router-view />
+      <router-view @view-change="handleViewChange" />
     </div>
   </div>
 </template>
@@ -22,8 +23,14 @@ export default {
         { view: 'View', label: 'View', icon: 'fa-solid fa-eye', routeName: 'view_equipment_com' },
         { view: 'Add', label: 'Create', icon: 'fa-solid fa-circle-plus', routeName: 'create_equipment_com' },
         { view: 'Update', label: 'Update', icon: 'fa-solid fa-pen', routeName: 'update_equipment_com' }
-      ]
+      ],
+      currentView: 'list' // Tracks the current view
     };
+  },
+  methods: {
+    handleViewChange(newView) {
+      this.currentView = newView;
+    }
   }
 };
 </script>
@@ -37,13 +44,11 @@ export default {
 @media (max-width: 768px) {
   .navbar-crud {
     position: relative;
-    border:none;
+    border: none;
   }
 }
 
 .content {
-  margin-top: 30px; 
+  margin-top: 30px;
 }
-
-
 </style>

@@ -32,14 +32,14 @@
                       :key="item.equipID" 
                       @click="selectEquipment(item)"
                     >
-                    <td class="align-middle">
+                    <td >
                       <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" @error="handleImageError" />
                     </td>
-                    <td class="align-middle">{{ item.equipName }}</td>
-                    <td class="align-middle">RM{{ item.equipPrice }}</td>
-                    <td class="align-middle">{{ item.equipCategory }}</td>
-                    <td class="align-middle">{{ item.equipBrand }}</td>
-                    <td class="align-middle">
+                    <td class="truncate">{{ item.equipName }}</td>
+                    <td>RM {{ parseFloat(item.equipPrice).toFixed(2) }}</td>
+                    <td>{{ item.equipCategory }}</td>
+                    <td>{{ item.equipBrand }}</td>
+                    <td @click.stop>
                       <div class="d-flex justify-content-center">
                         <RemoveButton :equipID="item.equipID" @item-removed="handleItemRemoved(item.equipID)" @error="showErrorModal" />
                       </div>
@@ -71,9 +71,20 @@
 
 <script src='@/javascript/Admin/View_Equipment.js'></script>
 
-<style>
+<style scoped>
 .img-thumbnail{
-  width:150px;
-  max-height:150px;
+  width: 90px;
+  height: 90px;
+} 
+
+.custom-table-dark td{
+  text-align: center;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; 
 }
 </style>
