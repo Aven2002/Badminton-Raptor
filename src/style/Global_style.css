@@ -239,13 +239,21 @@
 }
 
 .modal-title {
-  color: #fff; /* White title color */
+  color: #0483cc; 
   font-size: 28px; /* Larger font size for emphasis */
   font-weight: bold; /* Bold title for emphasis */
 }
 
 .modal-body p {
   font-size: 20px; /* Font size for body text */
+  text-align: justify;
+  color:#b9b9b9;
+  margin-left: 20px;
+}
+
+.modal-body strong{
+  text-align: justify;
+  color:#ffffff;
 }
 
 

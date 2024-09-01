@@ -4,7 +4,7 @@ import Breadcrumb_Com from '@/components/Breadcrumb_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import RemoveButton from '@/components/Remove_feedback_btn_com.vue';
 import Pagination from '@/components/Pagination_com.vue';
-import FeedbackModal from '@/components/Feedback_modal_com.vue';
+import FeedbackModal from '@/components/Feedback_Details_modal_com.vue';
 
 export default {
   name: 'View_Feedback',
@@ -69,7 +69,7 @@ export default {
     async showFeedbackModal(feedback) {
       this.selectedFeedback = feedback;
       await this.updateFeedbackStatus(feedback.feedbackID);
-      const feedbackModal = new Modal(document.getElementById('feedbackModal'));
+      const feedbackModal = new Modal(document.getElementById('feedbackDetailsModal'));
       feedbackModal.show();
     },
     async updateFeedbackStatus(feedbackID) {

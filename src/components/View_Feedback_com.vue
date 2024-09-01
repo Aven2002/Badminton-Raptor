@@ -24,6 +24,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Contact Number</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Created At</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -37,6 +38,7 @@
                     <td>{{ item.email }}</td>
                     <td>{{ item.contactNum }}</td>
                     <td>{{ item.feedbackCategory }}</td>
+                    <td>{{ item.created_at }}</td>
                     <td @click.stop>
                       <div class="d-flex justify-content-center" style="gap: 20px;">
                         <RemoveButton :feedbackID="item.feedbackID" @item-removed="removeFeedbackFromList" @error="showErrorModal" />

@@ -43,19 +43,3 @@
    },
  };
  </script>
- 
- <style scoped>
- .modal-title {
-     color: #0483cc; 
-   }
- .modal-body p{
-   text-align: justify;
-   color:#b9b9b9;
- }
- 
- .modal-body strong{
-   text-align: justify;
-   color:#ffffff;
- }
- 
- </style>

@@ -27,7 +27,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in paginatedItems" :key="item.equipID">
+                  <tr 
+                      v-for="item in paginatedItems" 
+                      :key="item.equipID" 
+                      @click="selectEquipment(item)"
+                    >
                     <td class="align-middle">
                       <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" @error="handleImageError" />
                     </td>
@@ -55,6 +59,12 @@
         </div>
       </div>
     </div>
+      <!-- Modals -->
+      <EquipmentDetailsModal
+        v-if="selectedEquipment"
+        :equipment="selectedEquipment"
+        @close="selectedEquipment = null"
+      />
     <ErrorModal :errorMessage="errorMessage" />
   </main>
 </template>
