@@ -16,8 +16,8 @@
             <img src="@/assets/Icon/Empty_Icon.png" alt="Empty Icon" class="img-fluid" />
           </div>
           <div v-else>
-            <div class="table-responsive">
-              <table class="table table-dark">
+            <div class="table-container">
+              <table class="custom-table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Feedback ID</th>
@@ -31,11 +31,6 @@
                   <tr
                     v-for="item in paginatedItems"
                     :key="item.feedbackID"
-                    :style="{
-                      backgroundColor: item.status === 0 ? '#f8d7da' : '#d4edda',
-                      color: item.status === 0 ? '#721c24' : '#155724', /* Adjust text color for readability */
-                      borderRadius: '4px' /* Optional: Add border radius to improve appearance */
-                    }"
                     @click="showFeedbackModal(item)"
                   >
                     <td>{{ item.feedbackID }}</td>

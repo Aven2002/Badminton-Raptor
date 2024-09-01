@@ -24,8 +24,6 @@
 
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'RecommendationModal',
   props: {
@@ -38,33 +36,6 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      equipmentDetails: []
-    };
-  },
-  watch: {
-    recommendation: {
-      immediate: true,
-      handler(newValue) {
-        if (newValue && newValue.equipment_ids) {
-          const equipIDs = JSON.parse(newValue.equipment_ids);
-          this.fetchEquipmentDetails(equipIDs);
-        }
-      }
-    }
-  },
-  methods: {
-    async fetchEquipmentDetails(equipIDs) {
-      this.equipmentDetails = [];
-      const fetchPromises = equipIDs.map(equipID =>
-        axios.get(`http://localhost:3000/api/equipment/${equipID}/details`)
-          .then(response => this.equipmentDetails.push(response.data.equipment))
-          .catch(error => console.error(`Error fetching equipment details for ID ${equipID}:`, error))
-      );
-      await Promise.all(fetchPromises);
-    }
-  }
 };
 </script>
 

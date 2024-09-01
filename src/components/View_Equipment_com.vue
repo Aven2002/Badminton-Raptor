@@ -14,8 +14,8 @@
             <img src="@/assets/Icon/Empty_Icon.png" alt="Empty Icon" class="img-fluid" />
           </div>
           <div v-else>
-            <div class="table-responsive">
-              <table class="table table-dark">
+            <div class="table-container">
+              <table class="custom-table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Image</th>
@@ -62,14 +62,8 @@
 <script src='@/javascript/Admin/View_Equipment.js'></script>
 
 <style>
-@import '@/style/Global_style.css';
-
-.btn.btn-transparent {
-  color: black;
-}
-
-.btn.btn-transparent:hover {
-  background-color: darkgray;
-  color: black;
+.img-thumbnail{
+  width:150px;
+  max-height:150px;
 }
 </style>

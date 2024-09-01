@@ -16,8 +16,8 @@
             <img src="@/assets/Icon/Empty_Icon.png" alt="Empty Icon" class="img-fluid" />
           </div>
           <div v-else>
-            <div class="table-responsive">
-              <table class="table table-dark">
+            <div class="table-container">
+              <table class="custom-table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Recommendation ID</th>
@@ -32,11 +32,6 @@
                   <tr
                     v-for="item in paginatedItems"
                     :key="item.recommendationID"
-                    :style="{
-                      backgroundColor: item.status === 0 ? '#f8d7da' : '#d4edda',
-                      color: item.status === 0 ? '#721c24' : '#155724',
-                      borderRadius: '4px'
-                    }"
                     @click="selectRecommendation(item)"
                   >
                     <td>{{ item.recommendationID }}</td>

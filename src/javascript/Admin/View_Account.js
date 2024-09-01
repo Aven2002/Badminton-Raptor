@@ -4,6 +4,7 @@ import ErrorModal from '@/components/Error_modal_com.vue';
 import RemoveButton from '@/components/Remove_account_btn_com.vue';
 import SearchBar_Com from '@/components/Search_Bar_com.vue';
 import Pagination from '@/components/Pagination_com.vue';
+import AccountDetailsModal from '@/components/Account_Details_modal_com.vue';
 
 export default {
   name: 'Manage_Account',
@@ -11,7 +12,8 @@ export default {
     ErrorModal,
     SearchBar_Com,
     RemoveButton,
-    Pagination
+    Pagination,
+    AccountDetailsModal
   },
   data() {
     return {
@@ -21,7 +23,8 @@ export default {
       errorMessage: '',
       currentPage: 1,
       itemsPerPage: 9,
-      searchData: ''
+      searchData: '',
+      selectedAccount: null
     };
   },
   created() {
@@ -74,6 +77,21 @@ export default {
         item.username.toLowerCase().includes(query)
       );
       this.currentPage = 1; // Reset to first page after search
+    },
+    selectAccount(account) {
+      this.selectedAccount = account;
+    
+      this.$nextTick(() => {
+        const modalElement = document.getElementById('accountDetailsModal');
+        
+        if (modalElement) {
+          const accountDetailsModal = Modal.getInstance(modalElement) || new Modal(modalElement);
+          accountDetailsModal.show();
+        } else {
+          console.error("Modal element not found!");
+        }
+      });
     }
+    
   }  
 };

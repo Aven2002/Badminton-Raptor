@@ -1,29 +1,51 @@
+/* Custom Dark Table */
+.table-container {
+  overflow-x: auto; /* Enables horizontal scrolling if necessary */
+}
 
-/* Dark- Table */
-.table-dark {
-    background-color: #333;
-    padding:15px;
-    border: 1px solid #444;
-    border-radius: 0.25rem;
-  }
-  .table-dark th, .table-dark td {
-    color: #e0e0e0; 
-  }
-  
-  .img-thumbnail {
-    width: 100px;
-    height: auto;
-    max-height:200px;
-  }
-  .table-hover tbody tr:hover {
-    cursor: pointer;
-  }
-  .table th, .table td {
-    text-align: center;
-  }
-  .table-responsive {
-    overflow-x: auto;
-  }
+/* Custom table dark theme */
+.custom-table-dark {
+  background-color: #333; /* Dark background for the table */
+  color: #fff; /* White text for table content */
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table-dark th,
+.custom-table-dark td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+/* Remove borders and add subtle row separation */
+.custom-table-dark th,
+.custom-table-dark td {
+  border: none; /* Remove borders */
+}
+
+.custom-table-dark th {
+  background-color: #292929; /* Slightly lighter background for header */
+  font-weight: bold;
+}
+
+.custom-table-dark tr {
+  border-bottom: 1px solid #555; /* Subtle row separation */
+  cursor:pointer;
+}
+
+.custom-table-dark tr:last-child {
+  border-bottom: none; /* Remove border for the last row */
+}
+
+.custom-table-dark tr:hover {
+  color: #43ec00; /* Highlight text color */
+}
+
+.custom-table-dark td {
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+}
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 /* Dark Card */
