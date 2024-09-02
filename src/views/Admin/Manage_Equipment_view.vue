@@ -49,6 +49,6 @@ export default {
 }
 
 .content {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 </style>

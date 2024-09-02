@@ -73,13 +73,13 @@
   <style scoped>
   .breadcrumb {
     background-color: transparent;
-    font-size: 15px;
+    font-size: 18px;
   }
   .breadcrumb-item a {
     color: #007bff;
   }
   .breadcrumb-item.active {
-    color: #6c757d;
+    color: #6e6e6e;
   }
   </style>
   

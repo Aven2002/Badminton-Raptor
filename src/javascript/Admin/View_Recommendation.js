@@ -5,6 +5,7 @@ import ErrorModal from '@/components/Error_modal_com.vue';
 import RemoveButton from '@/components/Remove_recommendation_btn_com.vue';
 import Pagination from '@/components/Pagination_com.vue';
 import RecommendationModal from '@/components/Recommendation_Details_modal_com.vue';
+import BackBtn from '@/components/Back_btn_com.vue';
 
 export default {
   name: 'View_Recommendation',
@@ -13,7 +14,8 @@ export default {
     ErrorModal,
     RemoveButton,
     Pagination,
-    RecommendationModal
+    RecommendationModal,
+    BackBtn
   },
   data() {
     return {

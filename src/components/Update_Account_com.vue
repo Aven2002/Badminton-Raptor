@@ -14,8 +14,8 @@
               <img src="@/assets/Icon/Empty_Icon.png" alt="Empty Icon" class="img-fluid" />
             </div>
             <div v-else>
-              <div class="table-responsive">
-                <table class="table table-dark">
+              <div class="table-container">
+                <table class="custom-table-dark">
                   <thead>
                     <tr>
                       <th scope="col">User ID</th>
@@ -23,10 +23,6 @@
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
                       <th scope="col">Contact Number</th>
-                      <th scope="col">Gender</th>
-                      <th scope="col">Age</th>
-                      <th scope="col">Race</th>
-                      <th scope="col">DOB</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -37,11 +33,7 @@
                       <td>{{ item.fname + ' ' + item.lname }}</td>
                       <td>{{ item.email }}</td>
                       <td>{{ item.contactNum }}</td>
-                      <td>{{ item.gender }}</td>
-                      <td>{{ item.age }}</td>
-                      <td>{{ item.race }}</td>
-                      <td>{{ item.dob }}</td>
-                      <td>
+                      <td @click.stop>
                         <div class="d-flex justify-content-center" style="gap: 20px;">
                           <UpdateButton
                             :userID="item.userID"
@@ -77,26 +69,3 @@
 </template>
 
 <script src='@/javascript/Admin/Update_Account.js'></script>
-
-
-<style>
-@import '@/style/Global_style.css';
-
-.btn.btn-transparent {
-color: black;
-}
-
-.btn.btn-transparent:hover {
-background-color: darkgray;
-color: black;
-}
-
-.toast-success {
-  background-color: #28a745; /* Green background */
-  color: #fff; /* White text */
-}
-
-.toast-success .toast-body {
-  color: #fff; /* Ensure the text inside the toast is white */
-}
-</style>

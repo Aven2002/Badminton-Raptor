@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-transparent justify-content-center mb-2">
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent justify-content-center mb-3">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -64,7 +64,7 @@ export default {
     background-color: transparent;
     border-radius: 30px;
     max-width: 450px;
-    border: solid #e26277 2px;
+    border: solid #e26277 4px;
   }
   
   .nav-item {

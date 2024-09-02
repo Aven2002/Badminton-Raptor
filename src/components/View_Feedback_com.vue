@@ -33,6 +33,7 @@
                     v-for="item in paginatedItems"
                     :key="item.feedbackID"
                     @click="showFeedbackModal(item)"
+                    :style="item.rowStyle"
                   >
                     <td>{{ item.feedbackID }}</td>
                     <td>{{ item.email }}</td>

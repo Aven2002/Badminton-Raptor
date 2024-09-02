@@ -43,7 +43,10 @@ export default {
       this.loading = true;
       try {
         const response = await axios.get('http://localhost:3000/api/feedback');
-        this.items = response.data;
+        this.items = response.data.map(item => {
+          item.rowStyle = item.status === 0 ? { backgroundColor: '#555' } : {};
+          return item;
+        });
       } catch (error) {
         console.error('Error fetching feedbacks:', error);
       } finally {
@@ -77,6 +80,7 @@ export default {
         await axios.put(`http://localhost:3000/api/feedback/${feedbackID}`);
         const feedback = this.items.find(item => item.feedbackID === feedbackID);
         if (feedback) feedback.status = 1;
+        await this.fetchItems();
       } catch (error) {
         console.error('Error updating feedback status:', error);
       }
