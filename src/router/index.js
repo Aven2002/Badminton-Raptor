@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Cookies from 'js-cookie';
-
+import State_management from './State_management';
 import Home_view_Admin from '@/views/Admin/Home_view_Admin.vue';
 import Manage_Account_view from '@/views/Admin/Manage_Account_view.vue';
 import Manage_Equipment_view from '@/views/Admin/Manage_Equipment_view.vue';
@@ -81,12 +80,18 @@ const routes = [
   { path: '/contact_us_view', component: Contact_Us_view, meta: { requiresAuth: true, requiresRole: 'User' } },
   { path: '/chatbox_view', component: Chatbox_view, meta: { requiresAuth: true, requiresRole: 'User' } },
 
+  //Only user can access
+    {
+      path: '/settings_view',
+      component: Settings_view,
+      meta: { requiresAuth: true, requiresRole: ['User', 'Admin'] },
+    },
+
   // General Routes (Accessible without login)
   { path: '/forbidden', component: Forbidden_view },
   { path: '/', component: Landing_view },
   { path: '/sign_up_view', component: Sign_Up_view },
   { path: '/log_in_view', component: Log_In_view },
-  { path: '/settings_view', name: 'Settings_view', component: Settings_view },
   { path: '/reset_password_view', name: 'Reset_Password_view', component: Reset_Password_view }
 ];
 
@@ -95,26 +100,24 @@ const router = createRouter({
   routes
 });
 
-// Navigation Guard to protect routes
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = Cookies.get('userID');  // Check if the userID cookie exists
-  const userRole = Cookies.get('userRole');  // Check the user role
+  const isAuthenticated = !!State_management.state.userID; // Use State_management instead of store
+  const userRole = State_management.state.userRole; // Use State_management instead of store
+  const requiresAuth = to.meta.requiresAuth;
+  const allowedRoles = to.meta.requiresRole || [];
 
+  console.log('Required Role:', allowedRoles);
   console.log('Authenticated:', isAuthenticated);
   console.log('User Role:', userRole);
-  console.log('Required Role:', to.meta.requiresRole);
 
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!isAuthenticated) {
-      next({ path: '/log_in_view' });
-    } else if (to.matched.some(record => record.meta.requiresRole) && userRole !== to.meta.requiresRole) {
-      next({ path: '/forbidden' });
-    } else {
-      next();  // Allow access to the route
-    }
+  if (requiresAuth && !isAuthenticated) {
+    next('/log_in_view');
+  } else if (requiresAuth && allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
+    next('/forbidden');
   } else {
-    next();  // Allow access to routes that don't require authentication
+    next();
   }
 });
+
 
 export default router;

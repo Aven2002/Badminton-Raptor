@@ -34,6 +34,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import ConfirmationModal from '@/components/Confirmation_modal_com.vue';
 import { Modal } from 'bootstrap';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Logout_btn_com',
@@ -49,6 +50,8 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['setUserID', 'setUserRole']),
+    
     getUserData() {
       // Fetch the user data using the userID stored in cookies
       const userID = Cookies.get('userID');
@@ -75,6 +78,12 @@ export default {
     handleConfirm() {
       // Remove the userID cookie
       Cookies.remove('userID');
+      Cookies.remove('userRole');
+
+      // Clear Vuex state
+      this.setUserID(null);
+      this.setUserRole('Visitor');
+
       // Redirect to the landing page
       this.$router.push('/');
   
@@ -91,6 +100,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 /* Profile Image Styling */

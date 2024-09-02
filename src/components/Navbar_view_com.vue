@@ -48,7 +48,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import LogoutButton from '@/components/Logout_btn_com.vue';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 export default {
   name: "Navbar_view_com",
@@ -62,17 +61,16 @@ export default {
       isNavbarCollapsed: false,
       isDropdownVisible: false,
       categories: [],
-      userID: Cookies.get('userID') || null,
     };
   },
   computed: {
-    ...mapGetters(['isAdmin']),
+    ...mapGetters(['isAdmin', 'userID']),  // Use Vuex getters
     homeLink() {
       return this.isAdmin ? '/home_view_admin' : '/home_view_user';
     }
   },
   methods: {
-    ...mapActions(['fetchUserRole']),
+    ...mapActions(['fetchUserRole', 'setUserID', 'setUserRole']), // Vuex actions
     toggleNavbar() {
       this.isNavbarCollapsed = !this.isNavbarCollapsed;
     },
@@ -94,16 +92,16 @@ export default {
         });
     }
   },
-  watch: {
-    userID(newID) {
-      if (newID) {
-        this.fetchUserRole(); // Fetch user role when userID changes
-      }
-    }
-  },
   created() {
     this.fetchEquipment();
     this.fetchUserRole(); // Fetch the user role when component is created
+  },
+  watch: {
+  userID(newID) {
+    if (newID) {
+      this.fetchUserRole(); // Fetch user role when userID changes
+    }
+  }
   }
 };
 </script>

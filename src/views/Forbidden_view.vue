@@ -49,6 +49,8 @@
   /* Lighter blue color for p */
   .text-light-blue {
     color: #00509e;
+    font-weight:600;
+    font-size:20px;
   }
   
   /* Image cover settings */

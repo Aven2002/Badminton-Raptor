@@ -3,6 +3,7 @@ import { Modal } from 'bootstrap';
 import Cookies from 'js-cookie';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import BackBtn from '@/components/Back_btn_com.vue';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Log_In_view',
@@ -32,6 +33,8 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setUserID', 'setUserRole']),
+
     async checkUser() {
       try {
         const response = await axios.get('http://localhost:3000/api/account');
@@ -99,6 +102,10 @@ export default {
 
         this.isAdmin = userRole === 'Admin'; // Ensure this matches the role in your API
         Cookies.set('userRole', userRole); // Save the userRole to cookies
+        
+        this.setUserID(userID);
+        this.setUserRole(userRole);
+
       } catch (error) {
         console.error('Error fetching user role:', error);
         this.isAdmin = false; // Default to non-admin in case of error
