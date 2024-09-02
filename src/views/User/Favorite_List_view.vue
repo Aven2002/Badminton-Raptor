@@ -25,7 +25,7 @@
             <img src="@/assets/Icon/Empty_Icon.png" alt="No favorites" class="img-fluid" />
           </div>
           <div v-else>
-            <table class="table table-dark table-hover">
+            <table class="custom-table-dark">
               <thead>
                 <tr>
                   <th scope="col">Image</th>
@@ -39,7 +39,7 @@
               <tbody>
                 <tr v-for="item in paginatedItems" :key="item.favoriteID" @click="goToDetails(item.equipID)">
                   <td>
-                    <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail fixed-size" />
+                    <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" />
                   </td>
                   <td>{{ item.equipName }}</td>
                   <td>RM{{ formattedPrice(item.equipPrice) }}</td>
@@ -72,13 +72,17 @@
 <script src='@/javascript/User/Favorite_List.js'></script>
 
 <style> 
-@import '@/style/Global_style.css';
-
 .text-light {
   color: #e0e0e0; /* Light color for loading text */
 }
+
 .table-dark tbody tr:hover {
   background-color: #333;
   cursor: pointer; 
 }
+
+.img-thumbnail{
+  width: 120px;
+  height: 120px;
+} 
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <button @click="addToFavorites" class="btn btn-transparent">
+      <button @click="addToFavorites" class="button">
         <i class="fa-solid fa-star"></i> Favorites
       </button>
   
@@ -91,20 +91,29 @@
   
   
   <style scoped>
-  .btn-transparent {
-    background-color: transparent;
-    color: #007bff; /* Primary color text */
-    border: 1px solid #007bff; /* Primary color border */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 14px; /* Adjust font size */
-    padding: 8px 16px; /* Adjust padding */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-  }
-  
-  .btn-transparent:hover {
-    background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
-    color: #0056b3; /* Darker blue text on hover */
-    border-color: #0056b3; /* Darker blue border on hover */
-  }
+.button {
+  --bg: #444;
+  --hover-bg: #e26277;
+  --hover-text: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid var(--bg);
+  border-radius: 30px;
+  padding: 0.8em 1.3em;
+  background: var(--bg);
+  transition: 0.2s;
+}
+
+.button:hover {
+  color: var(--hover-text);
+  transform: translate(-0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.button:active {
+  transform: translate(0);
+  box-shadow: none;
+}
   </style>
   
