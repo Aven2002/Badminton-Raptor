@@ -1,7 +1,7 @@
 <template>
     <div>
       <button @click="addToFavorites" class="button">
-        <i class="fa-solid fa-star"></i> Favorites
+        <i class="fa-solid fa-heart-circle-plus"></i> Like
       </button>
   
       <!-- Use ErrorModal component -->
@@ -92,16 +92,17 @@
   
   <style scoped>
 .button {
-  --bg: #444;
+  --bg: #5c5c5c;
   --hover-bg: #e26277;
   --hover-text: #000;
-  color: #fff;
+  color: #680000;
   cursor: pointer;
-  border: 1px solid var(--bg);
-  border-radius: 30px;
-  padding: 0.8em 1.3em;
-  background: var(--bg);
+  border: 3px groove #e26277;
+  border-radius: 10px;
+  padding: 0.6em 1.0em;
+  background: transparent;
   transition: 0.2s;
+  font-size:16px;
 }
 
 .button:hover {

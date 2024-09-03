@@ -1,34 +1,36 @@
 
 h2 {
-    font-size: 18px; 
+    font-size: 28px; 
     margin-bottom: 15px; 
     font-weight: bold;
     color: #343a40;
   }
   
   .lead {
-    font-size: 13px; 
+    font-size: 20px; 
     margin-bottom: 8px; 
     margin-left: 15px; 
-    color: #495057;
+    color: #000000;
     text-align: left;
-  }
-  
-  .text-primary {
-    color: #007bff !important;
-    text-align: left;
+    font-weight:500;
   }
   
   .list-group-item {
-    font-size: 13px; 
+    font-size: 15px; 
     padding: 10px 12px; 
     margin-bottom: 4px; 
     text-align: left;
   }
   
+  .list-group strong{
+    font-size: 14px;
+    color:aqua;
+  }
+
   .brand-logo {
-    height: 40px; 
-    width: 100px; 
+    height: 60px; 
+    width: 120px; 
+    margin-right: 20px;
   }
   
   .left-section {
@@ -50,4 +52,7 @@ h2 {
   .card-dark .list-group-item:not(:last-child) {
     border-bottom: 1px solid #6c757d;
   }
-  
+
+  .backbtn{
+    margin-left:auto;
+  }

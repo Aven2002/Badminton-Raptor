@@ -42,6 +42,15 @@ export default {
       const end = start + this.itemsPerPage;
       return this.filteredFavoriteItems.slice(start, end); // Updated to use filteredFavoriteItems
     },
+    truncatedItems() {
+      return this.items.map(item => {
+        const maxLength = 20;
+        const truncatedEquipmentName = item.equipName.length > maxLength
+          ? item.equipName.substring(0, maxLength) + '...'
+          : item.equipName;
+        return { ...item, equipmentName: truncatedEquipmentName };
+      });
+    },
   },  
   methods: {
     async fetchFavoriteItems() {

@@ -41,12 +41,12 @@
                   <td>
                     <img :src="getImagePath(item.equipImgPath)" alt="Equipment Image" class="img-thumbnail" />
                   </td>
-                  <td>{{ item.equipName }}</td>
+                  <td class="truncate">{{ item.equipName }}</td>
                   <td>RM{{ formattedPrice(item.equipPrice) }}</td>
                   <td>{{ item.equipCategory }}</td>
                   <td>{{ item.equipBrand }}</td>
                   <td @click.stop="">
-                    <div class="d-flex justify-content-end" style="gap: 20px;">
+                    <div class="d-flex justify-content-end mr-2" style="gap: 20px;">
                       <DownloadButton :equipID="item.equipID" @error="handleError" />
                       <RemoveButton :favoriteID="item.favoriteID" @item-removed="handleItemRemoved" @error="showErrorModal" />
                     </div>
@@ -85,4 +85,11 @@
   width: 120px;
   height: 120px;
 } 
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px; 
+}
 </style>

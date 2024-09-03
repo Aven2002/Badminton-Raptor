@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="goBack" class="custom-back-button mt-3 align-self-start">
-      Back <i class="fa-solid fa-arrow-right-to-bracket"></i>
+      BACK <i class="fa-solid fa-arrow-right-to-bracket"></i>
     </button>
   </div>
 </template>
@@ -18,80 +18,31 @@
   </script>
   
   <style scoped>
-  .custom-back-button {
-      position: relative;
-      padding: 10px 20px;
-      border-radius: 7px;
-      border: none;
-      font-size: 16px;
-      text-transform: uppercase;
-      font-weight: 800;
-      letter-spacing: 2px;
-      background: transparent;
-      color: #333333;
-      overflow: hidden;
-      box-shadow: 0 0 0 0 transparent;
-      -webkit-transition: all 0.2s ease-in;
-      -moz-transition: all 0.2s ease-in;
-      transition: all 0.2s ease-in;
-      margin-right:50px;
-    }
-    
-    .custom-back-button:hover {
-      background: #333333;
-      box-shadow: 0 0 30px 5px #444444;
-      -webkit-transition: all 0.2s ease-out;
-      -moz-transition: all 0.2s ease-out;
-      transition: all 0.2s ease-out;
-      color:#fff;
-    }
-    
-    .custom-back-button:hover::before {
-      -webkit-animation: sh02 0.5s 0s linear;
-      -moz-animation: sh02 0.5s 0s linear;
-      animation: sh02 0.5s 0s linear;
-    }
-    
-    .custom-back-button::before {
-      content: '';
-      display: block;
-      width: 0px;
-      height: 86%;
-      position: absolute;
-      top: 7%;
-      left: 0%;
-      opacity: 0;
-      background: #fff;
-      box-shadow: 0 0 50px 30px #fff;
-      -webkit-transform: skewX(-20deg);
-      -moz-transform: skewX(-20deg);
-      -ms-transform: skewX(-20deg);
-      -o-transform: skewX(-20deg);
-      transform: skewX(-20deg);
-    }
-    
-    @keyframes sh02 {
-      from {
-        opacity: 0;
-        left: 0%;
-      }
-    
-      50% {
-        opacity: 1;
-      }
-    
-      to {
-        opacity: 0;
-        left: 100%;
-      }
-    }
-    
-    .custom-back-button:active {
-      box-shadow: 0 0 0 0 transparent;
-      -webkit-transition: box-shadow 0.2s ease-in;
-      -moz-transition: box-shadow 0.2s ease-in;
-      transition: box-shadow 0.2s ease-in;
-    }
+ .custom-back-button {
+  --hover-bg: #444;
+  --hover-text: #000;
+  color: #680000;
+  cursor: pointer;
+  border: none;
+  padding: 0.6em 1.0em;
+  background: transparent;
+  transition: 0.2s;
+  font-size:18px;
+  font-weight: 600;
+}
+
+.custom-back-button:hover {
+  color: #dd9f9f;
+  border-radius:20px;
+  transform: translate(-0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.custom-back-button:active {
+  transform: translate(0);
+  box-shadow: none;
+}
   </style>
   
   

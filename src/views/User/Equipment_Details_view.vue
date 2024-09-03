@@ -1,6 +1,6 @@
 <template>
     <div>
-      <main class="content container py-4">
+      <main class="content container py-1">
         <div v-if="loading" class="text-center">
           <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
@@ -9,34 +9,30 @@
         <div v-else>
           <div v-if="equipment">
             <div class="row">
-              <!-- Top Section: Breadcrumb and Button -->
-              <div class="d-flex justify-content-between align-items-center w-100">
-                <Breadcrumb_com
-                  :homeLink="'/Home_view'"
-                  :breadcrumbItems="[
-                    { text: 'Equipment', link: '/Browse_Equipment_view' }
-                  ]"
-                  :currentItem="equipment.equipName"
-                />
+            <div class="d-flex justify-content-end">
+              <BackBtn/>
+            </div>
+              <div class="d-flex justify-content-start align-items-center mb-2">
+                <div class="row align-items-center mb-3">
+                  <div class="col d-flex align-items-center">
+                    <img :src="getBrandLogo(equipment.equipBrand)" alt="Brand Logo" class="brand-logo rounded shadow-lg" />
+                    <h2 class="display-4">{{ equipment.equipName }}</h2>
+                  </div>
+                </div>
               </div>
-  
               <!-- Left Section: Image -->
               <div class="col-md-4 d-flex flex-column align-items-center left-section position-relative">
                 <img :src="getImagePath(equipment.equipImgPath)" alt="Equipment Image" class="img-fluid rounded shadow-lg" />
               </div>
   
-              <!-- Right Section: Equipment Details -->
+              <!-- Right Section: Equipment Details and Favorite btn-->
               <div class="col-md-8">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h2 class="display-4">{{ equipment.equipName }}</h2>
-                  <Favorite_btn_com :equipID="equipment.equipID" class="favorite-btn" />
+                <div class="d-flex justify-content-between align-items-center mb-2 lead">
+                <p><i class="fa-solid fa-sack-dollar"></i> RM{{ equipment.equipPrice.toFixed(2) }}</p>
+                <Favorite_btn_com :equipID="equipment.equipID" class="favorite-btn" />
                 </div>
-                <p class="lead mb-3"><strong>Price:</strong> RM{{ equipment.equipPrice.toFixed(2) }}</p>
-                <p class="lead mb-3"><strong>Category:</strong> {{ equipment.equipCategory }}</p>
-                <p class="lead mb-4"><strong>Brand:</strong> {{ equipment.equipBrand }}</p>
-  
                 <!-- Additional Details Based on Category -->
-                <div v-if="details" class="mt-4">
+                <div v-if="details" class="mt-3">
                   <div v-if="equipment.equipCategory === 'Racquet'" class="card card-dark mb-2">
                     <div class="card-body">
                       <ul class="list-group">
