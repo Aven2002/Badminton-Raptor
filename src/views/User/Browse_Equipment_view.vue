@@ -1,5 +1,5 @@
 <template>
-  <main class="content container mt-3">
+  <main class="content container mt-1">
     <div class="row">
        <!-- Breadcrumb -->
       <div class="custom-breadcrumb">
@@ -58,8 +58,8 @@
                     <img class="card-img-top" :src="getImagePath(item.equipImgPath)" alt="Equipment Image">
                   </div>
                   <div class="card-back">
-                    <h5 class="card-title">{{ item.equipName }}</h5>
-                    <p class="card-text">Price: RM{{ item.equipPrice.toFixed(2) }}</p>
+                    <h5 class>{{ item.equipName }}</h5>
+                    <p class>Price: RM{{ item.equipPrice.toFixed(2) }}</p>
                   </div>
                 </div>
               </div>

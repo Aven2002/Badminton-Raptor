@@ -79,7 +79,7 @@
     color: #007bff;
   }
   .breadcrumb-item.active {
-    color: #6e6e6e;
+    color: #555;
   }
   </style>
   
