@@ -3,6 +3,7 @@ import SuccessModal from '@/components/Success_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import BackBtn from '@/components/Back_btn_com.vue';
 import { Toast, Modal } from 'bootstrap';
+import validation from '@/utils/Validation.js';
 
 export default {
   name: 'Sign_Up_view',
@@ -22,13 +23,14 @@ export default {
         email: '',
         password: '',
         gender: '',
-        age: '',
+        age: 0,
         race: '',
         contactNum: '',
         dob: '',
         securityQuestions: ['', '', ''],
         answers: ['', '', '']
       },
+      errors: {}, // For form validation errors
       securityQuestions: [],
       profileImgs: [
         require('@/assets/Profile_Img/Profile_Img_01.png'),
@@ -37,18 +39,35 @@ export default {
         require('@/assets/Profile_Img/Profile_Img_04.png')
       ],
       successMessage: '',
-      errorMessage: ''
+      errorMessage: '',
+      showPassword: false
     };
   },
   computed: {
     isStep2Valid() {
       return this.form.fname && this.form.lname && this.form.username &&
              this.form.email && this.form.password && this.form.gender &&
-             this.form.age && this.form.race && this.form.contactNum && this.form.dob;
+             this.form.race && this.form.contactNum && this.form.dob;
     },
-    isStep3Valid() {
-      // Check that all questions and answers are filled
+    isStep4Valid() {
       return this.form.securityQuestions.every(q => q) && this.form.answers.every(a => a);
+    },
+    age() {
+      if (!this.form.dob) return 0;
+      const dob = new Date(this.form.dob);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const monthDiff = today.getMonth() - dob.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      return age;
+    },
+    passwordFieldType() {
+      return this.showPassword ? 'text' : 'password';
+    },
+    passwordToggleIcon() {
+      return this.showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
     }
   },
   methods: {
@@ -57,19 +76,69 @@ export default {
         this.step = step;
       }
     },
-    nextStep() {
-      if (this.step < 4) {
-        this.step++;
+    async nextStep() {
+      try {
+        if (this.step === 2) {
+          const isValid = await this.validateForm(); // Ensure validateForm() completes
+          if (isValid) {
+            this.step++;
+          } else {
+            console.log('Validation failed. Current errors:', this.errors); // Debugging
+          }
+        } else if (this.step === 4) {
+          if (this.isStep4Valid) { // Ensure this is calculated correctly
+            this.step++;
+          } else {
+            this.showErrorModal('Please fill in all security questions and answers.');
+          }
+        } else if (this.step < 4) {
+          this.step++;
+        }
+      } catch (error) {
+        console.error('Error during step transition:', error);
+        this.showErrorModal('An error occurred during step transition.');
       }
-    },
+    },    
     prevStep() {
       if (this.step > 1) {
         this.step--;
       }
     },
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+    },
     selectProfileImg(img) {
       this.form.profileImg = img;
     },
+    async validateForm() {
+      this.errors = {}; // Clear previous errors
+    
+      try {
+        const usernameError = await validation.validateUsername(this.form.username);
+        const emailError = await validation.validateEmail(this.form.email);
+        const passwordError = validation.validatePassword(this.form.password);
+        const fnameError = validation.validateFName(this.form.fname);
+        const lnameError = validation.validateLName(this.form.lname);
+        const contactNumError = validation.validatePhoneNumber(this.form.contactNum);
+        const dobError = validation.validateDOB(this.form.dob);
+    
+        if (usernameError) this.errors.username = usernameError;
+        if (emailError) this.errors.email = emailError;
+        if (passwordError) this.errors.password = passwordError;
+        if (fnameError) this.errors.fname = fnameError;
+        if (lnameError) this.errors.lname = lnameError;
+        if (contactNumError) this.errors.contactNum = contactNumError;
+        if (dobError) this.errors.dob = dobError;
+    
+        console.log('Errors:', this.errors); // Debugging line
+        console.log('Validation result:', !Object.keys(this.errors).length); // Debugging line
+    
+        return !Object.keys(this.errors).length;
+      } catch (error) {
+        console.error('Validation error:', error);
+        return false;
+      }
+    },    
     async signUp() {
       // Format security answers for API
       const securityAnswers = this.form.securityQuestions.map((question, index) => ({
@@ -79,6 +148,7 @@ export default {
       
       const payload = {
         ...this.form,
+        age: this.age, 
         securityAnswers
       };
 

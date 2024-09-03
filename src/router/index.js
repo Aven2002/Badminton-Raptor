@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import State_management from './State_management';
+import State_management from '../utils/State_management';
 import Home_view_Admin from '@/views/Admin/Home_view_Admin.vue';
 import Manage_Account_view from '@/views/Admin/Manage_Account_view.vue';
 import Manage_Equipment_view from '@/views/Admin/Manage_Equipment_view.vue';
