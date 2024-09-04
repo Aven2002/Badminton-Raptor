@@ -130,9 +130,6 @@ export default {
         if (contactNumError) this.errors.contactNum = contactNumError;
         if (dobError) this.errors.dob = dobError;
     
-        console.log('Errors:', this.errors); // Debugging line
-        console.log('Validation result:', !Object.keys(this.errors).length); // Debugging line
-    
         return !Object.keys(this.errors).length;
       } catch (error) {
         console.error('Validation error:', error);

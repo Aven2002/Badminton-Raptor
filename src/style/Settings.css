@@ -101,4 +101,22 @@
     border-color: #007bff; /* Border color on hover */
   }
   
+  .errorValidationMessage {
+    text-align: justify;
+    font-family: 'Arial', sans-serif; /* Consider using a sans-serif font for a cleaner look in dark themes */
+    color: #e74c3c; /* Lighter red for better visibility on dark backgrounds */
+    background-color: transparent;
+    padding: 10px; /* Add some padding for better readability */
+    border-radius: 5px; /* Rounded corners for a softer look */
+    border: 1px solid #e74c3c; /* Border to make the message stand out */
+  }
   
+  .errorValidationMessage li{
+    margin-bottom: 10px;
+  }
+
+.field-username-email.edit-mode {
+  background-color: #333; /* Dark background */
+  color: #fff; /* White text */
+  text-align: center; /* Center text */
+}
