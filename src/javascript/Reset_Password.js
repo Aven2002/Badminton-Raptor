@@ -3,6 +3,7 @@ import { Modal } from 'bootstrap';
 import SuccessModal from '@/components/Success_modal_com.vue';
 import ErrorModal from '@/components/Error_modal_com.vue';
 import BackBtn from '@/components/Back_btn_com.vue';
+import validation from '@/utils/Validation.js';
 
 export default {
   components: {
@@ -26,6 +27,9 @@ export default {
       userID: null,
       questionID: null,
       isAnswerVerified: false,
+      errors: {
+        newPassword: '', // Initialize errors.newPassword
+      },
     };
   },
   computed: {
@@ -79,6 +83,19 @@ export default {
         this.reset();
       }
     },
+    async validateForm() {
+      this.errors = {}; // Clear previous errors
+      try {
+        const newPasswordError = validation.validatePassword(this.form.newPassword);
+        if (newPasswordError) this.errors.newPassword = newPasswordError;
+        console.log('Errors:', this.errors); // Debugging line
+        console.log('Validation result:', !Object.keys(this.errors).length); // Debugging line
+        return !Object.keys(this.errors).length;
+      } catch (error) {
+        console.error('Validation error:', error);
+        return false;
+      }
+    }, 
     async getRandomQuestion() {
       try {
         const response = await axios.get(`http://localhost:3000/api/security/random-security-question/${this.userID}`);
@@ -139,6 +156,14 @@ export default {
       }
     },
     async updatePassword() {
+      this.errors.newPassword = ''; // Clear previous errors
+
+      const validationError = validation.validatePassword(this.newPassword);
+      
+      if (validationError) {
+        this.errors.newPassword = validationError;
+        return;
+      }
       if (this.newPassword !== this.confirmPassword) {
         this.showError('Passwords do not match.');
         return;

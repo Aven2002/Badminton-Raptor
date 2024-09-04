@@ -65,6 +65,9 @@
               <input type="password" class="form-control" v-model="newPassword" required />
               <label for="confirmPassword" class="form-label">Confirm Password</label>
               <input type="password" class="form-control" v-model="confirmPassword" required />
+              <div v-if="errors.newPassword" class="text-danger">
+                {{ errors.newPassword }}
+              </div>
               <button type="submit" class="btn btn-primary mt-3 d-block mx-auto" @click="updatePassword">Reset Password</button>
             </div>
           </form>
