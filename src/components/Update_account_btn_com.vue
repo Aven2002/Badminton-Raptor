@@ -131,15 +131,33 @@
         return new Date(date).toISOString().split('T')[0];
       },
       async updateUser() {
-        try {
-          await axios.put(`http://localhost:3000/api/account/${this.userID}`, this.user);
-          const modal = Modal.getInstance(document.getElementById(`updateModal-${this.userID}`));
-          modal.hide();
-          this.$emit('user-updated', this.user);
-        } catch (error) {
-          console.error('Error updating user data:', error);
-        }
-      },
+  try {
+    const response = await axios.put(`http://localhost:3000/api/account/${this.userID}`, this.user, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log('Update successful:', response.data);
+    const modal = Modal.getInstance(document.getElementById(`updateModal-${this.userID}`));
+    modal.hide();
+    this.$emit('user-updated', this.user);
+  } catch (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      console.error('Server response error:', error.response.data);
+      console.error('Status:', error.response.status);
+      console.error('Headers:', error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error('No response received:', error.request);
+    } else {
+      // Something happened in setting up the request
+      console.error('Error setting up request:', error.message);
+    }
+    console.error('Axios error config:', error.config);
+  }
+}
+,
       selectProfileImage(img) {
         this.user.profileImg = img;
         this.editingProfileImage = false;
