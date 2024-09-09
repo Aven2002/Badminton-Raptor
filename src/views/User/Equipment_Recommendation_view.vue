@@ -72,41 +72,37 @@ export default {
     return {
       recommendations: [],
       loading: true,
-      currentRecommendationId: 0, // To store the recommendationId for the rating modal
+      currentRecommendationId: 0, 
     };
   },
   methods: {
     async fetchRecommendations() {
   try {
     const userID = Cookies.get('userID');
-console.log('Retrieved userID:', userID); // Log the value to ensure it's correct
+    console.log('Retrieved userID:', userID); // Log the value to ensure it's correct
 
     if (userID) {
       const response = await axios.post('http://localhost:3000/api/recommendation/generateRecommendation', {
         userID: userID 
       });
 
-      // Check if the backend response includes recommendationId
-      if (response.data.recommendationId) {
-        this.currentRecommendationId = response.data.recommendationId;
+      // Check if the backend response includes recommendationID
+      if (response.data.recommendations && response.data.recommendations.recommendationID) {
+        this.currentRecommendationId = response.data.recommendations.recommendationID;
+        console.log("Updated ID :", this.currentRecommendationId);
+      } else {
+        console.error('Recommendation ID not found in the response.');
       }
 
-      // Fetch equipment details for each recommendation
-      const recommendationsWithDetails = await Promise.all(
-        response.data.recommendations.map(async (item) => {
-          const detailsResponse = await axios.get(
-            `http://localhost:3000/api/equipment/${item.equipID}/details`
-          );
-          return {
-            ...item,
-            equipName: detailsResponse.data.equipment.equipName,
-            equipPrice: detailsResponse.data.equipment.equipPrice,
-            equipImgPath: detailsResponse.data.equipment.equipImgPath,
-          };
-        })
-      );
+      // Check if recommendations are present in the response
+      if (Array.isArray(response.data.recommendations.recommendations)) {
+        // Directly use the recommendations from the response
+        const recommendations = response.data.recommendations.recommendations;
 
-      this.recommendations = recommendationsWithDetails;
+        this.recommendations = recommendations;
+      } else {
+        console.error('Recommendations not found in the response.');
+      }
     } else {
       console.error('UserID not found in cookies.');
     }
@@ -128,9 +124,13 @@ console.log('Retrieved userID:', userID); // Log the value to ensure it's correc
       return numericPrice.toFixed(2);
     },
     triggerRatingModal() {
-      // Trigger the modal when the back button is pressed
-      const ratingModalInstance = new Modal(document.getElementById('ratingModal'));
-      ratingModalInstance.show();
+      if (this.currentRecommendationId !== null) {
+        // Trigger the modal when the back button is pressed
+        const ratingModalInstance = new Modal(document.getElementById('ratingModal'));
+        ratingModalInstance.show();
+      } else {
+        console.error('Recommendation ID is not set.');
+      }
     }
   },
   mounted() {
@@ -138,6 +138,7 @@ console.log('Retrieved userID:', userID); // Log the value to ensure it's correc
   }
 };
 </script>
+
 
 
 <style scoped>

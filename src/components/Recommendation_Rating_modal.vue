@@ -21,7 +21,7 @@
             </span>
           </div>
         </div>
-        <div class="modal-footer ">
+        <div class="modal-footer">
          <button type="button" class="custom-button-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
         </div>
       </div>
@@ -38,7 +38,8 @@ export default {
   props: {
     recommendationId: {
       type: Number,
-      required: true
+      required: true,
+      default: 0 
     }
   },
   data() {
@@ -55,18 +56,30 @@ export default {
     async submitRating() {
       try {
         const userID = Cookies.get('userID');
+        console.log('Retrieved userID:', userID); // Log the userID
+
         if (!userID) {
           console.error('User ID not found in cookies.');
           return;
         }
 
+        if (this.recommendationId <= 0) {
+          console.error('Invalid recommendation ID:', this.recommendationId);
+          return;
+        }
+
+        console.log('Recommendation ID:', this.recommendationId); // Log the recommendationID
+        console.log('Selected Rating:', this.selectedRating); // Log the selected rating
+
         const payload = {
-          user_id: userID,
-          recommendation_id: this.recommendationId,
+          userID: userID,
+          recommendationID: this.recommendationId,
           rating: this.selectedRating
         };
 
-        await axios.post('http://localhost:5000/api/update_rating', payload);
+        console.log('Payload for updateRating request:', payload); // Log the payload
+
+        await axios.put('http://localhost:3000/api/recommendation/updateRating', payload);
         console.log('Rating submitted successfully!');
 
       } catch (error) {
@@ -77,7 +90,8 @@ export default {
 };
 </script>
 
-  <style scoped>
+
+<style scoped>
   .modal-title {
     color: #26b602; 
   }
