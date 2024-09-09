@@ -79,9 +79,11 @@ export default {
     async fetchRecommendations() {
   try {
     const userID = Cookies.get('userID');
+console.log('Retrieved userID:', userID); // Log the value to ensure it's correct
+
     if (userID) {
-      const response = await axios.get('http://localhost:5000/api/recommendations', {
-        params: { user_id: userID }
+      const response = await axios.post('http://localhost:3000/api/recommendation/generateRecommendation', {
+        userID: userID 
       });
 
       // Check if the backend response includes recommendationId
@@ -220,11 +222,47 @@ export default {
   justify-content: center;
 }
 
-/* Responsive layout */
-@media (max-width: 768px) {
+/* Medium devices (laptops, 992px and up) */
+@media (min-width: 768px) and (max-width: 1200px) {
   .col-md-4 {
-    flex: 0 0 50%; /* Two cards per row on smaller screens */
-    max-width: 50%;
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+
+  .card {
+    width: 230px;
+    height: 230px;
+  }
+
+  .card-img-top {
+    max-height: 240px;
+  }
+
+  .card-back {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+/* Responsive layout for mobile devices */
+@media (max-width: 576px) {
+  .col-md-4 {
+    flex: 0 0 100%; /* One card per row on extra small screens */
+    max-width: 100%;
+  }
+
+  .card {
+    width: 100%; /* Make card width 100% of column width */
+    height: auto; /* Adjust height to maintain aspect ratio */
+  }
+
+  .card-img-top {
+    max-height: 150px; /* Further reduced image height on extra small screens */
+  }
+
+  .card-back {
+    font-size: 0.9rem; /* Smaller font size for smaller screens */
+    padding: 8px; /* Reduced padding */
   }
 }
 </style>
