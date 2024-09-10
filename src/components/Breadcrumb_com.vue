@@ -76,7 +76,7 @@
     font-size: 18px;
   }
   .breadcrumb-item a {
-    color: #007bff;
+    color: #005abb;
   }
   .breadcrumb-item.active {
     color: #555;
