@@ -36,17 +36,12 @@ export default {
           selectedCategory: this.formValues.selectedCategory || '' // Default to empty string if not provided
         };
     
-        // Log the payload to check the data being sent
-        console.log('Submitting recommendation form with payload:', payload);
-    
         // Make the API call
         const response = await axios.post('http://localhost:3000/api/chatbot/recommendation', payload);
 
         // Update recommendations with the received data
         this.recommendations = response.data.equipment;
     
-        // Log the response for debugging
-        console.log('Received response:', response.data);
     
       } catch (error) {
         console.error('Error fetching recommendations:', error);
