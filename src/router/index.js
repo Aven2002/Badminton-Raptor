@@ -20,7 +20,7 @@ import Compare_Equipment_view from '@/views/User/Compare_Equipment_view.vue';
 import Favorite_List_view from '@/views/User/Favorite_List_view.vue';
 import Equipment_Recommendation_view from '@/views/User/Equipment_Recommendation_view.vue';
 import Contact_Us_view from '@/views/User/Contact_Us_view.vue';
-import Chatbox_view from '@/views/User/Chatbox_view.vue';
+import Chatbox_view from '@/views/User/Chatbot_view.vue';
 
 import Forbidden_view from '@/views/Forbidden_view.vue';
 import Landing_view from '@/views/Landing_view.vue';

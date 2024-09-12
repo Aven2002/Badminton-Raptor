@@ -31,7 +31,7 @@ export default {
         { id: 4, title: 'Settings', link: '/settings_view', icon: 'fa-solid fa-gears' },
         { id: 5, title: 'Favorite List', link: '/favorite_list_view', icon: 'fa-solid fa-star' },
         { id: 6, title: 'Contact Us', link: '/contact_us_view', icon: 'fa-solid fa-comment-dots' },
-        { id: 6, title: 'ChatBox', link: '/chatbox_view', icon: 'fa-solid fa-robot' }
+        { id: 6, title: 'ChatBot', link: '/chatbox_view', icon: 'fa-solid fa-robot' }
       ]
     };
   }
