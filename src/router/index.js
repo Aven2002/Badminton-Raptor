@@ -89,7 +89,17 @@ const routes = [
 
   // General Routes (Accessible without login)
   { path: '/forbidden', component: Forbidden_view },
-  { path: '/', component: Landing_view },
+  { path: '/', component: Landing_view, beforeEnter: (to, from, next) => {
+      const isAuthenticated = !!State_management.state.userID; // Check for userID in state
+      if (isAuthenticated) {
+        const userRole = State_management.state.userRole; // Get user role
+        const homePage = userRole === 'Admin' ? '/home_view_admin' : '/home_view_user'; // Determine home page
+        next(homePage); // Redirect to appropriate home page
+      } else {
+        next(); // Redirect to landing page
+      }
+    }
+  },
   { path: '/sign_up_view', component: Sign_Up_view },
   { path: '/log_in_view', component: Log_In_view },
   { path: '/reset_password_view', name: 'Reset_Password_view', component: Reset_Password_view }
