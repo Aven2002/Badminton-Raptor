@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="full-width-container ">
     <!-- Conditionally render the Navbar_CRUD_com component -->
     <Navbar_CRUD_com v-if="currentView !== 'edit'" class="navbar-crud" :navItems="navItems" :basePath="'/manage_equipment_view'" />
     <div class="content">

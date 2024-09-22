@@ -297,4 +297,9 @@
   color:#ffffff;
 }
 
-
+.full-width-container {
+  padding:20px;
+  width: 90%; 
+  margin:auto;
+}
+  

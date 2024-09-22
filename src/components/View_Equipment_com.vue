@@ -1,5 +1,5 @@
 <template>
-  <main class="content container">
+  <main class="full-width-container">
     
     <!-- Search Bar -->
     <div class="d-flex flex-column flex-md-row justify-content-end mb-2">

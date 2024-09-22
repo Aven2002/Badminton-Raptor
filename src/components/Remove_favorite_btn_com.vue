@@ -39,7 +39,7 @@ export default {
   methods: {
     confirmRemove() {
       this.itemToRemove = this.favoriteID;
-      this.confirmationMessage = `Confirm to delete favorite - Favorite ID: ${this.favoriteID} ?`;
+      this.confirmationMessage = `Confirm to remove this item from favorite ?`;
       this.showConfirmationModal();
     },
     async handleConfirm() {

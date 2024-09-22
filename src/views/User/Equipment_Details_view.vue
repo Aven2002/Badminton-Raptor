@@ -1,6 +1,6 @@
 <template>
     <div>
-      <main class="content container py-1">
+      <main class="full-width-container  py-1">
         <div v-if="loading" class="text-center">
           <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>

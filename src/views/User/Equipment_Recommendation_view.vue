@@ -1,5 +1,5 @@
 <template>
-  <main class="content container mt-3">
+  <main class="full-width-container mt-3">
     <!-- Breadcrumb and Back Button -->
     <div class="d-flex justify-content-between align-items-center mb-5">
       <Breadcrumb_Com

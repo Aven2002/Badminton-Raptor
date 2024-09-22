@@ -1,5 +1,5 @@
 <template>
-  <main class="content container">
+  <main class="full-width-container ">
     <!-- Breadcrumb -->
     <div class="d-flex flex-column flex-sm-row justify-content-start custom-breadcrumb mt-3">
       <Breadcrumb_Com
@@ -69,6 +69,3 @@
 
 <script src='@/javascript/Admin/View_Feedback'></script>
 
-<style scoped>
-/* Scoped styles can be added here if needed */
-</style>

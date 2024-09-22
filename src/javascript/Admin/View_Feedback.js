@@ -44,7 +44,7 @@ export default {
       try {
         const response = await axios.get('http://localhost:3000/api/feedback');
         this.items = response.data.map(item => {
-          item.rowStyle = item.status === 0 ? { backgroundColor: '#555' } : {};
+          item.rowStyle = item.status === 0 ? { backgroundColor: '#444' } : {};
           return item;
         });
       } catch (error) {

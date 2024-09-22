@@ -1,5 +1,5 @@
 <template>
-  <main class="content container">
+  <main class="full-width-container">
     <!-- Breadcrumb and Search Bar -->
     <div class="mt-3">
       <div class="row mb-1 align-items-center">

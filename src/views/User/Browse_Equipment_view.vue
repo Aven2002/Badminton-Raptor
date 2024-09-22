@@ -1,5 +1,5 @@
 <template>
-  <main class="content container mt-1">
+  <main class="full-width-container mt-1">
     <div class="row">
        <!-- Breadcrumb -->
       <div class="custom-breadcrumb">

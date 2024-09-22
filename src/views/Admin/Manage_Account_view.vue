@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="full-width-container ">
     <Navbar_CRUD_com class="navbar-crud" :navItems="navItems" :basePath="'/manage_account_view'" />
     <div class="content">
       <router-view />
