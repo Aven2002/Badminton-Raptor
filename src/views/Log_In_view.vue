@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-end mt-3 mr-5 ">
+  <div class="d-flex justify-content-end mt-3 me-5">
     <BackBtn/>
   </div>
   <div class="login-container d-flex justify-content-center align-items-center">

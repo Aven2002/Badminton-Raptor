@@ -191,6 +191,11 @@
         </form>
       </div>
     </div>
+     <!-- Use ErrorModal component -->
+     <ErrorModal :errorMessage="errorMessage" />
+  
+  <!-- Use SuccessModal component -->
+  <SuccessModal :successMessage="successMessage" />
   </main>
 </template>
 

@@ -1,6 +1,13 @@
 import axios from 'axios';
-  
+import { Modal } from 'bootstrap';
+import SuccessModal from '@/components/Success_modal_com.vue';
+import ErrorModal from '@/components/Error_modal_com.vue';
+
   export default {
+    components: {
+      SuccessModal,
+      ErrorModal
+    },
     data() {
       return {
         equipment: {
@@ -11,10 +18,24 @@ import axios from 'axios';
           equipPrice: null
         },
         details: {},
-        selectedFile: null
+        selectedFile: null,
+        successMessage: '',
+        errorMessage: ''
       };
     },
     methods: {
+      showSuccessModal(message) {
+        this.successMessage = message;
+        const successModal = new Modal(document.getElementById('successModal'));
+        successModal.show();
+        successModal._element.addEventListener('hidden.bs.modal', this.resetForm);
+      },
+      showErrorModal(message) {
+        this.errorMessage = message;
+        const errorModal = new Modal(document.getElementById('errorModal'));
+        errorModal.show();
+        errorModal._element.addEventListener('hidden.bs.modal', this.resetForm);
+      },
         handleImageUpload(event) {
   this.selectedFile = event.target.files[0];
 },
@@ -33,11 +54,11 @@ import axios from 'axios';
         'Content-Type': 'multipart/form-data'
       }
     });
-    alert('Equipment created successfully');
+    this.showSuccessModal('Equipment created successfully');
     this.resetForm();
   } catch (error) {
     console.error('Error creating equipment:', error);
-    alert('Failed to create equipment. Please try again.');
+    this.showErrorModal('Failed to create equipment. Please try again.');
   }
 },
       getDetailTable() {
@@ -69,5 +90,5 @@ import axios from 'axios';
         this.details = {};
         this.selectedFile = null;
       }
-    }
+    },
   };

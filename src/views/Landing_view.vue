@@ -41,7 +41,7 @@ export default {
 .feature-list {
   list-style-type: none;
   padding-left: 0;
-  font-size: 16px;
+  font-size: 20px;
   margin: 20px 0;
 }
 
@@ -51,14 +51,14 @@ export default {
 
 h2 {
   font-family:'Times New Roman', Times, serif;
-  font-size: 3.0em;
+  font-size: 3.5em;
   margin-bottom: 20px;
   color: #333; /* Darker text color for contrast */
   font-weight:600;
 }
 
 p {
-  font-size: 1.2em;
+  font-size: 1.5em;
   margin-bottom: 20px;
   color: #333333; 
 }
